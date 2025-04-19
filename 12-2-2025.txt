@@ -1,0 +1,2168 @@
+
+SQL> SELECT employee_id, last_name, hire_date, job_id, salary, department_id
+  2  FROM employees;
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        100 King                      17-JUN-03 AD_PRES         24000
+           90
+
+        101 Kochhar                   21-SEP-05 AD_VP           17000
+           90
+
+        102 De Haan                   13-JAN-01 AD_VP           17000
+           90
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        103 Hunold                    03-JAN-06 IT_PROG          9000
+           60
+
+        104 Ernst                     21-MAY-07 IT_PROG          6000
+           60
+
+        105 Austin                    25-JUN-05 IT_PROG          4800
+           60
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        106 Pataballa                 05-FEB-06 IT_PROG          4800
+           60
+
+        107 Lorentz                   07-FEB-07 IT_PROG          4200
+           60
+
+        108 Greenberg                 17-AUG-02 FI_MGR          12008
+          100
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        109 Faviet                    16-AUG-02 FI_ACCOUNT       9000
+          100
+
+        110 Chen                      28-SEP-05 FI_ACCOUNT       8200
+          100
+
+        111 Sciarra                   30-SEP-05 FI_ACCOUNT       7700
+          100
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        112 Urman                     07-MAR-06 FI_ACCOUNT       7800
+          100
+
+        113 Popp                      07-DEC-07 FI_ACCOUNT       6900
+          100
+
+        114 Raphaely                  07-DEC-02 PU_MAN          11000
+           30
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        115 Khoo                      18-MAY-03 PU_CLERK         3100
+           30
+
+        116 Baida                     24-DEC-05 PU_CLERK         2900
+           30
+
+        117 Tobias                    24-JUL-05 PU_CLERK         2800
+           30
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        118 Himuro                    15-NOV-06 PU_CLERK         2600
+           30
+
+        119 Colmenares                10-AUG-07 PU_CLERK         2500
+           30
+
+        120 Weiss                     18-JUL-04 ST_MAN           8000
+           50
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        121 Fripp                     10-APR-05 ST_MAN           8200
+           50
+
+        122 Kaufling                  01-MAY-03 ST_MAN           7900
+           50
+
+        123 Vollman                   10-OCT-05 ST_MAN           6500
+           50
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        124 Mourgos                   16-NOV-07 ST_MAN           5800
+           50
+
+        125 Nayer                     16-JUL-05 ST_CLERK         3200
+           50
+
+        126 Mikkilineni               28-SEP-06 ST_CLERK         2700
+           50
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        127 Landry                    14-JAN-07 ST_CLERK         2400
+           50
+
+        128 Markle                    08-MAR-08 ST_CLERK         2200
+           50
+
+        129 Bissot                    20-AUG-05 ST_CLERK         3300
+           50
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        130 Atkinson                  30-OCT-05 ST_CLERK         2800
+           50
+
+        131 Marlow                    16-FEB-05 ST_CLERK         2500
+           50
+
+        132 Olson                     10-APR-07 ST_CLERK         2100
+           50
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        133 Mallin                    14-JUN-04 ST_CLERK         3300
+           50
+
+        134 Rogers                    26-AUG-06 ST_CLERK         2900
+           50
+
+        135 Gee                       12-DEC-07 ST_CLERK         2400
+           50
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        136 Philtanker                06-FEB-08 ST_CLERK         2200
+           50
+
+        137 Ladwig                    14-JUL-03 ST_CLERK         3600
+           50
+
+        138 Stiles                    26-OCT-05 ST_CLERK         3200
+           50
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        139 Seo                       12-FEB-06 ST_CLERK         2700
+           50
+
+        140 Patel                     06-APR-06 ST_CLERK         2500
+           50
+
+        141 Rajs                      17-OCT-03 ST_CLERK         3500
+           50
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        142 Davies                    29-JAN-05 ST_CLERK         3100
+           50
+
+        143 Matos                     15-MAR-06 ST_CLERK         2600
+           50
+
+        144 Vargas                    09-JUL-06 ST_CLERK         2500
+           50
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        145 Russell                   01-OCT-04 SA_MAN          14000
+           80
+
+        146 Partners                  05-JAN-05 SA_MAN          13500
+           80
+
+        147 Errazuriz                 10-MAR-05 SA_MAN          12000
+           80
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        148 Cambrault                 15-OCT-07 SA_MAN          11000
+           80
+
+        149 Zlotkey                   29-JAN-08 SA_MAN          10500
+           80
+
+        150 Tucker                    30-JAN-05 SA_REP          10000
+           80
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        151 Bernstein                 24-MAR-05 SA_REP           9500
+           80
+
+        152 Hall                      20-AUG-05 SA_REP           9000
+           80
+
+        153 Olsen                     30-MAR-06 SA_REP           8000
+           80
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        154 Cambrault                 09-DEC-06 SA_REP           7500
+           80
+
+        155 Tuvault                   23-NOV-07 SA_REP           7000
+           80
+
+        156 King                      30-JAN-04 SA_REP          10000
+           80
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        157 Sully                     04-MAR-04 SA_REP           9500
+           80
+
+        158 McEwen                    01-AUG-04 SA_REP           9000
+           80
+
+        159 Smith                     10-MAR-05 SA_REP           8000
+           80
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        160 Doran                     15-DEC-05 SA_REP           7500
+           80
+
+        161 Sewall                    03-NOV-06 SA_REP           7000
+           80
+
+        162 Vishney                   11-NOV-05 SA_REP          10500
+           80
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        163 Greene                    19-MAR-07 SA_REP           9500
+           80
+
+        164 Marvins                   24-JAN-08 SA_REP           7200
+           80
+
+        165 Lee                       23-FEB-08 SA_REP           6800
+           80
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        166 Ande                      24-MAR-08 SA_REP           6400
+           80
+
+        167 Banda                     21-APR-08 SA_REP           6200
+           80
+
+        168 Ozer                      11-MAR-05 SA_REP          11500
+           80
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        169 Bloom                     23-MAR-06 SA_REP          10000
+           80
+
+        170 Fox                       24-JAN-06 SA_REP           9600
+           80
+
+        171 Smith                     23-FEB-07 SA_REP           7400
+           80
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        172 Bates                     24-MAR-07 SA_REP           7300
+           80
+
+        173 Kumar                     21-APR-08 SA_REP           6100
+           80
+
+        174 Abel                      11-MAY-04 SA_REP          11000
+           80
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        175 Hutton                    19-MAR-05 SA_REP           8800
+           80
+
+        176 Taylor                    24-MAR-06 SA_REP           8600
+           80
+
+        177 Livingston                23-APR-06 SA_REP           8400
+           80
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        178 Grant                     24-MAY-07 SA_REP           7000
+
+
+        179 Johnson                   04-JAN-08 SA_REP           6200
+           80
+
+        180 Taylor                    24-JAN-06 SH_CLERK         3200
+           50
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        181 Fleaur                    23-FEB-06 SH_CLERK         3100
+           50
+
+        182 Sullivan                  21-JUN-07 SH_CLERK         2500
+           50
+
+        183 Geoni                     03-FEB-08 SH_CLERK         2800
+           50
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        184 Sarchand                  27-JAN-04 SH_CLERK         4200
+           50
+
+        185 Bull                      20-FEB-05 SH_CLERK         4100
+           50
+
+        186 Dellinger                 24-JUN-06 SH_CLERK         3400
+           50
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        187 Cabrio                    07-FEB-07 SH_CLERK         3000
+           50
+
+        188 Chung                     14-JUN-05 SH_CLERK         3800
+           50
+
+        189 Dilly                     13-AUG-05 SH_CLERK         3600
+           50
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        190 Gates                     11-JUL-06 SH_CLERK         2900
+           50
+
+        191 Perkins                   19-DEC-07 SH_CLERK         2500
+           50
+
+        192 Bell                      04-FEB-04 SH_CLERK         4000
+           50
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        193 Everett                   03-MAR-05 SH_CLERK         3900
+           50
+
+        194 McCain                    01-JUL-06 SH_CLERK         3200
+           50
+
+        195 Jones                     17-MAR-07 SH_CLERK         2800
+           50
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        196 Walsh                     24-APR-06 SH_CLERK         3100
+           50
+
+        197 Feeney                    23-MAY-06 SH_CLERK         3000
+           50
+
+        198 OConnell                  21-JUN-07 SH_CLERK         2600
+           50
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        199 Grant                     13-JAN-08 SH_CLERK         2600
+           50
+
+        200 Whalen                    17-SEP-03 AD_ASST          4400
+           10
+
+        201 Hartstein                 17-FEB-04 MK_MAN          13000
+           20
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        202 Fay                       17-AUG-05 MK_REP           6000
+           20
+
+        203 Mavris                    07-JUN-02 HR_REP           6500
+           40
+
+        204 Baer                      07-JUN-02 PR_REP          10000
+           70
+
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY
+----------- ------------------------- --------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        205 Higgins                   07-JUN-02 AC_MGR          12008
+          110
+
+        206 Gietz                     07-JUN-02 AC_ACCOUNT       8300
+          110
+
+
+107 rows selected.
+
+SQL> set lines 200
+SQL> /
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY DEPARTMENT_ID
+----------- ------------------------- --------- ---------- ---------- -------------
+        100 King                      17-JUN-03 AD_PRES         24000            90
+        101 Kochhar                   21-SEP-05 AD_VP           17000            90
+        102 De Haan                   13-JAN-01 AD_VP           17000            90
+        103 Hunold                    03-JAN-06 IT_PROG          9000            60
+        104 Ernst                     21-MAY-07 IT_PROG          6000            60
+        105 Austin                    25-JUN-05 IT_PROG          4800            60
+        106 Pataballa                 05-FEB-06 IT_PROG          4800            60
+        107 Lorentz                   07-FEB-07 IT_PROG          4200            60
+        108 Greenberg                 17-AUG-02 FI_MGR          12008           100
+        109 Faviet                    16-AUG-02 FI_ACCOUNT       9000           100
+        110 Chen                      28-SEP-05 FI_ACCOUNT       8200           100
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY DEPARTMENT_ID
+----------- ------------------------- --------- ---------- ---------- -------------
+        111 Sciarra                   30-SEP-05 FI_ACCOUNT       7700           100
+        112 Urman                     07-MAR-06 FI_ACCOUNT       7800           100
+        113 Popp                      07-DEC-07 FI_ACCOUNT       6900           100
+        114 Raphaely                  07-DEC-02 PU_MAN          11000            30
+        115 Khoo                      18-MAY-03 PU_CLERK         3100            30
+        116 Baida                     24-DEC-05 PU_CLERK         2900            30
+        117 Tobias                    24-JUL-05 PU_CLERK         2800            30
+        118 Himuro                    15-NOV-06 PU_CLERK         2600            30
+        119 Colmenares                10-AUG-07 PU_CLERK         2500            30
+        120 Weiss                     18-JUL-04 ST_MAN           8000            50
+        121 Fripp                     10-APR-05 ST_MAN           8200            50
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY DEPARTMENT_ID
+----------- ------------------------- --------- ---------- ---------- -------------
+        122 Kaufling                  01-MAY-03 ST_MAN           7900            50
+        123 Vollman                   10-OCT-05 ST_MAN           6500            50
+        124 Mourgos                   16-NOV-07 ST_MAN           5800            50
+        125 Nayer                     16-JUL-05 ST_CLERK         3200            50
+        126 Mikkilineni               28-SEP-06 ST_CLERK         2700            50
+        127 Landry                    14-JAN-07 ST_CLERK         2400            50
+        128 Markle                    08-MAR-08 ST_CLERK         2200            50
+        129 Bissot                    20-AUG-05 ST_CLERK         3300            50
+        130 Atkinson                  30-OCT-05 ST_CLERK         2800            50
+        131 Marlow                    16-FEB-05 ST_CLERK         2500            50
+        132 Olson                     10-APR-07 ST_CLERK         2100            50
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY DEPARTMENT_ID
+----------- ------------------------- --------- ---------- ---------- -------------
+        133 Mallin                    14-JUN-04 ST_CLERK         3300            50
+        134 Rogers                    26-AUG-06 ST_CLERK         2900            50
+        135 Gee                       12-DEC-07 ST_CLERK         2400            50
+        136 Philtanker                06-FEB-08 ST_CLERK         2200            50
+        137 Ladwig                    14-JUL-03 ST_CLERK         3600            50
+        138 Stiles                    26-OCT-05 ST_CLERK         3200            50
+        139 Seo                       12-FEB-06 ST_CLERK         2700            50
+        140 Patel                     06-APR-06 ST_CLERK         2500            50
+        141 Rajs                      17-OCT-03 ST_CLERK         3500            50
+        142 Davies                    29-JAN-05 ST_CLERK         3100            50
+        143 Matos                     15-MAR-06 ST_CLERK         2600            50
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY DEPARTMENT_ID
+----------- ------------------------- --------- ---------- ---------- -------------
+        144 Vargas                    09-JUL-06 ST_CLERK         2500            50
+        145 Russell                   01-OCT-04 SA_MAN          14000            80
+        146 Partners                  05-JAN-05 SA_MAN          13500            80
+        147 Errazuriz                 10-MAR-05 SA_MAN          12000            80
+        148 Cambrault                 15-OCT-07 SA_MAN          11000            80
+        149 Zlotkey                   29-JAN-08 SA_MAN          10500            80
+        150 Tucker                    30-JAN-05 SA_REP          10000            80
+        151 Bernstein                 24-MAR-05 SA_REP           9500            80
+        152 Hall                      20-AUG-05 SA_REP           9000            80
+        153 Olsen                     30-MAR-06 SA_REP           8000            80
+        154 Cambrault                 09-DEC-06 SA_REP           7500            80
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY DEPARTMENT_ID
+----------- ------------------------- --------- ---------- ---------- -------------
+        155 Tuvault                   23-NOV-07 SA_REP           7000            80
+        156 King                      30-JAN-04 SA_REP          10000            80
+        157 Sully                     04-MAR-04 SA_REP           9500            80
+        158 McEwen                    01-AUG-04 SA_REP           9000            80
+        159 Smith                     10-MAR-05 SA_REP           8000            80
+        160 Doran                     15-DEC-05 SA_REP           7500            80
+        161 Sewall                    03-NOV-06 SA_REP           7000            80
+        162 Vishney                   11-NOV-05 SA_REP          10500            80
+        163 Greene                    19-MAR-07 SA_REP           9500            80
+        164 Marvins                   24-JAN-08 SA_REP           7200            80
+        165 Lee                       23-FEB-08 SA_REP           6800            80
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY DEPARTMENT_ID
+----------- ------------------------- --------- ---------- ---------- -------------
+        166 Ande                      24-MAR-08 SA_REP           6400            80
+        167 Banda                     21-APR-08 SA_REP           6200            80
+        168 Ozer                      11-MAR-05 SA_REP          11500            80
+        169 Bloom                     23-MAR-06 SA_REP          10000            80
+        170 Fox                       24-JAN-06 SA_REP           9600            80
+        171 Smith                     23-FEB-07 SA_REP           7400            80
+        172 Bates                     24-MAR-07 SA_REP           7300            80
+        173 Kumar                     21-APR-08 SA_REP           6100            80
+        174 Abel                      11-MAY-04 SA_REP          11000            80
+        175 Hutton                    19-MAR-05 SA_REP           8800            80
+        176 Taylor                    24-MAR-06 SA_REP           8600            80
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY DEPARTMENT_ID
+----------- ------------------------- --------- ---------- ---------- -------------
+        177 Livingston                23-APR-06 SA_REP           8400            80
+        178 Grant                     24-MAY-07 SA_REP           7000
+        179 Johnson                   04-JAN-08 SA_REP           6200            80
+        180 Taylor                    24-JAN-06 SH_CLERK         3200            50
+        181 Fleaur                    23-FEB-06 SH_CLERK         3100            50
+        182 Sullivan                  21-JUN-07 SH_CLERK         2500            50
+        183 Geoni                     03-FEB-08 SH_CLERK         2800            50
+        184 Sarchand                  27-JAN-04 SH_CLERK         4200            50
+        185 Bull                      20-FEB-05 SH_CLERK         4100            50
+        186 Dellinger                 24-JUN-06 SH_CLERK         3400            50
+        187 Cabrio                    07-FEB-07 SH_CLERK         3000            50
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY DEPARTMENT_ID
+----------- ------------------------- --------- ---------- ---------- -------------
+        188 Chung                     14-JUN-05 SH_CLERK         3800            50
+        189 Dilly                     13-AUG-05 SH_CLERK         3600            50
+        190 Gates                     11-JUL-06 SH_CLERK         2900            50
+        191 Perkins                   19-DEC-07 SH_CLERK         2500            50
+        192 Bell                      04-FEB-04 SH_CLERK         4000            50
+        193 Everett                   03-MAR-05 SH_CLERK         3900            50
+        194 McCain                    01-JUL-06 SH_CLERK         3200            50
+        195 Jones                     17-MAR-07 SH_CLERK         2800            50
+        196 Walsh                     24-APR-06 SH_CLERK         3100            50
+        197 Feeney                    23-MAY-06 SH_CLERK         3000            50
+        198 OConnell                  21-JUN-07 SH_CLERK         2600            50
+
+EMPLOYEE_ID LAST_NAME                 HIRE_DATE JOB_ID         SALARY DEPARTMENT_ID
+----------- ------------------------- --------- ---------- ---------- -------------
+        199 Grant                     13-JAN-08 SH_CLERK         2600            50
+        200 Whalen                    17-SEP-03 AD_ASST          4400            10
+        201 Hartstein                 17-FEB-04 MK_MAN          13000            20
+        202 Fay                       17-AUG-05 MK_REP           6000            20
+        203 Mavris                    07-JUN-02 HR_REP           6500            40
+        204 Baer                      07-JUN-02 PR_REP          10000            70
+        205 Higgins                   07-JUN-02 AC_MGR          12008           110
+        206 Gietz                     07-JUN-02 AC_ACCOUNT       8300           110
+
+107 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id "#id", last_name "Name", hire_date  , job_id, salary, salary *12 "Annual Pay"department_id
+  2* FROM employees
+SQL> /
+SELECT employee_id "#id", last_name "Name", hire_date  , job_id, salary, salary *12 "Annual Pay"department_id
+                                                                                                *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> /
+SELECT employee_id "#id", last_name "Name", hire_date  , job_id, salary, salary *12 "Annual Pay"department_id
+                                                                                                *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id "#id", last_name "Name", hire_date, job_id, salary, salary *12 "Annual Pay", department_id
+  2* FROM employees
+SQL> /
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       100 King                      17-JUN-03 AD_PRES         24000     288000            90
+       101 Kochhar                   21-SEP-05 AD_VP           17000     204000            90
+       102 De Haan                   13-JAN-01 AD_VP           17000     204000            90
+       103 Hunold                    03-JAN-06 IT_PROG          9000     108000            60
+       104 Ernst                     21-MAY-07 IT_PROG          6000      72000            60
+       105 Austin                    25-JUN-05 IT_PROG          4800      57600            60
+       106 Pataballa                 05-FEB-06 IT_PROG          4800      57600            60
+       107 Lorentz                   07-FEB-07 IT_PROG          4200      50400            60
+       108 Greenberg                 17-AUG-02 FI_MGR          12008     144096           100
+       109 Faviet                    16-AUG-02 FI_ACCOUNT       9000     108000           100
+       110 Chen                      28-SEP-05 FI_ACCOUNT       8200      98400           100
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       111 Sciarra                   30-SEP-05 FI_ACCOUNT       7700      92400           100
+       112 Urman                     07-MAR-06 FI_ACCOUNT       7800      93600           100
+       113 Popp                      07-DEC-07 FI_ACCOUNT       6900      82800           100
+       114 Raphaely                  07-DEC-02 PU_MAN          11000     132000            30
+       115 Khoo                      18-MAY-03 PU_CLERK         3100      37200            30
+       116 Baida                     24-DEC-05 PU_CLERK         2900      34800            30
+       117 Tobias                    24-JUL-05 PU_CLERK         2800      33600            30
+       118 Himuro                    15-NOV-06 PU_CLERK         2600      31200            30
+       119 Colmenares                10-AUG-07 PU_CLERK         2500      30000            30
+       120 Weiss                     18-JUL-04 ST_MAN           8000      96000            50
+       121 Fripp                     10-APR-05 ST_MAN           8200      98400            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       122 Kaufling                  01-MAY-03 ST_MAN           7900      94800            50
+       123 Vollman                   10-OCT-05 ST_MAN           6500      78000            50
+       124 Mourgos                   16-NOV-07 ST_MAN           5800      69600            50
+       125 Nayer                     16-JUL-05 ST_CLERK         3200      38400            50
+       126 Mikkilineni               28-SEP-06 ST_CLERK         2700      32400            50
+       127 Landry                    14-JAN-07 ST_CLERK         2400      28800            50
+       128 Markle                    08-MAR-08 ST_CLERK         2200      26400            50
+       129 Bissot                    20-AUG-05 ST_CLERK         3300      39600            50
+       130 Atkinson                  30-OCT-05 ST_CLERK         2800      33600            50
+       131 Marlow                    16-FEB-05 ST_CLERK         2500      30000            50
+       132 Olson                     10-APR-07 ST_CLERK         2100      25200            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       133 Mallin                    14-JUN-04 ST_CLERK         3300      39600            50
+       134 Rogers                    26-AUG-06 ST_CLERK         2900      34800            50
+       135 Gee                       12-DEC-07 ST_CLERK         2400      28800            50
+       136 Philtanker                06-FEB-08 ST_CLERK         2200      26400            50
+       137 Ladwig                    14-JUL-03 ST_CLERK         3600      43200            50
+       138 Stiles                    26-OCT-05 ST_CLERK         3200      38400            50
+       139 Seo                       12-FEB-06 ST_CLERK         2700      32400            50
+       140 Patel                     06-APR-06 ST_CLERK         2500      30000            50
+       141 Rajs                      17-OCT-03 ST_CLERK         3500      42000            50
+       142 Davies                    29-JAN-05 ST_CLERK         3100      37200            50
+       143 Matos                     15-MAR-06 ST_CLERK         2600      31200            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       144 Vargas                    09-JUL-06 ST_CLERK         2500      30000            50
+       145 Russell                   01-OCT-04 SA_MAN          14000     168000            80
+       146 Partners                  05-JAN-05 SA_MAN          13500     162000            80
+       147 Errazuriz                 10-MAR-05 SA_MAN          12000     144000            80
+       148 Cambrault                 15-OCT-07 SA_MAN          11000     132000            80
+       149 Zlotkey                   29-JAN-08 SA_MAN          10500     126000            80
+       150 Tucker                    30-JAN-05 SA_REP          10000     120000            80
+       151 Bernstein                 24-MAR-05 SA_REP           9500     114000            80
+       152 Hall                      20-AUG-05 SA_REP           9000     108000            80
+       153 Olsen                     30-MAR-06 SA_REP           8000      96000            80
+       154 Cambrault                 09-DEC-06 SA_REP           7500      90000            80
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       155 Tuvault                   23-NOV-07 SA_REP           7000      84000            80
+       156 King                      30-JAN-04 SA_REP          10000     120000            80
+       157 Sully                     04-MAR-04 SA_REP           9500     114000            80
+       158 McEwen                    01-AUG-04 SA_REP           9000     108000            80
+       159 Smith                     10-MAR-05 SA_REP           8000      96000            80
+       160 Doran                     15-DEC-05 SA_REP           7500      90000            80
+       161 Sewall                    03-NOV-06 SA_REP           7000      84000            80
+       162 Vishney                   11-NOV-05 SA_REP          10500     126000            80
+       163 Greene                    19-MAR-07 SA_REP           9500     114000            80
+       164 Marvins                   24-JAN-08 SA_REP           7200      86400            80
+       165 Lee                       23-FEB-08 SA_REP           6800      81600            80
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       166 Ande                      24-MAR-08 SA_REP           6400      76800            80
+       167 Banda                     21-APR-08 SA_REP           6200      74400            80
+       168 Ozer                      11-MAR-05 SA_REP          11500     138000            80
+       169 Bloom                     23-MAR-06 SA_REP          10000     120000            80
+       170 Fox                       24-JAN-06 SA_REP           9600     115200            80
+       171 Smith                     23-FEB-07 SA_REP           7400      88800            80
+       172 Bates                     24-MAR-07 SA_REP           7300      87600            80
+       173 Kumar                     21-APR-08 SA_REP           6100      73200            80
+       174 Abel                      11-MAY-04 SA_REP          11000     132000            80
+       175 Hutton                    19-MAR-05 SA_REP           8800     105600            80
+       176 Taylor                    24-MAR-06 SA_REP           8600     103200            80
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       177 Livingston                23-APR-06 SA_REP           8400     100800            80
+       178 Grant                     24-MAY-07 SA_REP           7000      84000
+       179 Johnson                   04-JAN-08 SA_REP           6200      74400            80
+       180 Taylor                    24-JAN-06 SH_CLERK         3200      38400            50
+       181 Fleaur                    23-FEB-06 SH_CLERK         3100      37200            50
+       182 Sullivan                  21-JUN-07 SH_CLERK         2500      30000            50
+       183 Geoni                     03-FEB-08 SH_CLERK         2800      33600            50
+       184 Sarchand                  27-JAN-04 SH_CLERK         4200      50400            50
+       185 Bull                      20-FEB-05 SH_CLERK         4100      49200            50
+       186 Dellinger                 24-JUN-06 SH_CLERK         3400      40800            50
+       187 Cabrio                    07-FEB-07 SH_CLERK         3000      36000            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       188 Chung                     14-JUN-05 SH_CLERK         3800      45600            50
+       189 Dilly                     13-AUG-05 SH_CLERK         3600      43200            50
+       190 Gates                     11-JUL-06 SH_CLERK         2900      34800            50
+       191 Perkins                   19-DEC-07 SH_CLERK         2500      30000            50
+       192 Bell                      04-FEB-04 SH_CLERK         4000      48000            50
+       193 Everett                   03-MAR-05 SH_CLERK         3900      46800            50
+       194 McCain                    01-JUL-06 SH_CLERK         3200      38400            50
+       195 Jones                     17-MAR-07 SH_CLERK         2800      33600            50
+       196 Walsh                     24-APR-06 SH_CLERK         3100      37200            50
+       197 Feeney                    23-MAY-06 SH_CLERK         3000      36000            50
+       198 OConnell                  21-JUN-07 SH_CLERK         2600      31200            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       199 Grant                     13-JAN-08 SH_CLERK         2600      31200            50
+       200 Whalen                    17-SEP-03 AD_ASST          4400      52800            10
+       201 Hartstein                 17-FEB-04 MK_MAN          13000     156000            20
+       202 Fay                       17-AUG-05 MK_REP           6000      72000            20
+       203 Mavris                    07-JUN-02 HR_REP           6500      78000            40
+       204 Baer                      07-JUN-02 PR_REP          10000     120000            70
+       205 Higgins                   07-JUN-02 AC_MGR          12008     144096           110
+       206 Gietz                     07-JUN-02 AC_ACCOUNT       8300      99600           110
+
+107 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id "#id", last_name "Name", hire_date, job_id, salary, salary *12 "Annual Pay", department_id
+  2  FROM employees
+  3* WHERE department_id = 90
+SQL> /
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       100 King                      17-JUN-03 AD_PRES         24000     288000            90
+       101 Kochhar                   21-SEP-05 AD_VP           17000     204000            90
+       102 De Haan                   13-JAN-01 AD_VP           17000     204000            90
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id "#id", last_name "Name", hire_date, job_id, salary, salary *12 "Annual Pay", department_id
+  2  FROM employees
+  3* WHERE job_id='IT_PROG'
+SQL> /
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       103 Hunold                    03-JAN-06 IT_PROG          9000     108000            60
+       104 Ernst                     21-MAY-07 IT_PROG          6000      72000            60
+       105 Austin                    25-JUN-05 IT_PROG          4800      57600            60
+       106 Pataballa                 05-FEB-06 IT_PROG          4800      57600            60
+       107 Lorentz                   07-FEB-07 IT_PROG          4200      50400            60
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id "#id", last_name "Name", hire_date, job_id, salary, salary *12 "Annual Pay", department_id
+  2  FROM employees
+  3* WHERE employee_id=100
+SQL> /
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       100 King                      17-JUN-03 AD_PRES         24000     288000            90
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id "#id", last_name "Name", hire_date, job_id, salary, salary *12 "Annual Pay", department_id
+  2  FROM employees
+  3* WHERE last_name ='King'
+SQL> /
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       156 King                      30-JAN-04 SA_REP          10000     120000            80
+       100 King                      17-JUN-03 AD_PRES         24000     288000            90
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id "#id", last_name "Name", hire_date, job_id, salary, salary *12 "Annual Pay", department_id
+  2  FROM employees
+  3* WHERE hire_date= '17-OCT-03'
+SQL> /
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       141 Rajs                      17-OCT-03 ST_CLERK         3500      42000            50
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id "#id", last_name "Name", hire_date, job_id, salary, salary *12 "Annual Pay", department_id
+  2  FROM employees
+  3* WHERE hire_date > '17-OCT-03'
+SQL> /
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       101 Kochhar                   21-SEP-05 AD_VP           17000     204000            90
+       103 Hunold                    03-JAN-06 IT_PROG          9000     108000            60
+       104 Ernst                     21-MAY-07 IT_PROG          6000      72000            60
+       105 Austin                    25-JUN-05 IT_PROG          4800      57600            60
+       106 Pataballa                 05-FEB-06 IT_PROG          4800      57600            60
+       107 Lorentz                   07-FEB-07 IT_PROG          4200      50400            60
+       110 Chen                      28-SEP-05 FI_ACCOUNT       8200      98400           100
+       111 Sciarra                   30-SEP-05 FI_ACCOUNT       7700      92400           100
+       112 Urman                     07-MAR-06 FI_ACCOUNT       7800      93600           100
+       113 Popp                      07-DEC-07 FI_ACCOUNT       6900      82800           100
+       116 Baida                     24-DEC-05 PU_CLERK         2900      34800            30
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       117 Tobias                    24-JUL-05 PU_CLERK         2800      33600            30
+       118 Himuro                    15-NOV-06 PU_CLERK         2600      31200            30
+       119 Colmenares                10-AUG-07 PU_CLERK         2500      30000            30
+       120 Weiss                     18-JUL-04 ST_MAN           8000      96000            50
+       121 Fripp                     10-APR-05 ST_MAN           8200      98400            50
+       123 Vollman                   10-OCT-05 ST_MAN           6500      78000            50
+       124 Mourgos                   16-NOV-07 ST_MAN           5800      69600            50
+       125 Nayer                     16-JUL-05 ST_CLERK         3200      38400            50
+       126 Mikkilineni               28-SEP-06 ST_CLERK         2700      32400            50
+       127 Landry                    14-JAN-07 ST_CLERK         2400      28800            50
+       128 Markle                    08-MAR-08 ST_CLERK         2200      26400            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       129 Bissot                    20-AUG-05 ST_CLERK         3300      39600            50
+       130 Atkinson                  30-OCT-05 ST_CLERK         2800      33600            50
+       131 Marlow                    16-FEB-05 ST_CLERK         2500      30000            50
+       132 Olson                     10-APR-07 ST_CLERK         2100      25200            50
+       133 Mallin                    14-JUN-04 ST_CLERK         3300      39600            50
+       134 Rogers                    26-AUG-06 ST_CLERK         2900      34800            50
+       135 Gee                       12-DEC-07 ST_CLERK         2400      28800            50
+       136 Philtanker                06-FEB-08 ST_CLERK         2200      26400            50
+       138 Stiles                    26-OCT-05 ST_CLERK         3200      38400            50
+       139 Seo                       12-FEB-06 ST_CLERK         2700      32400            50
+       140 Patel                     06-APR-06 ST_CLERK         2500      30000            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       142 Davies                    29-JAN-05 ST_CLERK         3100      37200            50
+       143 Matos                     15-MAR-06 ST_CLERK         2600      31200            50
+       144 Vargas                    09-JUL-06 ST_CLERK         2500      30000            50
+       145 Russell                   01-OCT-04 SA_MAN          14000     168000            80
+       146 Partners                  05-JAN-05 SA_MAN          13500     162000            80
+       147 Errazuriz                 10-MAR-05 SA_MAN          12000     144000            80
+       148 Cambrault                 15-OCT-07 SA_MAN          11000     132000            80
+       149 Zlotkey                   29-JAN-08 SA_MAN          10500     126000            80
+       150 Tucker                    30-JAN-05 SA_REP          10000     120000            80
+       151 Bernstein                 24-MAR-05 SA_REP           9500     114000            80
+       152 Hall                      20-AUG-05 SA_REP           9000     108000            80
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       153 Olsen                     30-MAR-06 SA_REP           8000      96000            80
+       154 Cambrault                 09-DEC-06 SA_REP           7500      90000            80
+       155 Tuvault                   23-NOV-07 SA_REP           7000      84000            80
+       156 King                      30-JAN-04 SA_REP          10000     120000            80
+       157 Sully                     04-MAR-04 SA_REP           9500     114000            80
+       158 McEwen                    01-AUG-04 SA_REP           9000     108000            80
+       159 Smith                     10-MAR-05 SA_REP           8000      96000            80
+       160 Doran                     15-DEC-05 SA_REP           7500      90000            80
+       161 Sewall                    03-NOV-06 SA_REP           7000      84000            80
+       162 Vishney                   11-NOV-05 SA_REP          10500     126000            80
+       163 Greene                    19-MAR-07 SA_REP           9500     114000            80
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       164 Marvins                   24-JAN-08 SA_REP           7200      86400            80
+       165 Lee                       23-FEB-08 SA_REP           6800      81600            80
+       166 Ande                      24-MAR-08 SA_REP           6400      76800            80
+       167 Banda                     21-APR-08 SA_REP           6200      74400            80
+       168 Ozer                      11-MAR-05 SA_REP          11500     138000            80
+       169 Bloom                     23-MAR-06 SA_REP          10000     120000            80
+       170 Fox                       24-JAN-06 SA_REP           9600     115200            80
+       171 Smith                     23-FEB-07 SA_REP           7400      88800            80
+       172 Bates                     24-MAR-07 SA_REP           7300      87600            80
+       173 Kumar                     21-APR-08 SA_REP           6100      73200            80
+       174 Abel                      11-MAY-04 SA_REP          11000     132000            80
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       175 Hutton                    19-MAR-05 SA_REP           8800     105600            80
+       176 Taylor                    24-MAR-06 SA_REP           8600     103200            80
+       177 Livingston                23-APR-06 SA_REP           8400     100800            80
+       178 Grant                     24-MAY-07 SA_REP           7000      84000
+       179 Johnson                   04-JAN-08 SA_REP           6200      74400            80
+       180 Taylor                    24-JAN-06 SH_CLERK         3200      38400            50
+       181 Fleaur                    23-FEB-06 SH_CLERK         3100      37200            50
+       182 Sullivan                  21-JUN-07 SH_CLERK         2500      30000            50
+       183 Geoni                     03-FEB-08 SH_CLERK         2800      33600            50
+       184 Sarchand                  27-JAN-04 SH_CLERK         4200      50400            50
+       185 Bull                      20-FEB-05 SH_CLERK         4100      49200            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       186 Dellinger                 24-JUN-06 SH_CLERK         3400      40800            50
+       187 Cabrio                    07-FEB-07 SH_CLERK         3000      36000            50
+       188 Chung                     14-JUN-05 SH_CLERK         3800      45600            50
+       189 Dilly                     13-AUG-05 SH_CLERK         3600      43200            50
+       190 Gates                     11-JUL-06 SH_CLERK         2900      34800            50
+       191 Perkins                   19-DEC-07 SH_CLERK         2500      30000            50
+       192 Bell                      04-FEB-04 SH_CLERK         4000      48000            50
+       193 Everett                   03-MAR-05 SH_CLERK         3900      46800            50
+       194 McCain                    01-JUL-06 SH_CLERK         3200      38400            50
+       195 Jones                     17-MAR-07 SH_CLERK         2800      33600            50
+       196 Walsh                     24-APR-06 SH_CLERK         3100      37200            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       197 Feeney                    23-MAY-06 SH_CLERK         3000      36000            50
+       198 OConnell                  21-JUN-07 SH_CLERK         2600      31200            50
+       199 Grant                     13-JAN-08 SH_CLERK         2600      31200            50
+       201 Hartstein                 17-FEB-04 MK_MAN          13000     156000            20
+       202 Fay                       17-AUG-05 MK_REP           6000      72000            20
+
+93 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id "#id", last_name "Name", hire_date, job_id, salary, salary *12 "Annual Pay", department_id
+  2  FROM employees
+  3* WHERE hire_date < '17-OCT-03'
+SQL> /
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       100 King                      17-JUN-03 AD_PRES         24000     288000            90
+       102 De Haan                   13-JAN-01 AD_VP           17000     204000            90
+       108 Greenberg                 17-AUG-02 FI_MGR          12008     144096           100
+       109 Faviet                    16-AUG-02 FI_ACCOUNT       9000     108000           100
+       114 Raphaely                  07-DEC-02 PU_MAN          11000     132000            30
+       115 Khoo                      18-MAY-03 PU_CLERK         3100      37200            30
+       122 Kaufling                  01-MAY-03 ST_MAN           7900      94800            50
+       137 Ladwig                    14-JUL-03 ST_CLERK         3600      43200            50
+       200 Whalen                    17-SEP-03 AD_ASST          4400      52800            10
+       203 Mavris                    07-JUN-02 HR_REP           6500      78000            40
+       204 Baer                      07-JUN-02 PR_REP          10000     120000            70
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       205 Higgins                   07-JUN-02 AC_MGR          12008     144096           110
+       206 Gietz                     07-JUN-02 AC_ACCOUNT       8300      99600           110
+
+13 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id "#id", last_name "Name", hire_date, job_id, salary, salary *12 "Annual Pay", department_id
+  2  FROM employees
+  3* WHERE salary =10000
+SQL> /
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       150 Tucker                    30-JAN-05 SA_REP          10000     120000            80
+       156 King                      30-JAN-04 SA_REP          10000     120000            80
+       169 Bloom                     23-MAR-06 SA_REP          10000     120000            80
+       204 Baer                      07-JUN-02 PR_REP          10000     120000            70
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id "#id", last_name "Name", hire_date, job_id, salary, salary *12 "Annual Pay", department_id
+  2  FROM employees
+  3* WHERE salary >=10000
+SQL> /
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       100 King                      17-JUN-03 AD_PRES         24000     288000            90
+       101 Kochhar                   21-SEP-05 AD_VP           17000     204000            90
+       102 De Haan                   13-JAN-01 AD_VP           17000     204000            90
+       108 Greenberg                 17-AUG-02 FI_MGR          12008     144096           100
+       114 Raphaely                  07-DEC-02 PU_MAN          11000     132000            30
+       145 Russell                   01-OCT-04 SA_MAN          14000     168000            80
+       146 Partners                  05-JAN-05 SA_MAN          13500     162000            80
+       147 Errazuriz                 10-MAR-05 SA_MAN          12000     144000            80
+       148 Cambrault                 15-OCT-07 SA_MAN          11000     132000            80
+       149 Zlotkey                   29-JAN-08 SA_MAN          10500     126000            80
+       150 Tucker                    30-JAN-05 SA_REP          10000     120000            80
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       156 King                      30-JAN-04 SA_REP          10000     120000            80
+       162 Vishney                   11-NOV-05 SA_REP          10500     126000            80
+       168 Ozer                      11-MAR-05 SA_REP          11500     138000            80
+       169 Bloom                     23-MAR-06 SA_REP          10000     120000            80
+       174 Abel                      11-MAY-04 SA_REP          11000     132000            80
+       201 Hartstein                 17-FEB-04 MK_MAN          13000     156000            20
+       204 Baer                      07-JUN-02 PR_REP          10000     120000            70
+       205 Higgins                   07-JUN-02 AC_MGR          12008     144096           110
+
+19 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id "#id", last_name "Name", hire_date, job_id, salary, salary *12 "Annual Pay", department_id
+  2  FROM employees
+  3* WHERE salary >10000
+SQL> /
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       100 King                      17-JUN-03 AD_PRES         24000     288000            90
+       101 Kochhar                   21-SEP-05 AD_VP           17000     204000            90
+       102 De Haan                   13-JAN-01 AD_VP           17000     204000            90
+       108 Greenberg                 17-AUG-02 FI_MGR          12008     144096           100
+       114 Raphaely                  07-DEC-02 PU_MAN          11000     132000            30
+       145 Russell                   01-OCT-04 SA_MAN          14000     168000            80
+       146 Partners                  05-JAN-05 SA_MAN          13500     162000            80
+       147 Errazuriz                 10-MAR-05 SA_MAN          12000     144000            80
+       148 Cambrault                 15-OCT-07 SA_MAN          11000     132000            80
+       149 Zlotkey                   29-JAN-08 SA_MAN          10500     126000            80
+       162 Vishney                   11-NOV-05 SA_REP          10500     126000            80
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       168 Ozer                      11-MAR-05 SA_REP          11500     138000            80
+       174 Abel                      11-MAY-04 SA_REP          11000     132000            80
+       201 Hartstein                 17-FEB-04 MK_MAN          13000     156000            20
+       205 Higgins                   07-JUN-02 AC_MGR          12008     144096           110
+
+15 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id "#id", last_name "Name", hire_date, job_id, salary, salary *12 "Annual Pay", department_id
+  2  FROM employees
+  3* WHERE salary <10000
+SQL> /
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       103 Hunold                    03-JAN-06 IT_PROG          9000     108000            60
+       104 Ernst                     21-MAY-07 IT_PROG          6000      72000            60
+       105 Austin                    25-JUN-05 IT_PROG          4800      57600            60
+       106 Pataballa                 05-FEB-06 IT_PROG          4800      57600            60
+       107 Lorentz                   07-FEB-07 IT_PROG          4200      50400            60
+       109 Faviet                    16-AUG-02 FI_ACCOUNT       9000     108000           100
+       110 Chen                      28-SEP-05 FI_ACCOUNT       8200      98400           100
+       111 Sciarra                   30-SEP-05 FI_ACCOUNT       7700      92400           100
+       112 Urman                     07-MAR-06 FI_ACCOUNT       7800      93600           100
+       113 Popp                      07-DEC-07 FI_ACCOUNT       6900      82800           100
+       115 Khoo                      18-MAY-03 PU_CLERK         3100      37200            30
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       116 Baida                     24-DEC-05 PU_CLERK         2900      34800            30
+       117 Tobias                    24-JUL-05 PU_CLERK         2800      33600            30
+       118 Himuro                    15-NOV-06 PU_CLERK         2600      31200            30
+       119 Colmenares                10-AUG-07 PU_CLERK         2500      30000            30
+       120 Weiss                     18-JUL-04 ST_MAN           8000      96000            50
+       121 Fripp                     10-APR-05 ST_MAN           8200      98400            50
+       122 Kaufling                  01-MAY-03 ST_MAN           7900      94800            50
+       123 Vollman                   10-OCT-05 ST_MAN           6500      78000            50
+       124 Mourgos                   16-NOV-07 ST_MAN           5800      69600            50
+       125 Nayer                     16-JUL-05 ST_CLERK         3200      38400            50
+       126 Mikkilineni               28-SEP-06 ST_CLERK         2700      32400            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       127 Landry                    14-JAN-07 ST_CLERK         2400      28800            50
+       128 Markle                    08-MAR-08 ST_CLERK         2200      26400            50
+       129 Bissot                    20-AUG-05 ST_CLERK         3300      39600            50
+       130 Atkinson                  30-OCT-05 ST_CLERK         2800      33600            50
+       131 Marlow                    16-FEB-05 ST_CLERK         2500      30000            50
+       132 Olson                     10-APR-07 ST_CLERK         2100      25200            50
+       133 Mallin                    14-JUN-04 ST_CLERK         3300      39600            50
+       134 Rogers                    26-AUG-06 ST_CLERK         2900      34800            50
+       135 Gee                       12-DEC-07 ST_CLERK         2400      28800            50
+       136 Philtanker                06-FEB-08 ST_CLERK         2200      26400            50
+       137 Ladwig                    14-JUL-03 ST_CLERK         3600      43200            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       138 Stiles                    26-OCT-05 ST_CLERK         3200      38400            50
+       139 Seo                       12-FEB-06 ST_CLERK         2700      32400            50
+       140 Patel                     06-APR-06 ST_CLERK         2500      30000            50
+       141 Rajs                      17-OCT-03 ST_CLERK         3500      42000            50
+       142 Davies                    29-JAN-05 ST_CLERK         3100      37200            50
+       143 Matos                     15-MAR-06 ST_CLERK         2600      31200            50
+       144 Vargas                    09-JUL-06 ST_CLERK         2500      30000            50
+       151 Bernstein                 24-MAR-05 SA_REP           9500     114000            80
+       152 Hall                      20-AUG-05 SA_REP           9000     108000            80
+       153 Olsen                     30-MAR-06 SA_REP           8000      96000            80
+       154 Cambrault                 09-DEC-06 SA_REP           7500      90000            80
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       155 Tuvault                   23-NOV-07 SA_REP           7000      84000            80
+       157 Sully                     04-MAR-04 SA_REP           9500     114000            80
+       158 McEwen                    01-AUG-04 SA_REP           9000     108000            80
+       159 Smith                     10-MAR-05 SA_REP           8000      96000            80
+       160 Doran                     15-DEC-05 SA_REP           7500      90000            80
+       161 Sewall                    03-NOV-06 SA_REP           7000      84000            80
+       163 Greene                    19-MAR-07 SA_REP           9500     114000            80
+       164 Marvins                   24-JAN-08 SA_REP           7200      86400            80
+       165 Lee                       23-FEB-08 SA_REP           6800      81600            80
+       166 Ande                      24-MAR-08 SA_REP           6400      76800            80
+       167 Banda                     21-APR-08 SA_REP           6200      74400            80
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       170 Fox                       24-JAN-06 SA_REP           9600     115200            80
+       171 Smith                     23-FEB-07 SA_REP           7400      88800            80
+       172 Bates                     24-MAR-07 SA_REP           7300      87600            80
+       173 Kumar                     21-APR-08 SA_REP           6100      73200            80
+       175 Hutton                    19-MAR-05 SA_REP           8800     105600            80
+       176 Taylor                    24-MAR-06 SA_REP           8600     103200            80
+       177 Livingston                23-APR-06 SA_REP           8400     100800            80
+       178 Grant                     24-MAY-07 SA_REP           7000      84000
+       179 Johnson                   04-JAN-08 SA_REP           6200      74400            80
+       180 Taylor                    24-JAN-06 SH_CLERK         3200      38400            50
+       181 Fleaur                    23-FEB-06 SH_CLERK         3100      37200            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       182 Sullivan                  21-JUN-07 SH_CLERK         2500      30000            50
+       183 Geoni                     03-FEB-08 SH_CLERK         2800      33600            50
+       184 Sarchand                  27-JAN-04 SH_CLERK         4200      50400            50
+       185 Bull                      20-FEB-05 SH_CLERK         4100      49200            50
+       186 Dellinger                 24-JUN-06 SH_CLERK         3400      40800            50
+       187 Cabrio                    07-FEB-07 SH_CLERK         3000      36000            50
+       188 Chung                     14-JUN-05 SH_CLERK         3800      45600            50
+       189 Dilly                     13-AUG-05 SH_CLERK         3600      43200            50
+       190 Gates                     11-JUL-06 SH_CLERK         2900      34800            50
+       191 Perkins                   19-DEC-07 SH_CLERK         2500      30000            50
+       192 Bell                      04-FEB-04 SH_CLERK         4000      48000            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       193 Everett                   03-MAR-05 SH_CLERK         3900      46800            50
+       194 McCain                    01-JUL-06 SH_CLERK         3200      38400            50
+       195 Jones                     17-MAR-07 SH_CLERK         2800      33600            50
+       196 Walsh                     24-APR-06 SH_CLERK         3100      37200            50
+       197 Feeney                    23-MAY-06 SH_CLERK         3000      36000            50
+       198 OConnell                  21-JUN-07 SH_CLERK         2600      31200            50
+       199 Grant                     13-JAN-08 SH_CLERK         2600      31200            50
+       200 Whalen                    17-SEP-03 AD_ASST          4400      52800            10
+       202 Fay                       17-AUG-05 MK_REP           6000      72000            20
+       203 Mavris                    07-JUN-02 HR_REP           6500      78000            40
+       206 Gietz                     07-JUN-02 AC_ACCOUNT       8300      99600           110
+
+88 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id "#id", last_name "Name", hire_date, job_id, salary, salary *12 "Annual Pay", department_id
+  2  FROM employees
+  3* WHERE salary <= 10000
+SQL> /
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       103 Hunold                    03-JAN-06 IT_PROG          9000     108000            60
+       104 Ernst                     21-MAY-07 IT_PROG          6000      72000            60
+       105 Austin                    25-JUN-05 IT_PROG          4800      57600            60
+       106 Pataballa                 05-FEB-06 IT_PROG          4800      57600            60
+       107 Lorentz                   07-FEB-07 IT_PROG          4200      50400            60
+       109 Faviet                    16-AUG-02 FI_ACCOUNT       9000     108000           100
+       110 Chen                      28-SEP-05 FI_ACCOUNT       8200      98400           100
+       111 Sciarra                   30-SEP-05 FI_ACCOUNT       7700      92400           100
+       112 Urman                     07-MAR-06 FI_ACCOUNT       7800      93600           100
+       113 Popp                      07-DEC-07 FI_ACCOUNT       6900      82800           100
+       115 Khoo                      18-MAY-03 PU_CLERK         3100      37200            30
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       116 Baida                     24-DEC-05 PU_CLERK         2900      34800            30
+       117 Tobias                    24-JUL-05 PU_CLERK         2800      33600            30
+       118 Himuro                    15-NOV-06 PU_CLERK         2600      31200            30
+       119 Colmenares                10-AUG-07 PU_CLERK         2500      30000            30
+       120 Weiss                     18-JUL-04 ST_MAN           8000      96000            50
+       121 Fripp                     10-APR-05 ST_MAN           8200      98400            50
+       122 Kaufling                  01-MAY-03 ST_MAN           7900      94800            50
+       123 Vollman                   10-OCT-05 ST_MAN           6500      78000            50
+       124 Mourgos                   16-NOV-07 ST_MAN           5800      69600            50
+       125 Nayer                     16-JUL-05 ST_CLERK         3200      38400            50
+       126 Mikkilineni               28-SEP-06 ST_CLERK         2700      32400            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       127 Landry                    14-JAN-07 ST_CLERK         2400      28800            50
+       128 Markle                    08-MAR-08 ST_CLERK         2200      26400            50
+       129 Bissot                    20-AUG-05 ST_CLERK         3300      39600            50
+       130 Atkinson                  30-OCT-05 ST_CLERK         2800      33600            50
+       131 Marlow                    16-FEB-05 ST_CLERK         2500      30000            50
+       132 Olson                     10-APR-07 ST_CLERK         2100      25200            50
+       133 Mallin                    14-JUN-04 ST_CLERK         3300      39600            50
+       134 Rogers                    26-AUG-06 ST_CLERK         2900      34800            50
+       135 Gee                       12-DEC-07 ST_CLERK         2400      28800            50
+       136 Philtanker                06-FEB-08 ST_CLERK         2200      26400            50
+       137 Ladwig                    14-JUL-03 ST_CLERK         3600      43200            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       138 Stiles                    26-OCT-05 ST_CLERK         3200      38400            50
+       139 Seo                       12-FEB-06 ST_CLERK         2700      32400            50
+       140 Patel                     06-APR-06 ST_CLERK         2500      30000            50
+       141 Rajs                      17-OCT-03 ST_CLERK         3500      42000            50
+       142 Davies                    29-JAN-05 ST_CLERK         3100      37200            50
+       143 Matos                     15-MAR-06 ST_CLERK         2600      31200            50
+       144 Vargas                    09-JUL-06 ST_CLERK         2500      30000            50
+       150 Tucker                    30-JAN-05 SA_REP          10000     120000            80
+       151 Bernstein                 24-MAR-05 SA_REP           9500     114000            80
+       152 Hall                      20-AUG-05 SA_REP           9000     108000            80
+       153 Olsen                     30-MAR-06 SA_REP           8000      96000            80
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       154 Cambrault                 09-DEC-06 SA_REP           7500      90000            80
+       155 Tuvault                   23-NOV-07 SA_REP           7000      84000            80
+       156 King                      30-JAN-04 SA_REP          10000     120000            80
+       157 Sully                     04-MAR-04 SA_REP           9500     114000            80
+       158 McEwen                    01-AUG-04 SA_REP           9000     108000            80
+       159 Smith                     10-MAR-05 SA_REP           8000      96000            80
+       160 Doran                     15-DEC-05 SA_REP           7500      90000            80
+       161 Sewall                    03-NOV-06 SA_REP           7000      84000            80
+       163 Greene                    19-MAR-07 SA_REP           9500     114000            80
+       164 Marvins                   24-JAN-08 SA_REP           7200      86400            80
+       165 Lee                       23-FEB-08 SA_REP           6800      81600            80
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       166 Ande                      24-MAR-08 SA_REP           6400      76800            80
+       167 Banda                     21-APR-08 SA_REP           6200      74400            80
+       169 Bloom                     23-MAR-06 SA_REP          10000     120000            80
+       170 Fox                       24-JAN-06 SA_REP           9600     115200            80
+       171 Smith                     23-FEB-07 SA_REP           7400      88800            80
+       172 Bates                     24-MAR-07 SA_REP           7300      87600            80
+       173 Kumar                     21-APR-08 SA_REP           6100      73200            80
+       175 Hutton                    19-MAR-05 SA_REP           8800     105600            80
+       176 Taylor                    24-MAR-06 SA_REP           8600     103200            80
+       177 Livingston                23-APR-06 SA_REP           8400     100800            80
+       178 Grant                     24-MAY-07 SA_REP           7000      84000
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       179 Johnson                   04-JAN-08 SA_REP           6200      74400            80
+       180 Taylor                    24-JAN-06 SH_CLERK         3200      38400            50
+       181 Fleaur                    23-FEB-06 SH_CLERK         3100      37200            50
+       182 Sullivan                  21-JUN-07 SH_CLERK         2500      30000            50
+       183 Geoni                     03-FEB-08 SH_CLERK         2800      33600            50
+       184 Sarchand                  27-JAN-04 SH_CLERK         4200      50400            50
+       185 Bull                      20-FEB-05 SH_CLERK         4100      49200            50
+       186 Dellinger                 24-JUN-06 SH_CLERK         3400      40800            50
+       187 Cabrio                    07-FEB-07 SH_CLERK         3000      36000            50
+       188 Chung                     14-JUN-05 SH_CLERK         3800      45600            50
+       189 Dilly                     13-AUG-05 SH_CLERK         3600      43200            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       190 Gates                     11-JUL-06 SH_CLERK         2900      34800            50
+       191 Perkins                   19-DEC-07 SH_CLERK         2500      30000            50
+       192 Bell                      04-FEB-04 SH_CLERK         4000      48000            50
+       193 Everett                   03-MAR-05 SH_CLERK         3900      46800            50
+       194 McCain                    01-JUL-06 SH_CLERK         3200      38400            50
+       195 Jones                     17-MAR-07 SH_CLERK         2800      33600            50
+       196 Walsh                     24-APR-06 SH_CLERK         3100      37200            50
+       197 Feeney                    23-MAY-06 SH_CLERK         3000      36000            50
+       198 OConnell                  21-JUN-07 SH_CLERK         2600      31200            50
+       199 Grant                     13-JAN-08 SH_CLERK         2600      31200            50
+       200 Whalen                    17-SEP-03 AD_ASST          4400      52800            10
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       202 Fay                       17-AUG-05 MK_REP           6000      72000            20
+       203 Mavris                    07-JUN-02 HR_REP           6500      78000            40
+       204 Baer                      07-JUN-02 PR_REP          10000     120000            70
+       206 Gietz                     07-JUN-02 AC_ACCOUNT       8300      99600           110
+
+92 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id "#id", last_name "Name", hire_date, job_id, salary, salary *12 "Annual Pay", department_id
+  2  FROM employees
+  3* WHERE salary BETWEEN 10000 AND 15000
+SQL> /
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       108 Greenberg                 17-AUG-02 FI_MGR          12008     144096           100
+       114 Raphaely                  07-DEC-02 PU_MAN          11000     132000            30
+       145 Russell                   01-OCT-04 SA_MAN          14000     168000            80
+       146 Partners                  05-JAN-05 SA_MAN          13500     162000            80
+       147 Errazuriz                 10-MAR-05 SA_MAN          12000     144000            80
+       148 Cambrault                 15-OCT-07 SA_MAN          11000     132000            80
+       149 Zlotkey                   29-JAN-08 SA_MAN          10500     126000            80
+       150 Tucker                    30-JAN-05 SA_REP          10000     120000            80
+       156 King                      30-JAN-04 SA_REP          10000     120000            80
+       162 Vishney                   11-NOV-05 SA_REP          10500     126000            80
+       168 Ozer                      11-MAR-05 SA_REP          11500     138000            80
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       169 Bloom                     23-MAR-06 SA_REP          10000     120000            80
+       174 Abel                      11-MAY-04 SA_REP          11000     132000            80
+       201 Hartstein                 17-FEB-04 MK_MAN          13000     156000            20
+       204 Baer                      07-JUN-02 PR_REP          10000     120000            70
+       205 Higgins                   07-JUN-02 AC_MGR          12008     144096           110
+
+16 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id "#id", last_name "Name", hire_date, job_id, salary, salary *12 "Annual Pay", department_id
+  2  FROM employees
+  3* WHERE salary BETWEEN 100000 AND 150000
+SQL> /
+
+no rows selected
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id "#id", last_name "Name", hire_date, job_id, salary, salary *12 "Annual Pay", department_id
+  2  FROM employees
+  3* WHERE salary BETWEEN 10000 AND 150000
+SQL> /
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       100 King                      17-JUN-03 AD_PRES         24000     288000            90
+       101 Kochhar                   21-SEP-05 AD_VP           17000     204000            90
+       102 De Haan                   13-JAN-01 AD_VP           17000     204000            90
+       108 Greenberg                 17-AUG-02 FI_MGR          12008     144096           100
+       114 Raphaely                  07-DEC-02 PU_MAN          11000     132000            30
+       145 Russell                   01-OCT-04 SA_MAN          14000     168000            80
+       146 Partners                  05-JAN-05 SA_MAN          13500     162000            80
+       147 Errazuriz                 10-MAR-05 SA_MAN          12000     144000            80
+       148 Cambrault                 15-OCT-07 SA_MAN          11000     132000            80
+       149 Zlotkey                   29-JAN-08 SA_MAN          10500     126000            80
+       150 Tucker                    30-JAN-05 SA_REP          10000     120000            80
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       156 King                      30-JAN-04 SA_REP          10000     120000            80
+       162 Vishney                   11-NOV-05 SA_REP          10500     126000            80
+       168 Ozer                      11-MAR-05 SA_REP          11500     138000            80
+       169 Bloom                     23-MAR-06 SA_REP          10000     120000            80
+       174 Abel                      11-MAY-04 SA_REP          11000     132000            80
+       201 Hartstein                 17-FEB-04 MK_MAN          13000     156000            20
+       204 Baer                      07-JUN-02 PR_REP          10000     120000            70
+       205 Higgins                   07-JUN-02 AC_MGR          12008     144096           110
+
+19 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id "#id", last_name "Name", hire_date, job_id, salary, salary *12 "Annual Pay", department_id
+  2  FROM employees
+  3* WHERE salary BETWEEN 10000 AND 150000
+SQL> /
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       100 King                      17-JUN-03 AD_PRES         24000     288000            90
+       101 Kochhar                   21-SEP-05 AD_VP           17000     204000            90
+       102 De Haan                   13-JAN-01 AD_VP           17000     204000            90
+       108 Greenberg                 17-AUG-02 FI_MGR          12008     144096           100
+       114 Raphaely                  07-DEC-02 PU_MAN          11000     132000            30
+       145 Russell                   01-OCT-04 SA_MAN          14000     168000            80
+       146 Partners                  05-JAN-05 SA_MAN          13500     162000            80
+       147 Errazuriz                 10-MAR-05 SA_MAN          12000     144000            80
+       148 Cambrault                 15-OCT-07 SA_MAN          11000     132000            80
+       149 Zlotkey                   29-JAN-08 SA_MAN          10500     126000            80
+       150 Tucker                    30-JAN-05 SA_REP          10000     120000            80
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       156 King                      30-JAN-04 SA_REP          10000     120000            80
+       162 Vishney                   11-NOV-05 SA_REP          10500     126000            80
+       168 Ozer                      11-MAR-05 SA_REP          11500     138000            80
+       169 Bloom                     23-MAR-06 SA_REP          10000     120000            80
+       174 Abel                      11-MAY-04 SA_REP          11000     132000            80
+       201 Hartstein                 17-FEB-04 MK_MAN          13000     156000            20
+       204 Baer                      07-JUN-02 PR_REP          10000     120000            70
+       205 Higgins                   07-JUN-02 AC_MGR          12008     144096           110
+
+19 rows selected.
+
+SQL> eded
+SP2-0042: unknown command "eded" - rest of line ignored.
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id "#id", last_name "Name", hire_date, job_id, salary, salary *12 "Annual Pay", department_id
+  2  FROM employees
+  3* WHERE salary BETWEEN 1000 AND 150000
+SQL> /
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       100 King                      17-JUN-03 AD_PRES         24000     288000            90
+       101 Kochhar                   21-SEP-05 AD_VP           17000     204000            90
+       102 De Haan                   13-JAN-01 AD_VP           17000     204000            90
+       103 Hunold                    03-JAN-06 IT_PROG          9000     108000            60
+       104 Ernst                     21-MAY-07 IT_PROG          6000      72000            60
+       105 Austin                    25-JUN-05 IT_PROG          4800      57600            60
+       106 Pataballa                 05-FEB-06 IT_PROG          4800      57600            60
+       107 Lorentz                   07-FEB-07 IT_PROG          4200      50400            60
+       108 Greenberg                 17-AUG-02 FI_MGR          12008     144096           100
+       109 Faviet                    16-AUG-02 FI_ACCOUNT       9000     108000           100
+       110 Chen                      28-SEP-05 FI_ACCOUNT       8200      98400           100
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       111 Sciarra                   30-SEP-05 FI_ACCOUNT       7700      92400           100
+       112 Urman                     07-MAR-06 FI_ACCOUNT       7800      93600           100
+       113 Popp                      07-DEC-07 FI_ACCOUNT       6900      82800           100
+       114 Raphaely                  07-DEC-02 PU_MAN          11000     132000            30
+       115 Khoo                      18-MAY-03 PU_CLERK         3100      37200            30
+       116 Baida                     24-DEC-05 PU_CLERK         2900      34800            30
+       117 Tobias                    24-JUL-05 PU_CLERK         2800      33600            30
+       118 Himuro                    15-NOV-06 PU_CLERK         2600      31200            30
+       119 Colmenares                10-AUG-07 PU_CLERK         2500      30000            30
+       120 Weiss                     18-JUL-04 ST_MAN           8000      96000            50
+       121 Fripp                     10-APR-05 ST_MAN           8200      98400            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       122 Kaufling                  01-MAY-03 ST_MAN           7900      94800            50
+       123 Vollman                   10-OCT-05 ST_MAN           6500      78000            50
+       124 Mourgos                   16-NOV-07 ST_MAN           5800      69600            50
+       125 Nayer                     16-JUL-05 ST_CLERK         3200      38400            50
+       126 Mikkilineni               28-SEP-06 ST_CLERK         2700      32400            50
+       127 Landry                    14-JAN-07 ST_CLERK         2400      28800            50
+       128 Markle                    08-MAR-08 ST_CLERK         2200      26400            50
+       129 Bissot                    20-AUG-05 ST_CLERK         3300      39600            50
+       130 Atkinson                  30-OCT-05 ST_CLERK         2800      33600            50
+       131 Marlow                    16-FEB-05 ST_CLERK         2500      30000            50
+       132 Olson                     10-APR-07 ST_CLERK         2100      25200            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       133 Mallin                    14-JUN-04 ST_CLERK         3300      39600            50
+       134 Rogers                    26-AUG-06 ST_CLERK         2900      34800            50
+       135 Gee                       12-DEC-07 ST_CLERK         2400      28800            50
+       136 Philtanker                06-FEB-08 ST_CLERK         2200      26400            50
+       137 Ladwig                    14-JUL-03 ST_CLERK         3600      43200            50
+       138 Stiles                    26-OCT-05 ST_CLERK         3200      38400            50
+       139 Seo                       12-FEB-06 ST_CLERK         2700      32400            50
+       140 Patel                     06-APR-06 ST_CLERK         2500      30000            50
+       141 Rajs                      17-OCT-03 ST_CLERK         3500      42000            50
+       142 Davies                    29-JAN-05 ST_CLERK         3100      37200            50
+       143 Matos                     15-MAR-06 ST_CLERK         2600      31200            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       144 Vargas                    09-JUL-06 ST_CLERK         2500      30000            50
+       145 Russell                   01-OCT-04 SA_MAN          14000     168000            80
+       146 Partners                  05-JAN-05 SA_MAN          13500     162000            80
+       147 Errazuriz                 10-MAR-05 SA_MAN          12000     144000            80
+       148 Cambrault                 15-OCT-07 SA_MAN          11000     132000            80
+       149 Zlotkey                   29-JAN-08 SA_MAN          10500     126000            80
+       150 Tucker                    30-JAN-05 SA_REP          10000     120000            80
+       151 Bernstein                 24-MAR-05 SA_REP           9500     114000            80
+       152 Hall                      20-AUG-05 SA_REP           9000     108000            80
+       153 Olsen                     30-MAR-06 SA_REP           8000      96000            80
+       154 Cambrault                 09-DEC-06 SA_REP           7500      90000            80
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       155 Tuvault                   23-NOV-07 SA_REP           7000      84000            80
+       156 King                      30-JAN-04 SA_REP          10000     120000            80
+       157 Sully                     04-MAR-04 SA_REP           9500     114000            80
+       158 McEwen                    01-AUG-04 SA_REP           9000     108000            80
+       159 Smith                     10-MAR-05 SA_REP           8000      96000            80
+       160 Doran                     15-DEC-05 SA_REP           7500      90000            80
+       161 Sewall                    03-NOV-06 SA_REP           7000      84000            80
+       162 Vishney                   11-NOV-05 SA_REP          10500     126000            80
+       163 Greene                    19-MAR-07 SA_REP           9500     114000            80
+       164 Marvins                   24-JAN-08 SA_REP           7200      86400            80
+       165 Lee                       23-FEB-08 SA_REP           6800      81600            80
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       166 Ande                      24-MAR-08 SA_REP           6400      76800            80
+       167 Banda                     21-APR-08 SA_REP           6200      74400            80
+       168 Ozer                      11-MAR-05 SA_REP          11500     138000            80
+       169 Bloom                     23-MAR-06 SA_REP          10000     120000            80
+       170 Fox                       24-JAN-06 SA_REP           9600     115200            80
+       171 Smith                     23-FEB-07 SA_REP           7400      88800            80
+       172 Bates                     24-MAR-07 SA_REP           7300      87600            80
+       173 Kumar                     21-APR-08 SA_REP           6100      73200            80
+       174 Abel                      11-MAY-04 SA_REP          11000     132000            80
+       175 Hutton                    19-MAR-05 SA_REP           8800     105600            80
+       176 Taylor                    24-MAR-06 SA_REP           8600     103200            80
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       177 Livingston                23-APR-06 SA_REP           8400     100800            80
+       178 Grant                     24-MAY-07 SA_REP           7000      84000
+       179 Johnson                   04-JAN-08 SA_REP           6200      74400            80
+       180 Taylor                    24-JAN-06 SH_CLERK         3200      38400            50
+       181 Fleaur                    23-FEB-06 SH_CLERK         3100      37200            50
+       182 Sullivan                  21-JUN-07 SH_CLERK         2500      30000            50
+       183 Geoni                     03-FEB-08 SH_CLERK         2800      33600            50
+       184 Sarchand                  27-JAN-04 SH_CLERK         4200      50400            50
+       185 Bull                      20-FEB-05 SH_CLERK         4100      49200            50
+       186 Dellinger                 24-JUN-06 SH_CLERK         3400      40800            50
+       187 Cabrio                    07-FEB-07 SH_CLERK         3000      36000            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       188 Chung                     14-JUN-05 SH_CLERK         3800      45600            50
+       189 Dilly                     13-AUG-05 SH_CLERK         3600      43200            50
+       190 Gates                     11-JUL-06 SH_CLERK         2900      34800            50
+       191 Perkins                   19-DEC-07 SH_CLERK         2500      30000            50
+       192 Bell                      04-FEB-04 SH_CLERK         4000      48000            50
+       193 Everett                   03-MAR-05 SH_CLERK         3900      46800            50
+       194 McCain                    01-JUL-06 SH_CLERK         3200      38400            50
+       195 Jones                     17-MAR-07 SH_CLERK         2800      33600            50
+       196 Walsh                     24-APR-06 SH_CLERK         3100      37200            50
+       197 Feeney                    23-MAY-06 SH_CLERK         3000      36000            50
+       198 OConnell                  21-JUN-07 SH_CLERK         2600      31200            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       199 Grant                     13-JAN-08 SH_CLERK         2600      31200            50
+       200 Whalen                    17-SEP-03 AD_ASST          4400      52800            10
+       201 Hartstein                 17-FEB-04 MK_MAN          13000     156000            20
+       202 Fay                       17-AUG-05 MK_REP           6000      72000            20
+       203 Mavris                    07-JUN-02 HR_REP           6500      78000            40
+       204 Baer                      07-JUN-02 PR_REP          10000     120000            70
+       205 Higgins                   07-JUN-02 AC_MGR          12008     144096           110
+       206 Gietz                     07-JUN-02 AC_ACCOUNT       8300      99600           110
+
+107 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id "#id", last_name "Name", hire_date, job_id, salary, salary *12 "Annual Pay", department_id
+  2  FROM employees
+  3* WHERE salary BETWEEN 1000 AND 1500
+SQL> /
+
+no rows selected
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id "#id", last_name "Name", hire_date, job_id, salary, salary *12 "Annual Pay", department_id
+  2  FROM employees
+  3* WHERE salary BETWEEN 1000 AND 40000
+SQL> /
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       100 King                      17-JUN-03 AD_PRES         24000     288000            90
+       101 Kochhar                   21-SEP-05 AD_VP           17000     204000            90
+       102 De Haan                   13-JAN-01 AD_VP           17000     204000            90
+       103 Hunold                    03-JAN-06 IT_PROG          9000     108000            60
+       104 Ernst                     21-MAY-07 IT_PROG          6000      72000            60
+       105 Austin                    25-JUN-05 IT_PROG          4800      57600            60
+       106 Pataballa                 05-FEB-06 IT_PROG          4800      57600            60
+       107 Lorentz                   07-FEB-07 IT_PROG          4200      50400            60
+       108 Greenberg                 17-AUG-02 FI_MGR          12008     144096           100
+       109 Faviet                    16-AUG-02 FI_ACCOUNT       9000     108000           100
+       110 Chen                      28-SEP-05 FI_ACCOUNT       8200      98400           100
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       111 Sciarra                   30-SEP-05 FI_ACCOUNT       7700      92400           100
+       112 Urman                     07-MAR-06 FI_ACCOUNT       7800      93600           100
+       113 Popp                      07-DEC-07 FI_ACCOUNT       6900      82800           100
+       114 Raphaely                  07-DEC-02 PU_MAN          11000     132000            30
+       115 Khoo                      18-MAY-03 PU_CLERK         3100      37200            30
+       116 Baida                     24-DEC-05 PU_CLERK         2900      34800            30
+       117 Tobias                    24-JUL-05 PU_CLERK         2800      33600            30
+       118 Himuro                    15-NOV-06 PU_CLERK         2600      31200            30
+       119 Colmenares                10-AUG-07 PU_CLERK         2500      30000            30
+       120 Weiss                     18-JUL-04 ST_MAN           8000      96000            50
+       121 Fripp                     10-APR-05 ST_MAN           8200      98400            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       122 Kaufling                  01-MAY-03 ST_MAN           7900      94800            50
+       123 Vollman                   10-OCT-05 ST_MAN           6500      78000            50
+       124 Mourgos                   16-NOV-07 ST_MAN           5800      69600            50
+       125 Nayer                     16-JUL-05 ST_CLERK         3200      38400            50
+       126 Mikkilineni               28-SEP-06 ST_CLERK         2700      32400            50
+       127 Landry                    14-JAN-07 ST_CLERK         2400      28800            50
+       128 Markle                    08-MAR-08 ST_CLERK         2200      26400            50
+       129 Bissot                    20-AUG-05 ST_CLERK         3300      39600            50
+       130 Atkinson                  30-OCT-05 ST_CLERK         2800      33600            50
+       131 Marlow                    16-FEB-05 ST_CLERK         2500      30000            50
+       132 Olson                     10-APR-07 ST_CLERK         2100      25200            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       133 Mallin                    14-JUN-04 ST_CLERK         3300      39600            50
+       134 Rogers                    26-AUG-06 ST_CLERK         2900      34800            50
+       135 Gee                       12-DEC-07 ST_CLERK         2400      28800            50
+       136 Philtanker                06-FEB-08 ST_CLERK         2200      26400            50
+       137 Ladwig                    14-JUL-03 ST_CLERK         3600      43200            50
+       138 Stiles                    26-OCT-05 ST_CLERK         3200      38400            50
+       139 Seo                       12-FEB-06 ST_CLERK         2700      32400            50
+       140 Patel                     06-APR-06 ST_CLERK         2500      30000            50
+       141 Rajs                      17-OCT-03 ST_CLERK         3500      42000            50
+       142 Davies                    29-JAN-05 ST_CLERK         3100      37200            50
+       143 Matos                     15-MAR-06 ST_CLERK         2600      31200            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       144 Vargas                    09-JUL-06 ST_CLERK         2500      30000            50
+       145 Russell                   01-OCT-04 SA_MAN          14000     168000            80
+       146 Partners                  05-JAN-05 SA_MAN          13500     162000            80
+       147 Errazuriz                 10-MAR-05 SA_MAN          12000     144000            80
+       148 Cambrault                 15-OCT-07 SA_MAN          11000     132000            80
+       149 Zlotkey                   29-JAN-08 SA_MAN          10500     126000            80
+       150 Tucker                    30-JAN-05 SA_REP          10000     120000            80
+       151 Bernstein                 24-MAR-05 SA_REP           9500     114000            80
+       152 Hall                      20-AUG-05 SA_REP           9000     108000            80
+       153 Olsen                     30-MAR-06 SA_REP           8000      96000            80
+       154 Cambrault                 09-DEC-06 SA_REP           7500      90000            80
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       155 Tuvault                   23-NOV-07 SA_REP           7000      84000            80
+       156 King                      30-JAN-04 SA_REP          10000     120000            80
+       157 Sully                     04-MAR-04 SA_REP           9500     114000            80
+       158 McEwen                    01-AUG-04 SA_REP           9000     108000            80
+       159 Smith                     10-MAR-05 SA_REP           8000      96000            80
+       160 Doran                     15-DEC-05 SA_REP           7500      90000            80
+       161 Sewall                    03-NOV-06 SA_REP           7000      84000            80
+       162 Vishney                   11-NOV-05 SA_REP          10500     126000            80
+       163 Greene                    19-MAR-07 SA_REP           9500     114000            80
+       164 Marvins                   24-JAN-08 SA_REP           7200      86400            80
+       165 Lee                       23-FEB-08 SA_REP           6800      81600            80
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       166 Ande                      24-MAR-08 SA_REP           6400      76800            80
+       167 Banda                     21-APR-08 SA_REP           6200      74400            80
+       168 Ozer                      11-MAR-05 SA_REP          11500     138000            80
+       169 Bloom                     23-MAR-06 SA_REP          10000     120000            80
+       170 Fox                       24-JAN-06 SA_REP           9600     115200            80
+       171 Smith                     23-FEB-07 SA_REP           7400      88800            80
+       172 Bates                     24-MAR-07 SA_REP           7300      87600            80
+       173 Kumar                     21-APR-08 SA_REP           6100      73200            80
+       174 Abel                      11-MAY-04 SA_REP          11000     132000            80
+       175 Hutton                    19-MAR-05 SA_REP           8800     105600            80
+       176 Taylor                    24-MAR-06 SA_REP           8600     103200            80
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       177 Livingston                23-APR-06 SA_REP           8400     100800            80
+       178 Grant                     24-MAY-07 SA_REP           7000      84000
+       179 Johnson                   04-JAN-08 SA_REP           6200      74400            80
+       180 Taylor                    24-JAN-06 SH_CLERK         3200      38400            50
+       181 Fleaur                    23-FEB-06 SH_CLERK         3100      37200            50
+       182 Sullivan                  21-JUN-07 SH_CLERK         2500      30000            50
+       183 Geoni                     03-FEB-08 SH_CLERK         2800      33600            50
+       184 Sarchand                  27-JAN-04 SH_CLERK         4200      50400            50
+       185 Bull                      20-FEB-05 SH_CLERK         4100      49200            50
+       186 Dellinger                 24-JUN-06 SH_CLERK         3400      40800            50
+       187 Cabrio                    07-FEB-07 SH_CLERK         3000      36000            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       188 Chung                     14-JUN-05 SH_CLERK         3800      45600            50
+       189 Dilly                     13-AUG-05 SH_CLERK         3600      43200            50
+       190 Gates                     11-JUL-06 SH_CLERK         2900      34800            50
+       191 Perkins                   19-DEC-07 SH_CLERK         2500      30000            50
+       192 Bell                      04-FEB-04 SH_CLERK         4000      48000            50
+       193 Everett                   03-MAR-05 SH_CLERK         3900      46800            50
+       194 McCain                    01-JUL-06 SH_CLERK         3200      38400            50
+       195 Jones                     17-MAR-07 SH_CLERK         2800      33600            50
+       196 Walsh                     24-APR-06 SH_CLERK         3100      37200            50
+       197 Feeney                    23-MAY-06 SH_CLERK         3000      36000            50
+       198 OConnell                  21-JUN-07 SH_CLERK         2600      31200            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       199 Grant                     13-JAN-08 SH_CLERK         2600      31200            50
+       200 Whalen                    17-SEP-03 AD_ASST          4400      52800            10
+       201 Hartstein                 17-FEB-04 MK_MAN          13000     156000            20
+       202 Fay                       17-AUG-05 MK_REP           6000      72000            20
+       203 Mavris                    07-JUN-02 HR_REP           6500      78000            40
+       204 Baer                      07-JUN-02 PR_REP          10000     120000            70
+       205 Higgins                   07-JUN-02 AC_MGR          12008     144096           110
+       206 Gietz                     07-JUN-02 AC_ACCOUNT       8300      99600           110
+
+107 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id "#id", last_name "Name", hire_date, job_id, salary, salary *12 "Annual Pay", department_id
+  2  FROM employees
+  3  WHERE last_name BETWEEN 'King' AND 'Whalen'
+  4* ORDER BY last_name
+  5  /
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       100 King                      17-JUN-03 AD_PRES         24000     288000            90
+       156 King                      30-JAN-04 SA_REP          10000     120000            80
+       101 Kochhar                   21-SEP-05 AD_VP           17000     204000            90
+       173 Kumar                     21-APR-08 SA_REP           6100      73200            80
+       137 Ladwig                    14-JUL-03 ST_CLERK         3600      43200            50
+       127 Landry                    14-JAN-07 ST_CLERK         2400      28800            50
+       165 Lee                       23-FEB-08 SA_REP           6800      81600            80
+       177 Livingston                23-APR-06 SA_REP           8400     100800            80
+       107 Lorentz                   07-FEB-07 IT_PROG          4200      50400            60
+       133 Mallin                    14-JUN-04 ST_CLERK         3300      39600            50
+       128 Markle                    08-MAR-08 ST_CLERK         2200      26400            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       131 Marlow                    16-FEB-05 ST_CLERK         2500      30000            50
+       164 Marvins                   24-JAN-08 SA_REP           7200      86400            80
+       143 Matos                     15-MAR-06 ST_CLERK         2600      31200            50
+       203 Mavris                    07-JUN-02 HR_REP           6500      78000            40
+       194 McCain                    01-JUL-06 SH_CLERK         3200      38400            50
+       158 McEwen                    01-AUG-04 SA_REP           9000     108000            80
+       126 Mikkilineni               28-SEP-06 ST_CLERK         2700      32400            50
+       124 Mourgos                   16-NOV-07 ST_MAN           5800      69600            50
+       125 Nayer                     16-JUL-05 ST_CLERK         3200      38400            50
+       198 OConnell                  21-JUN-07 SH_CLERK         2600      31200            50
+       153 Olsen                     30-MAR-06 SA_REP           8000      96000            80
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       132 Olson                     10-APR-07 ST_CLERK         2100      25200            50
+       168 Ozer                      11-MAR-05 SA_REP          11500     138000            80
+       146 Partners                  05-JAN-05 SA_MAN          13500     162000            80
+       106 Pataballa                 05-FEB-06 IT_PROG          4800      57600            60
+       140 Patel                     06-APR-06 ST_CLERK         2500      30000            50
+       191 Perkins                   19-DEC-07 SH_CLERK         2500      30000            50
+       136 Philtanker                06-FEB-08 ST_CLERK         2200      26400            50
+       113 Popp                      07-DEC-07 FI_ACCOUNT       6900      82800           100
+       141 Rajs                      17-OCT-03 ST_CLERK         3500      42000            50
+       114 Raphaely                  07-DEC-02 PU_MAN          11000     132000            30
+       134 Rogers                    26-AUG-06 ST_CLERK         2900      34800            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       145 Russell                   01-OCT-04 SA_MAN          14000     168000            80
+       184 Sarchand                  27-JAN-04 SH_CLERK         4200      50400            50
+       111 Sciarra                   30-SEP-05 FI_ACCOUNT       7700      92400           100
+       139 Seo                       12-FEB-06 ST_CLERK         2700      32400            50
+       161 Sewall                    03-NOV-06 SA_REP           7000      84000            80
+       171 Smith                     23-FEB-07 SA_REP           7400      88800            80
+       159 Smith                     10-MAR-05 SA_REP           8000      96000            80
+       138 Stiles                    26-OCT-05 ST_CLERK         3200      38400            50
+       182 Sullivan                  21-JUN-07 SH_CLERK         2500      30000            50
+       157 Sully                     04-MAR-04 SA_REP           9500     114000            80
+       180 Taylor                    24-JAN-06 SH_CLERK         3200      38400            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       176 Taylor                    24-MAR-06 SA_REP           8600     103200            80
+       117 Tobias                    24-JUL-05 PU_CLERK         2800      33600            30
+       150 Tucker                    30-JAN-05 SA_REP          10000     120000            80
+       155 Tuvault                   23-NOV-07 SA_REP           7000      84000            80
+       112 Urman                     07-MAR-06 FI_ACCOUNT       7800      93600           100
+       144 Vargas                    09-JUL-06 ST_CLERK         2500      30000            50
+       162 Vishney                   11-NOV-05 SA_REP          10500     126000            80
+       123 Vollman                   10-OCT-05 ST_MAN           6500      78000            50
+       196 Walsh                     24-APR-06 SH_CLERK         3100      37200            50
+       120 Weiss                     18-JUL-04 ST_MAN           8000      96000            50
+       200 Whalen                    17-SEP-03 AD_ASST          4400      52800            10
+
+55 rows selected.
+
+SQL> /
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       100 King                      17-JUN-03 AD_PRES         24000     288000            90
+       156 King                      30-JAN-04 SA_REP          10000     120000            80
+       101 Kochhar                   21-SEP-05 AD_VP           17000     204000            90
+       173 Kumar                     21-APR-08 SA_REP           6100      73200            80
+       137 Ladwig                    14-JUL-03 ST_CLERK         3600      43200            50
+       127 Landry                    14-JAN-07 ST_CLERK         2400      28800            50
+       165 Lee                       23-FEB-08 SA_REP           6800      81600            80
+       177 Livingston                23-APR-06 SA_REP           8400     100800            80
+       107 Lorentz                   07-FEB-07 IT_PROG          4200      50400            60
+       133 Mallin                    14-JUN-04 ST_CLERK         3300      39600            50
+       128 Markle                    08-MAR-08 ST_CLERK         2200      26400            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       131 Marlow                    16-FEB-05 ST_CLERK         2500      30000            50
+       164 Marvins                   24-JAN-08 SA_REP           7200      86400            80
+       143 Matos                     15-MAR-06 ST_CLERK         2600      31200            50
+       203 Mavris                    07-JUN-02 HR_REP           6500      78000            40
+       194 McCain                    01-JUL-06 SH_CLERK         3200      38400            50
+       158 McEwen                    01-AUG-04 SA_REP           9000     108000            80
+       126 Mikkilineni               28-SEP-06 ST_CLERK         2700      32400            50
+       124 Mourgos                   16-NOV-07 ST_MAN           5800      69600            50
+       125 Nayer                     16-JUL-05 ST_CLERK         3200      38400            50
+       198 OConnell                  21-JUN-07 SH_CLERK         2600      31200            50
+       153 Olsen                     30-MAR-06 SA_REP           8000      96000            80
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       132 Olson                     10-APR-07 ST_CLERK         2100      25200            50
+       168 Ozer                      11-MAR-05 SA_REP          11500     138000            80
+       146 Partners                  05-JAN-05 SA_MAN          13500     162000            80
+       106 Pataballa                 05-FEB-06 IT_PROG          4800      57600            60
+       140 Patel                     06-APR-06 ST_CLERK         2500      30000            50
+       191 Perkins                   19-DEC-07 SH_CLERK         2500      30000            50
+       136 Philtanker                06-FEB-08 ST_CLERK         2200      26400            50
+       113 Popp                      07-DEC-07 FI_ACCOUNT       6900      82800           100
+       141 Rajs                      17-OCT-03 ST_CLERK         3500      42000            50
+       114 Raphaely                  07-DEC-02 PU_MAN          11000     132000            30
+       134 Rogers                    26-AUG-06 ST_CLERK         2900      34800            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       145 Russell                   01-OCT-04 SA_MAN          14000     168000            80
+       184 Sarchand                  27-JAN-04 SH_CLERK         4200      50400            50
+       111 Sciarra                   30-SEP-05 FI_ACCOUNT       7700      92400           100
+       139 Seo                       12-FEB-06 ST_CLERK         2700      32400            50
+       161 Sewall                    03-NOV-06 SA_REP           7000      84000            80
+       171 Smith                     23-FEB-07 SA_REP           7400      88800            80
+       159 Smith                     10-MAR-05 SA_REP           8000      96000            80
+       138 Stiles                    26-OCT-05 ST_CLERK         3200      38400            50
+       182 Sullivan                  21-JUN-07 SH_CLERK         2500      30000            50
+       157 Sully                     04-MAR-04 SA_REP           9500     114000            80
+       180 Taylor                    24-JAN-06 SH_CLERK         3200      38400            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       176 Taylor                    24-MAR-06 SA_REP           8600     103200            80
+       117 Tobias                    24-JUL-05 PU_CLERK         2800      33600            30
+       150 Tucker                    30-JAN-05 SA_REP          10000     120000            80
+       155 Tuvault                   23-NOV-07 SA_REP           7000      84000            80
+       112 Urman                     07-MAR-06 FI_ACCOUNT       7800      93600           100
+       144 Vargas                    09-JUL-06 ST_CLERK         2500      30000            50
+       162 Vishney                   11-NOV-05 SA_REP          10500     126000            80
+       123 Vollman                   10-OCT-05 ST_MAN           6500      78000            50
+       196 Walsh                     24-APR-06 SH_CLERK         3100      37200            50
+       120 Weiss                     18-JUL-04 ST_MAN           8000      96000            50
+       200 Whalen                    17-SEP-03 AD_ASST          4400      52800            10
+
+55 rows selected.
+
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL> /
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       100 King                      17-JUN-03 AD_PRES         24000     288000            90
+       156 King                      30-JAN-04 SA_REP          10000     120000            80
+       101 Kochhar                   21-SEP-05 AD_VP           17000     204000            90
+       173 Kumar                     21-APR-08 SA_REP           6100      73200            80
+       137 Ladwig                    14-JUL-03 ST_CLERK         3600      43200            50
+       127 Landry                    14-JAN-07 ST_CLERK         2400      28800            50
+       165 Lee                       23-FEB-08 SA_REP           6800      81600            80
+       177 Livingston                23-APR-06 SA_REP           8400     100800            80
+       107 Lorentz                   07-FEB-07 IT_PROG          4200      50400            60
+       133 Mallin                    14-JUN-04 ST_CLERK         3300      39600            50
+       128 Markle                    08-MAR-08 ST_CLERK         2200      26400            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       131 Marlow                    16-FEB-05 ST_CLERK         2500      30000            50
+       164 Marvins                   24-JAN-08 SA_REP           7200      86400            80
+       143 Matos                     15-MAR-06 ST_CLERK         2600      31200            50
+       203 Mavris                    07-JUN-02 HR_REP           6500      78000            40
+       194 McCain                    01-JUL-06 SH_CLERK         3200      38400            50
+       158 McEwen                    01-AUG-04 SA_REP           9000     108000            80
+       126 Mikkilineni               28-SEP-06 ST_CLERK         2700      32400            50
+       124 Mourgos                   16-NOV-07 ST_MAN           5800      69600            50
+       125 Nayer                     16-JUL-05 ST_CLERK         3200      38400            50
+       198 OConnell                  21-JUN-07 SH_CLERK         2600      31200            50
+       153 Olsen                     30-MAR-06 SA_REP           8000      96000            80
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       132 Olson                     10-APR-07 ST_CLERK         2100      25200            50
+       168 Ozer                      11-MAR-05 SA_REP          11500     138000            80
+       146 Partners                  05-JAN-05 SA_MAN          13500     162000            80
+       106 Pataballa                 05-FEB-06 IT_PROG          4800      57600            60
+       140 Patel                     06-APR-06 ST_CLERK         2500      30000            50
+       191 Perkins                   19-DEC-07 SH_CLERK         2500      30000            50
+       136 Philtanker                06-FEB-08 ST_CLERK         2200      26400            50
+       113 Popp                      07-DEC-07 FI_ACCOUNT       6900      82800           100
+       141 Rajs                      17-OCT-03 ST_CLERK         3500      42000            50
+       114 Raphaely                  07-DEC-02 PU_MAN          11000     132000            30
+       134 Rogers                    26-AUG-06 ST_CLERK         2900      34800            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       145 Russell                   01-OCT-04 SA_MAN          14000     168000            80
+       184 Sarchand                  27-JAN-04 SH_CLERK         4200      50400            50
+       111 Sciarra                   30-SEP-05 FI_ACCOUNT       7700      92400           100
+       139 Seo                       12-FEB-06 ST_CLERK         2700      32400            50
+       161 Sewall                    03-NOV-06 SA_REP           7000      84000            80
+       171 Smith                     23-FEB-07 SA_REP           7400      88800            80
+       159 Smith                     10-MAR-05 SA_REP           8000      96000            80
+       138 Stiles                    26-OCT-05 ST_CLERK         3200      38400            50
+       182 Sullivan                  21-JUN-07 SH_CLERK         2500      30000            50
+       157 Sully                     04-MAR-04 SA_REP           9500     114000            80
+       180 Taylor                    24-JAN-06 SH_CLERK         3200      38400            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       176 Taylor                    24-MAR-06 SA_REP           8600     103200            80
+       117 Tobias                    24-JUL-05 PU_CLERK         2800      33600            30
+       150 Tucker                    30-JAN-05 SA_REP          10000     120000            80
+       155 Tuvault                   23-NOV-07 SA_REP           7000      84000            80
+       112 Urman                     07-MAR-06 FI_ACCOUNT       7800      93600           100
+       144 Vargas                    09-JUL-06 ST_CLERK         2500      30000            50
+       162 Vishney                   11-NOV-05 SA_REP          10500     126000            80
+       123 Vollman                   10-OCT-05 ST_MAN           6500      78000            50
+       196 Walsh                     24-APR-06 SH_CLERK         3100      37200            50
+       120 Weiss                     18-JUL-04 ST_MAN           8000      96000            50
+       200 Whalen                    17-SEP-03 AD_ASST          4400      52800            10
+
+55 rows selected.
+
+SQL> /
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       100 King                      17-JUN-03 AD_PRES         24000     288000            90
+       156 King                      30-JAN-04 SA_REP          10000     120000            80
+       101 Kochhar                   21-SEP-05 AD_VP           17000     204000            90
+       173 Kumar                     21-APR-08 SA_REP           6100      73200            80
+       137 Ladwig                    14-JUL-03 ST_CLERK         3600      43200            50
+       127 Landry                    14-JAN-07 ST_CLERK         2400      28800            50
+       165 Lee                       23-FEB-08 SA_REP           6800      81600            80
+       177 Livingston                23-APR-06 SA_REP           8400     100800            80
+       107 Lorentz                   07-FEB-07 IT_PROG          4200      50400            60
+       133 Mallin                    14-JUN-04 ST_CLERK         3300      39600            50
+       128 Markle                    08-MAR-08 ST_CLERK         2200      26400            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       131 Marlow                    16-FEB-05 ST_CLERK         2500      30000            50
+       164 Marvins                   24-JAN-08 SA_REP           7200      86400            80
+       143 Matos                     15-MAR-06 ST_CLERK         2600      31200            50
+       203 Mavris                    07-JUN-02 HR_REP           6500      78000            40
+       194 McCain                    01-JUL-06 SH_CLERK         3200      38400            50
+       158 McEwen                    01-AUG-04 SA_REP           9000     108000            80
+       126 Mikkilineni               28-SEP-06 ST_CLERK         2700      32400            50
+       124 Mourgos                   16-NOV-07 ST_MAN           5800      69600            50
+       125 Nayer                     16-JUL-05 ST_CLERK         3200      38400            50
+       198 OConnell                  21-JUN-07 SH_CLERK         2600      31200            50
+       153 Olsen                     30-MAR-06 SA_REP           8000      96000            80
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       132 Olson                     10-APR-07 ST_CLERK         2100      25200            50
+       168 Ozer                      11-MAR-05 SA_REP          11500     138000            80
+       146 Partners                  05-JAN-05 SA_MAN          13500     162000            80
+       106 Pataballa                 05-FEB-06 IT_PROG          4800      57600            60
+       140 Patel                     06-APR-06 ST_CLERK         2500      30000            50
+       191 Perkins                   19-DEC-07 SH_CLERK         2500      30000            50
+       136 Philtanker                06-FEB-08 ST_CLERK         2200      26400            50
+       113 Popp                      07-DEC-07 FI_ACCOUNT       6900      82800           100
+       141 Rajs                      17-OCT-03 ST_CLERK         3500      42000            50
+       114 Raphaely                  07-DEC-02 PU_MAN          11000     132000            30
+       134 Rogers                    26-AUG-06 ST_CLERK         2900      34800            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       145 Russell                   01-OCT-04 SA_MAN          14000     168000            80
+       184 Sarchand                  27-JAN-04 SH_CLERK         4200      50400            50
+       111 Sciarra                   30-SEP-05 FI_ACCOUNT       7700      92400           100
+       139 Seo                       12-FEB-06 ST_CLERK         2700      32400            50
+       161 Sewall                    03-NOV-06 SA_REP           7000      84000            80
+       171 Smith                     23-FEB-07 SA_REP           7400      88800            80
+       159 Smith                     10-MAR-05 SA_REP           8000      96000            80
+       138 Stiles                    26-OCT-05 ST_CLERK         3200      38400            50
+       182 Sullivan                  21-JUN-07 SH_CLERK         2500      30000            50
+       157 Sully                     04-MAR-04 SA_REP           9500     114000            80
+       180 Taylor                    24-JAN-06 SH_CLERK         3200      38400            50
+
+       #id Name                      HIRE_DATE JOB_ID         SALARY Annual Pay DEPARTMENT_ID
+---------- ------------------------- --------- ---------- ---------- ---------- -------------
+       176 Taylor                    24-MAR-06 SA_REP           8600     103200            80
+       117 Tobias                    24-JUL-05 PU_CLERK         2800      33600            30
+       150 Tucker                    30-JAN-05 SA_REP          10000     120000            80
+       155 Tuvault                   23-NOV-07 SA_REP           7000      84000            80
+       112 Urman                     07-MAR-06 FI_ACCOUNT       7800      93600           100
+       144 Vargas                    09-JUL-06 ST_CLERK         2500      30000            50
+       162 Vishney                   11-NOV-05 SA_REP          10500     126000            80
+       123 Vollman                   10-OCT-05 ST_MAN           6500      78000            50
+       196 Walsh                     24-APR-06 SH_CLERK         3100      37200            50
+       120 Weiss                     18-JUL-04 ST_MAN           8000      96000            50
+       200 Whalen                    17-SEP-03 AD_ASST          4400      52800            10
+
+55 rows selected.
+
+SQL> SELECT employee_id, last_name, salary, manager_id
+  2  FROM employees
+  3  WHERE manager_id IN (100, 101, 201);
+
+EMPLOYEE_ID LAST_NAME                     SALARY MANAGER_ID
+----------- ------------------------- ---------- ----------
+        101 Kochhar                        17000        100
+        102 De Haan                        17000        100
+        114 Raphaely                       11000        100
+        120 Weiss                           8000        100
+        121 Fripp                           8200        100
+        122 Kaufling                        7900        100
+        123 Vollman                         6500        100
+        124 Mourgos                         5800        100
+        145 Russell                        14000        100
+        146 Partners                       13500        100
+        147 Errazuriz                      12000        100
+
+EMPLOYEE_ID LAST_NAME                     SALARY MANAGER_ID
+----------- ------------------------- ---------- ----------
+        148 Cambrault                      11000        100
+        149 Zlotkey                        10500        100
+        201 Hartstein                      13000        100
+        108 Greenberg                      12008        101
+        200 Whalen                          4400        101
+        203 Mavris                          6500        101
+        204 Baer                           10000        101
+        205 Higgins                        12008        101
+        202 Fay                             6000        201
+
+20 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, salary, manager_id
+  2  FROM employees
+  3* WHERE manager_id IN (100, 101, 201)
+SQL> /
+
+EMPLOYEE_ID LAST_NAME                     SALARY MANAGER_ID
+----------- ------------------------- ---------- ----------
+        101 Kochhar                        17000        100
+        102 De Haan                        17000        100
+        114 Raphaely                       11000        100
+        120 Weiss                           8000        100
+        121 Fripp                           8200        100
+        122 Kaufling                        7900        100
+        123 Vollman                         6500        100
+        124 Mourgos                         5800        100
+        145 Russell                        14000        100
+        146 Partners                       13500        100
+        147 Errazuriz                      12000        100
+
+EMPLOYEE_ID LAST_NAME                     SALARY MANAGER_ID
+----------- ------------------------- ---------- ----------
+        148 Cambrault                      11000        100
+        149 Zlotkey                        10500        100
+        201 Hartstein                      13000        100
+        108 Greenberg                      12008        101
+        200 Whalen                          4400        101
+        203 Mavris                          6500        101
+        204 Baer                           10000        101
+        205 Higgins                        12008        101
+        202 Fay                             6000        201
+
+20 rows selected.
+
+SQL>

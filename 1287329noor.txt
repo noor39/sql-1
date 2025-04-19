@@ -1,0 +1,126 @@
+ANS.1
+SELECT employee_id, last_name, job_id, hire_date startdate
+FROM employees;
+
+ANS.2
+
+SELECT DISTINCT job_id
+FROM employees;
+
+ans.3
+select employee_id "Emp#", last_name "Employee", job_id "Job", hire_date "Hire Date"
+FROM employees;
+
+
+ans.4
+SELECT last_name||',' ||job_id "Emlpoyee and Title"
+FROM employees;
+
+ans.5
+
+SELECT last_name, job_id, hire_date
+FROM employees 
+WHERE last_Name in ('Matos','Taylor');
+
+
+ans.6
+
+SELECT last_name "Employee", salary "Monthly Salary"
+FROM employees
+WHERE salary BETWEEN 5000 and 12000
+AND department_id IN (20,50);
+
+ans.7
+
+SELECT last_name,  hire_date
+FROM employees
+WHERE hire_date like ('%04');
+
+ans.8
+
+SELECT last_name, salary, commission_pct
+FROM employees
+WHERE commission_pct is not null
+ORDER BY 2 DESC, 3 DESC;
+
+ans.9
+
+SELECT last_name
+FROM employees
+WHERE last_name LIKE ('%a%') AND last_name LIKE ('%e%');
+
+
+ans.10
+
+SELECT last_name, salary, hire_date, TO_CHAR(next_day(Add_months(hire_date, 6), 'MONDAY'), 'fmDay, "the" DDspth "of" month, yyyy') review
+FROM employees;
+
+
+ans.11
+
+SELECT last_name, NVL(To_char(commission_pct), 'No Commission') "COMM"
+FROM employees;
+
+
+ans.12
+this runs the code but this is error!
+select last_name, hire_date, next_day(hire_date, 'Monday') "DAY"
+from employees
+ORDER BY "DAY"
+
++++++++
+
+SELECT last_name, hire_date, TO_CHAR(hire_date, 'DAY') AS "DAY"
+FROM employees
+ORDER BY to_char(hire_date-1,'d');
+
+ans.13
+SELECT COUNT(manager_id) "Number of Manager"
+FROM employees;
+
+ans14
+
+SELECT manager_id, MIN(salary)
+FROM employees
+WHERE manager_id IS NOT NULL
+GROUP BY manager_id
+HAVING MIN(Salary) > 6000
+ORDER BY MIN(salary) DESC;
+
+ans.15
+
+SELECT employee_id, last_name,salary, round(salary*1.155) "New Salary"
+FROM employees;
+
+ans.16
+  SELECT last_name, INITCAP(last_name) "Name", length(last_name) length
+  FROM employees
+  WHERE last_name LIKE '%J%'
+  OR last_name LIKE '%A%'
+  OR last_name LIKE '%M%'
+  ORDER BY last_name;
+
+ANS.17
+
+SELECT LAST_NAME, ROUND(MONTHS_BETWEEN(SYSDATE, HIRE_DATE)) months_worked
+FROM employees
+ORDER BY  months_worked;
+
+ans.18
+
+SELECT last_name, LPAD(salary,15 , '$') "SALARY"
+FROM employees;
+
+
+ANS.19
+
+SELECT SUBSTR(LAST_NAME, 8), RPAD(' ', SALARY/1000, '*') EMPLOYEES_AND_THIER_SALARIES
+FROM EMPLOYEES
+ORDER BY SALARY DESC;
+
+ans.20
+
+SELECT to_char(HIRE_DATE,'fmddspth "of" month yyyy fmHH:MI:SS AM')
+FROM EMPLOYEES;
+
+

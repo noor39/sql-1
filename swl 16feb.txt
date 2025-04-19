@@ -1,0 +1,2037 @@
+
+SQL*Plus: Release 19.0.0.0.0 - Production on Sun Feb 16 09:03:42 2025
+Version 19.3.0.0.0
+
+Copyright (c) 1982, 2019, Oracle.  All rights reserved.
+
+Enter user-name: sys as sysdba
+Enter password:
+
+Connected to:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.3.0.0.0
+
+SQL> alter session set container=orclpdb;
+
+Session altered.
+
+SQL> alter pluggable database open;
+alter pluggable database open
+*
+ERROR at line 1:
+ORA-65019: pluggable database ORCLPDB already open
+
+
+SQL> conn hr/hr@orclpdb;
+Connected.
+SQL> SELECT employee_id, hire_date, MONTHS_BETWEEN (SYSDATE, hire_date) TENURE, ADD_MONTHS (hire_date,6) REVIEW, NEXT_DAY (hire_date, 'FRIDAY'), LAST_DAY(hire_date)
+  2  FROM employees
+  3  WHERE MONTHS_BETWEEN (SYSDATE, hire_date) < 150;
+
+no rows selected
+
+SQL> SELECT employee_id, hire_date,
+  2  ROUND(hire_date, 'MONTH'), TRUNC(hire_date, 'MONTH')
+  3  FROM employees
+  4  WHERE hire_date LIKE '%04'
+  5  /
+
+EMPLOYEE_ID HIRE_DATE ROUND(HIR TRUNC(HIR
+----------- --------- --------- ---------
+        120 18-JUL-04 01-AUG-04 01-JUL-04
+        133 14-JUN-04 01-JUN-04 01-JUN-04
+        145 01-OCT-04 01-OCT-04 01-OCT-04
+        156 30-JAN-04 01-FEB-04 01-JAN-04
+        157 04-MAR-04 01-MAR-04 01-MAR-04
+        158 01-AUG-04 01-AUG-04 01-AUG-04
+        174 11-MAY-04 01-MAY-04 01-MAY-04
+        184 27-JAN-04 01-FEB-04 01-JAN-04
+        192 04-FEB-04 01-FEB-04 01-FEB-04
+        201 17-FEB-04 01-MAR-04 01-FEB-04
+
+10 rows selected.
+
+SQL> SELECT last_name, job_id, department_id, hire_date
+  2  FROM employees
+  3  ORDER BY hire_date;
+
+LAST_NAME                 JOB_ID     DEPARTMENT_ID HIRE_DATE
+------------------------- ---------- ------------- ---------
+De Haan                   AD_VP                 90 13-JAN-01
+Gietz                     AC_ACCOUNT           110 07-JUN-02
+Baer                      PR_REP                70 07-JUN-02
+Mavris                    HR_REP                40 07-JUN-02
+Higgins                   AC_MGR               110 07-JUN-02
+Faviet                    FI_ACCOUNT           100 16-AUG-02
+Greenberg                 FI_MGR               100 17-AUG-02
+Raphaely                  PU_MAN                30 07-DEC-02
+Kaufling                  ST_MAN                50 01-MAY-03
+Khoo                      PU_CLERK              30 18-MAY-03
+King                      AD_PRES               90 17-JUN-03
+
+LAST_NAME                 JOB_ID     DEPARTMENT_ID HIRE_DATE
+------------------------- ---------- ------------- ---------
+Ladwig                    ST_CLERK              50 14-JUL-03
+Whalen                    AD_ASST               10 17-SEP-03
+Rajs                      ST_CLERK              50 17-OCT-03
+Sarchand                  SH_CLERK              50 27-JAN-04
+King                      SA_REP                80 30-JAN-04
+Bell                      SH_CLERK              50 04-FEB-04
+Hartstein                 MK_MAN                20 17-FEB-04
+Sully                     SA_REP                80 04-MAR-04
+Abel                      SA_REP                80 11-MAY-04
+Mallin                    ST_CLERK              50 14-JUN-04
+Weiss                     ST_MAN                50 18-JUL-04
+
+LAST_NAME                 JOB_ID     DEPARTMENT_ID HIRE_DATE
+------------------------- ---------- ------------- ---------
+McEwen                    SA_REP                80 01-AUG-04
+Russell                   SA_MAN                80 01-OCT-04
+Partners                  SA_MAN                80 05-JAN-05
+Davies                    ST_CLERK              50 29-JAN-05
+Tucker                    SA_REP                80 30-JAN-05
+Marlow                    ST_CLERK              50 16-FEB-05
+Bull                      SH_CLERK              50 20-FEB-05
+Everett                   SH_CLERK              50 03-MAR-05
+Errazuriz                 SA_MAN                80 10-MAR-05
+Smith                     SA_REP                80 10-MAR-05
+Ozer                      SA_REP                80 11-MAR-05
+
+LAST_NAME                 JOB_ID     DEPARTMENT_ID HIRE_DATE
+------------------------- ---------- ------------- ---------
+Hutton                    SA_REP                80 19-MAR-05
+Bernstein                 SA_REP                80 24-MAR-05
+Fripp                     ST_MAN                50 10-APR-05
+Chung                     SH_CLERK              50 14-JUN-05
+Austin                    IT_PROG               60 25-JUN-05
+Nayer                     ST_CLERK              50 16-JUL-05
+Tobias                    PU_CLERK              30 24-JUL-05
+Dilly                     SH_CLERK              50 13-AUG-05
+Fay                       MK_REP                20 17-AUG-05
+Hall                      SA_REP                80 20-AUG-05
+Bissot                    ST_CLERK              50 20-AUG-05
+
+LAST_NAME                 JOB_ID     DEPARTMENT_ID HIRE_DATE
+------------------------- ---------- ------------- ---------
+Kochhar                   AD_VP                 90 21-SEP-05
+Chen                      FI_ACCOUNT           100 28-SEP-05
+Sciarra                   FI_ACCOUNT           100 30-SEP-05
+Vollman                   ST_MAN                50 10-OCT-05
+Stiles                    ST_CLERK              50 26-OCT-05
+Atkinson                  ST_CLERK              50 30-OCT-05
+Vishney                   SA_REP                80 11-NOV-05
+Doran                     SA_REP                80 15-DEC-05
+Baida                     PU_CLERK              30 24-DEC-05
+Hunold                    IT_PROG               60 03-JAN-06
+Fox                       SA_REP                80 24-JAN-06
+
+LAST_NAME                 JOB_ID     DEPARTMENT_ID HIRE_DATE
+------------------------- ---------- ------------- ---------
+Taylor                    SH_CLERK              50 24-JAN-06
+Pataballa                 IT_PROG               60 05-FEB-06
+Seo                       ST_CLERK              50 12-FEB-06
+Fleaur                    SH_CLERK              50 23-FEB-06
+Urman                     FI_ACCOUNT           100 07-MAR-06
+Matos                     ST_CLERK              50 15-MAR-06
+Bloom                     SA_REP                80 23-MAR-06
+Taylor                    SA_REP                80 24-MAR-06
+Olsen                     SA_REP                80 30-MAR-06
+Patel                     ST_CLERK              50 06-APR-06
+Livingston                SA_REP                80 23-APR-06
+
+LAST_NAME                 JOB_ID     DEPARTMENT_ID HIRE_DATE
+------------------------- ---------- ------------- ---------
+Walsh                     SH_CLERK              50 24-APR-06
+Feeney                    SH_CLERK              50 23-MAY-06
+Dellinger                 SH_CLERK              50 24-JUN-06
+McCain                    SH_CLERK              50 01-JUL-06
+Vargas                    ST_CLERK              50 09-JUL-06
+Gates                     SH_CLERK              50 11-JUL-06
+Rogers                    ST_CLERK              50 26-AUG-06
+Mikkilineni               ST_CLERK              50 28-SEP-06
+Sewall                    SA_REP                80 03-NOV-06
+Himuro                    PU_CLERK              30 15-NOV-06
+Cambrault                 SA_REP                80 09-DEC-06
+
+LAST_NAME                 JOB_ID     DEPARTMENT_ID HIRE_DATE
+------------------------- ---------- ------------- ---------
+Landry                    ST_CLERK              50 14-JAN-07
+Cabrio                    SH_CLERK              50 07-FEB-07
+Lorentz                   IT_PROG               60 07-FEB-07
+Smith                     SA_REP                80 23-FEB-07
+Jones                     SH_CLERK              50 17-MAR-07
+Greene                    SA_REP                80 19-MAR-07
+Bates                     SA_REP                80 24-MAR-07
+Olson                     ST_CLERK              50 10-APR-07
+Ernst                     IT_PROG               60 21-MAY-07
+Grant                     SA_REP                   24-MAY-07
+OConnell                  SH_CLERK              50 21-JUN-07
+
+LAST_NAME                 JOB_ID     DEPARTMENT_ID HIRE_DATE
+------------------------- ---------- ------------- ---------
+Sullivan                  SH_CLERK              50 21-JUN-07
+Colmenares                PU_CLERK              30 10-AUG-07
+Cambrault                 SA_MAN                80 15-OCT-07
+Mourgos                   ST_MAN                50 16-NOV-07
+Tuvault                   SA_REP                80 23-NOV-07
+Popp                      FI_ACCOUNT           100 07-DEC-07
+Gee                       ST_CLERK              50 12-DEC-07
+Perkins                   SH_CLERK              50 19-DEC-07
+Johnson                   SA_REP                80 04-JAN-08
+Grant                     SH_CLERK              50 13-JAN-08
+Marvins                   SA_REP                80 24-JAN-08
+
+LAST_NAME                 JOB_ID     DEPARTMENT_ID HIRE_DATE
+------------------------- ---------- ------------- ---------
+Zlotkey                   SA_MAN                80 29-JAN-08
+Geoni                     SH_CLERK              50 03-FEB-08
+Philtanker                ST_CLERK              50 06-FEB-08
+Lee                       SA_REP                80 23-FEB-08
+Markle                    ST_CLERK              50 08-MAR-08
+Ande                      SA_REP                80 24-MAR-08
+Banda                     SA_REP                80 21-APR-08
+Kumar                     SA_REP                80 21-APR-08
+
+107 rows selected.
+
+SQL> SELECT last_name, salary as sal, department_id deptid, hire_date
+  2  from employees
+  3  order by salary;
+
+LAST_NAME                        SAL     DEPTID HIRE_DATE
+------------------------- ---------- ---------- ---------
+Olson                           2100         50 10-APR-07
+Markle                          2200         50 08-MAR-08
+Philtanker                      2200         50 06-FEB-08
+Landry                          2400         50 14-JAN-07
+Gee                             2400         50 12-DEC-07
+Colmenares                      2500         30 10-AUG-07
+Marlow                          2500         50 16-FEB-05
+Patel                           2500         50 06-APR-06
+Vargas                          2500         50 09-JUL-06
+Sullivan                        2500         50 21-JUN-07
+Perkins                         2500         50 19-DEC-07
+
+LAST_NAME                        SAL     DEPTID HIRE_DATE
+------------------------- ---------- ---------- ---------
+Himuro                          2600         30 15-NOV-06
+Matos                           2600         50 15-MAR-06
+OConnell                        2600         50 21-JUN-07
+Grant                           2600         50 13-JAN-08
+Mikkilineni                     2700         50 28-SEP-06
+Seo                             2700         50 12-FEB-06
+Tobias                          2800         30 24-JUL-05
+Atkinson                        2800         50 30-OCT-05
+Geoni                           2800         50 03-FEB-08
+Jones                           2800         50 17-MAR-07
+Baida                           2900         30 24-DEC-05
+
+LAST_NAME                        SAL     DEPTID HIRE_DATE
+------------------------- ---------- ---------- ---------
+Rogers                          2900         50 26-AUG-06
+Gates                           2900         50 11-JUL-06
+Cabrio                          3000         50 07-FEB-07
+Feeney                          3000         50 23-MAY-06
+Khoo                            3100         30 18-MAY-03
+Davies                          3100         50 29-JAN-05
+Fleaur                          3100         50 23-FEB-06
+Walsh                           3100         50 24-APR-06
+Nayer                           3200         50 16-JUL-05
+Stiles                          3200         50 26-OCT-05
+Taylor                          3200         50 24-JAN-06
+
+LAST_NAME                        SAL     DEPTID HIRE_DATE
+------------------------- ---------- ---------- ---------
+McCain                          3200         50 01-JUL-06
+Bissot                          3300         50 20-AUG-05
+Mallin                          3300         50 14-JUN-04
+Dellinger                       3400         50 24-JUN-06
+Rajs                            3500         50 17-OCT-03
+Ladwig                          3600         50 14-JUL-03
+Dilly                           3600         50 13-AUG-05
+Chung                           3800         50 14-JUN-05
+Everett                         3900         50 03-MAR-05
+Bell                            4000         50 04-FEB-04
+Bull                            4100         50 20-FEB-05
+
+LAST_NAME                        SAL     DEPTID HIRE_DATE
+------------------------- ---------- ---------- ---------
+Lorentz                         4200         60 07-FEB-07
+Sarchand                        4200         50 27-JAN-04
+Whalen                          4400         10 17-SEP-03
+Austin                          4800         60 25-JUN-05
+Pataballa                       4800         60 05-FEB-06
+Mourgos                         5800         50 16-NOV-07
+Ernst                           6000         60 21-MAY-07
+Fay                             6000         20 17-AUG-05
+Kumar                           6100         80 21-APR-08
+Banda                           6200         80 21-APR-08
+Johnson                         6200         80 04-JAN-08
+
+LAST_NAME                        SAL     DEPTID HIRE_DATE
+------------------------- ---------- ---------- ---------
+Ande                            6400         80 24-MAR-08
+Vollman                         6500         50 10-OCT-05
+Mavris                          6500         40 07-JUN-02
+Lee                             6800         80 23-FEB-08
+Popp                            6900        100 07-DEC-07
+Tuvault                         7000         80 23-NOV-07
+Sewall                          7000         80 03-NOV-06
+Grant                           7000            24-MAY-07
+Marvins                         7200         80 24-JAN-08
+Bates                           7300         80 24-MAR-07
+Smith                           7400         80 23-FEB-07
+
+LAST_NAME                        SAL     DEPTID HIRE_DATE
+------------------------- ---------- ---------- ---------
+Cambrault                       7500         80 09-DEC-06
+Doran                           7500         80 15-DEC-05
+Sciarra                         7700        100 30-SEP-05
+Urman                           7800        100 07-MAR-06
+Kaufling                        7900         50 01-MAY-03
+Weiss                           8000         50 18-JUL-04
+Olsen                           8000         80 30-MAR-06
+Smith                           8000         80 10-MAR-05
+Chen                            8200        100 28-SEP-05
+Fripp                           8200         50 10-APR-05
+Gietz                           8300        110 07-JUN-02
+
+LAST_NAME                        SAL     DEPTID HIRE_DATE
+------------------------- ---------- ---------- ---------
+Livingston                      8400         80 23-APR-06
+Taylor                          8600         80 24-MAR-06
+Hutton                          8800         80 19-MAR-05
+Hunold                          9000         60 03-JAN-06
+Faviet                          9000        100 16-AUG-02
+Hall                            9000         80 20-AUG-05
+McEwen                          9000         80 01-AUG-04
+Sully                           9500         80 04-MAR-04
+Greene                          9500         80 19-MAR-07
+Bernstein                       9500         80 24-MAR-05
+Fox                             9600         80 24-JAN-06
+
+LAST_NAME                        SAL     DEPTID HIRE_DATE
+------------------------- ---------- ---------- ---------
+Baer                           10000         70 07-JUN-02
+Bloom                          10000         80 23-MAR-06
+King                           10000         80 30-JAN-04
+Tucker                         10000         80 30-JAN-05
+Vishney                        10500         80 11-NOV-05
+Zlotkey                        10500         80 29-JAN-08
+Cambrault                      11000         80 15-OCT-07
+Raphaely                       11000         30 07-DEC-02
+Abel                           11000         80 11-MAY-04
+Ozer                           11500         80 11-MAR-05
+Errazuriz                      12000         80 10-MAR-05
+
+LAST_NAME                        SAL     DEPTID HIRE_DATE
+------------------------- ---------- ---------- ---------
+Higgins                        12008        110 07-JUN-02
+Greenberg                      12008        100 17-AUG-02
+Hartstein                      13000         20 17-FEB-04
+Partners                       13500         80 05-JAN-05
+Russell                        14000         80 01-OCT-04
+De Haan                        17000         90 13-JAN-01
+Kochhar                        17000         90 21-SEP-05
+King                           24000         90 17-JUN-03
+
+107 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT last_name name, salary as sal, department_id deptid, hire_date hiring
+  2  from employees
+  3* order by salary
+SQL> /
+
+NAME                             SAL     DEPTID HIRING
+------------------------- ---------- ---------- ---------
+Olson                           2100         50 10-APR-07
+Markle                          2200         50 08-MAR-08
+Philtanker                      2200         50 06-FEB-08
+Landry                          2400         50 14-JAN-07
+Gee                             2400         50 12-DEC-07
+Colmenares                      2500         30 10-AUG-07
+Marlow                          2500         50 16-FEB-05
+Patel                           2500         50 06-APR-06
+Vargas                          2500         50 09-JUL-06
+Sullivan                        2500         50 21-JUN-07
+Perkins                         2500         50 19-DEC-07
+
+NAME                             SAL     DEPTID HIRING
+------------------------- ---------- ---------- ---------
+Himuro                          2600         30 15-NOV-06
+Matos                           2600         50 15-MAR-06
+OConnell                        2600         50 21-JUN-07
+Grant                           2600         50 13-JAN-08
+Mikkilineni                     2700         50 28-SEP-06
+Seo                             2700         50 12-FEB-06
+Tobias                          2800         30 24-JUL-05
+Atkinson                        2800         50 30-OCT-05
+Geoni                           2800         50 03-FEB-08
+Jones                           2800         50 17-MAR-07
+Baida                           2900         30 24-DEC-05
+
+NAME                             SAL     DEPTID HIRING
+------------------------- ---------- ---------- ---------
+Rogers                          2900         50 26-AUG-06
+Gates                           2900         50 11-JUL-06
+Cabrio                          3000         50 07-FEB-07
+Feeney                          3000         50 23-MAY-06
+Khoo                            3100         30 18-MAY-03
+Davies                          3100         50 29-JAN-05
+Fleaur                          3100         50 23-FEB-06
+Walsh                           3100         50 24-APR-06
+Nayer                           3200         50 16-JUL-05
+Stiles                          3200         50 26-OCT-05
+Taylor                          3200         50 24-JAN-06
+
+NAME                             SAL     DEPTID HIRING
+------------------------- ---------- ---------- ---------
+McCain                          3200         50 01-JUL-06
+Bissot                          3300         50 20-AUG-05
+Mallin                          3300         50 14-JUN-04
+Dellinger                       3400         50 24-JUN-06
+Rajs                            3500         50 17-OCT-03
+Ladwig                          3600         50 14-JUL-03
+Dilly                           3600         50 13-AUG-05
+Chung                           3800         50 14-JUN-05
+Everett                         3900         50 03-MAR-05
+Bell                            4000         50 04-FEB-04
+Bull                            4100         50 20-FEB-05
+
+NAME                             SAL     DEPTID HIRING
+------------------------- ---------- ---------- ---------
+Lorentz                         4200         60 07-FEB-07
+Sarchand                        4200         50 27-JAN-04
+Whalen                          4400         10 17-SEP-03
+Austin                          4800         60 25-JUN-05
+Pataballa                       4800         60 05-FEB-06
+Mourgos                         5800         50 16-NOV-07
+Ernst                           6000         60 21-MAY-07
+Fay                             6000         20 17-AUG-05
+Kumar                           6100         80 21-APR-08
+Banda                           6200         80 21-APR-08
+Johnson                         6200         80 04-JAN-08
+
+NAME                             SAL     DEPTID HIRING
+------------------------- ---------- ---------- ---------
+Ande                            6400         80 24-MAR-08
+Vollman                         6500         50 10-OCT-05
+Mavris                          6500         40 07-JUN-02
+Lee                             6800         80 23-FEB-08
+Popp                            6900        100 07-DEC-07
+Tuvault                         7000         80 23-NOV-07
+Sewall                          7000         80 03-NOV-06
+Grant                           7000            24-MAY-07
+Marvins                         7200         80 24-JAN-08
+Bates                           7300         80 24-MAR-07
+Smith                           7400         80 23-FEB-07
+
+NAME                             SAL     DEPTID HIRING
+------------------------- ---------- ---------- ---------
+Cambrault                       7500         80 09-DEC-06
+Doran                           7500         80 15-DEC-05
+Sciarra                         7700        100 30-SEP-05
+Urman                           7800        100 07-MAR-06
+Kaufling                        7900         50 01-MAY-03
+Weiss                           8000         50 18-JUL-04
+Olsen                           8000         80 30-MAR-06
+Smith                           8000         80 10-MAR-05
+Chen                            8200        100 28-SEP-05
+Fripp                           8200         50 10-APR-05
+Gietz                           8300        110 07-JUN-02
+
+NAME                             SAL     DEPTID HIRING
+------------------------- ---------- ---------- ---------
+Livingston                      8400         80 23-APR-06
+Taylor                          8600         80 24-MAR-06
+Hutton                          8800         80 19-MAR-05
+Hunold                          9000         60 03-JAN-06
+Faviet                          9000        100 16-AUG-02
+Hall                            9000         80 20-AUG-05
+McEwen                          9000         80 01-AUG-04
+Sully                           9500         80 04-MAR-04
+Greene                          9500         80 19-MAR-07
+Bernstein                       9500         80 24-MAR-05
+Fox                             9600         80 24-JAN-06
+
+NAME                             SAL     DEPTID HIRING
+------------------------- ---------- ---------- ---------
+Baer                           10000         70 07-JUN-02
+Bloom                          10000         80 23-MAR-06
+King                           10000         80 30-JAN-04
+Tucker                         10000         80 30-JAN-05
+Vishney                        10500         80 11-NOV-05
+Zlotkey                        10500         80 29-JAN-08
+Cambrault                      11000         80 15-OCT-07
+Raphaely                       11000         30 07-DEC-02
+Abel                           11000         80 11-MAY-04
+Ozer                           11500         80 11-MAR-05
+Errazuriz                      12000         80 10-MAR-05
+
+NAME                             SAL     DEPTID HIRING
+------------------------- ---------- ---------- ---------
+Higgins                        12008        110 07-JUN-02
+Greenberg                      12008        100 17-AUG-02
+Hartstein                      13000         20 17-FEB-04
+Partners                       13500         80 05-JAN-05
+Russell                        14000         80 01-OCT-04
+De Haan                        17000         90 13-JAN-01
+Kochhar                        17000         90 21-SEP-05
+King                           24000         90 17-JUN-03
+
+107 rows selected.
+
+SQL> SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL",
+  2  FROM employees
+  3  WHERE last_name LIKE 'M%'
+  4  /
+FROM employees
+*
+ERROR at line 2:
+ORA-00936: missing expression
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL"
+  2  FROM employees
+  3* WHERE last_name LIKE 'M%'
+SQL> /
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL
+----------- ------------------------- ---------- ---------- ----------
+        133 Mallin                    ST_CLERK         3300      39600
+        128 Markle                    ST_CLERK         2200      26400
+        131 Marlow                    ST_CLERK         2500      30000
+        164 Marvins                   SA_REP           7200      86400
+        143 Matos                     ST_CLERK         2600      31200
+        203 Mavris                    HR_REP           6500      78000
+        194 McCain                    SH_CLERK         3200      38400
+        158 McEwen                    SA_REP           9000     108000
+        126 Mikkilineni               ST_CLERK         2700      32400
+        124 Mourgos                   ST_MAN           5800      69600
+
+10 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL"
+  2  FROM employees
+  3* WHERE last_name LIKE 'M%' AND 'S%'
+SQL> /
+WHERE last_name LIKE 'M%' AND 'S%'
+                                 *
+ERROR at line 3:
+ORA-00920: invalid relational operator
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL"
+  2  FROM employees
+  3* WHERE last_name LIKE 'M%','S%'
+SQL> /
+WHERE last_name LIKE 'M%','S%'
+                         *
+ERROR at line 3:
+ORA-00933: SQL command not properly ended
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL"
+  2  FROM employees
+  3* WHERE last_name LIKE '%n'
+SQL> /
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL
+----------- ------------------------- ---------- ---------- ----------
+        102 De Haan                   AD_VP           17000     204000
+        105 Austin                    IT_PROG          4800      57600
+        110 Chen                      FI_ACCOUNT       8200      98400
+        112 Urman                     FI_ACCOUNT       7800      93600
+        123 Vollman                   ST_MAN           6500      78000
+        130 Atkinson                  ST_CLERK         2800      33600
+        132 Olson                     ST_CLERK         2100      25200
+        133 Mallin                    ST_CLERK         3300      39600
+        151 Bernstein                 SA_REP           9500     114000
+        153 Olsen                     SA_REP           8000      96000
+        158 McEwen                    SA_REP           9000     108000
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL
+----------- ------------------------- ---------- ---------- ----------
+        160 Doran                     SA_REP           7500      90000
+        175 Hutton                    SA_REP           8800     105600
+        177 Livingston                SA_REP           8400     100800
+        179 Johnson                   SA_REP           6200      74400
+        182 Sullivan                  SH_CLERK         2500      30000
+        194 McCain                    SH_CLERK         3200      38400
+        200 Whalen                    AD_ASST          4400      52800
+        201 Hartstein                 MK_MAN          13000     156000
+
+19 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL"
+  2  FROM employees
+  3* WHERE last_name LIKE 'n%'
+SQL> /
+
+no rows selected
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL"
+  2  FROM employees
+  3* WHERE last_name LIKE 'N%'
+SQL> /
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL
+----------- ------------------------- ---------- ---------- ----------
+        125 Nayer                     ST_CLERK         3200      38400
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL"
+  2  FROM employees
+  3* WHERE last_name LIKE 'N%' 'm%'
+SQL> /
+WHERE last_name LIKE 'N%' 'm%'
+                          *
+ERROR at line 3:
+ORA-00933: SQL command not properly ended
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL"
+  2  FROM employees
+  3* WHERE last_name LIKE 'N%', 'm%'
+SQL> /
+WHERE last_name LIKE 'N%', 'm%'
+                         *
+ERROR at line 3:
+ORA-00933: SQL command not properly ended
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL"
+  2  FROM employees
+  3* WHERE last_name LIKE 'N%', 'M%'
+SQL> /
+WHERE last_name LIKE 'N%', 'M%'
+                         *
+ERROR at line 3:
+ORA-00933: SQL command not properly ended
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL"
+  2  FROM employees
+  3  WHERE job_id like '%MAN%'
+  4* AND salary>10000
+  5  /
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL
+----------- ------------------------- ---------- ---------- ----------
+        114 Raphaely                  PU_MAN          11000     132000
+        145 Russell                   SA_MAN          14000     168000
+        146 Partners                  SA_MAN          13500     162000
+        147 Errazuriz                 SA_MAN          12000     144000
+        148 Cambrault                 SA_MAN          11000     132000
+        149 Zlotkey                   SA_MAN          10500     126000
+        201 Hartstein                 MK_MAN          13000     156000
+
+7 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL"
+  2  FROM employees
+  3  WHERE job_id like '%MAN%'
+  4* OR salary>10000
+SQL> /
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL
+----------- ------------------------- ---------- ---------- ----------
+        100 King                      AD_PRES         24000     288000
+        101 Kochhar                   AD_VP           17000     204000
+        102 De Haan                   AD_VP           17000     204000
+        108 Greenberg                 FI_MGR          12008     144096
+        114 Raphaely                  PU_MAN          11000     132000
+        120 Weiss                     ST_MAN           8000      96000
+        121 Fripp                     ST_MAN           8200      98400
+        122 Kaufling                  ST_MAN           7900      94800
+        123 Vollman                   ST_MAN           6500      78000
+        124 Mourgos                   ST_MAN           5800      69600
+        145 Russell                   SA_MAN          14000     168000
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL
+----------- ------------------------- ---------- ---------- ----------
+        146 Partners                  SA_MAN          13500     162000
+        147 Errazuriz                 SA_MAN          12000     144000
+        148 Cambrault                 SA_MAN          11000     132000
+        149 Zlotkey                   SA_MAN          10500     126000
+        162 Vishney                   SA_REP          10500     126000
+        168 Ozer                      SA_REP          11500     138000
+        174 Abel                      SA_REP          11000     132000
+        201 Hartstein                 MK_MAN          13000     156000
+        205 Higgins                   AC_MGR          12008     144096
+
+20 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL"
+  2  FROM employees
+  3  WHERE job_id like '%MAN%'
+  4  OR salary>10000
+  5* ORDER BY employee_id
+SQL> /
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL
+----------- ------------------------- ---------- ---------- ----------
+        100 King                      AD_PRES         24000     288000
+        101 Kochhar                   AD_VP           17000     204000
+        102 De Haan                   AD_VP           17000     204000
+        108 Greenberg                 FI_MGR          12008     144096
+        114 Raphaely                  PU_MAN          11000     132000
+        120 Weiss                     ST_MAN           8000      96000
+        121 Fripp                     ST_MAN           8200      98400
+        122 Kaufling                  ST_MAN           7900      94800
+        123 Vollman                   ST_MAN           6500      78000
+        124 Mourgos                   ST_MAN           5800      69600
+        145 Russell                   SA_MAN          14000     168000
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL
+----------- ------------------------- ---------- ---------- ----------
+        146 Partners                  SA_MAN          13500     162000
+        147 Errazuriz                 SA_MAN          12000     144000
+        148 Cambrault                 SA_MAN          11000     132000
+        149 Zlotkey                   SA_MAN          10500     126000
+        162 Vishney                   SA_REP          10500     126000
+        168 Ozer                      SA_REP          11500     138000
+        174 Abel                      SA_REP          11000     132000
+        201 Hartstein                 MK_MAN          13000     156000
+        205 Higgins                   AC_MGR          12008     144096
+
+20 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL"
+  2  FROM employees
+  3  WHERE job_id like '%MAN%'
+  4  OR salary>10000
+  5* ORDER BY last_name
+SQL> /
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL
+----------- ------------------------- ---------- ---------- ----------
+        174 Abel                      SA_REP          11000     132000
+        148 Cambrault                 SA_MAN          11000     132000
+        102 De Haan                   AD_VP           17000     204000
+        147 Errazuriz                 SA_MAN          12000     144000
+        121 Fripp                     ST_MAN           8200      98400
+        108 Greenberg                 FI_MGR          12008     144096
+        201 Hartstein                 MK_MAN          13000     156000
+        205 Higgins                   AC_MGR          12008     144096
+        122 Kaufling                  ST_MAN           7900      94800
+        100 King                      AD_PRES         24000     288000
+        101 Kochhar                   AD_VP           17000     204000
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL
+----------- ------------------------- ---------- ---------- ----------
+        124 Mourgos                   ST_MAN           5800      69600
+        168 Ozer                      SA_REP          11500     138000
+        146 Partners                  SA_MAN          13500     162000
+        114 Raphaely                  PU_MAN          11000     132000
+        145 Russell                   SA_MAN          14000     168000
+        162 Vishney                   SA_REP          10500     126000
+        123 Vollman                   ST_MAN           6500      78000
+        120 Weiss                     ST_MAN           8000      96000
+        149 Zlotkey                   SA_MAN          10500     126000
+
+20 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL"
+  2  FROM employees
+  3  WHERE job_id like '%MAN%'
+  4  OR salary>10000
+  5* ORDER BY job_id
+SQL> /
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL
+----------- ------------------------- ---------- ---------- ----------
+        205 Higgins                   AC_MGR          12008     144096
+        100 King                      AD_PRES         24000     288000
+        101 Kochhar                   AD_VP           17000     204000
+        102 De Haan                   AD_VP           17000     204000
+        108 Greenberg                 FI_MGR          12008     144096
+        201 Hartstein                 MK_MAN          13000     156000
+        114 Raphaely                  PU_MAN          11000     132000
+        147 Errazuriz                 SA_MAN          12000     144000
+        149 Zlotkey                   SA_MAN          10500     126000
+        148 Cambrault                 SA_MAN          11000     132000
+        146 Partners                  SA_MAN          13500     162000
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL
+----------- ------------------------- ---------- ---------- ----------
+        145 Russell                   SA_MAN          14000     168000
+        174 Abel                      SA_REP          11000     132000
+        168 Ozer                      SA_REP          11500     138000
+        162 Vishney                   SA_REP          10500     126000
+        120 Weiss                     ST_MAN           8000      96000
+        121 Fripp                     ST_MAN           8200      98400
+        124 Mourgos                   ST_MAN           5800      69600
+        123 Vollman                   ST_MAN           6500      78000
+        122 Kaufling                  ST_MAN           7900      94800
+
+20 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL"
+  2  FROM employees
+  3  WHERE job_id like '%MAN%'
+  4  OR salary>10000
+  5* ORDER BY salary
+SQL> /
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL
+----------- ------------------------- ---------- ---------- ----------
+        124 Mourgos                   ST_MAN           5800      69600
+        123 Vollman                   ST_MAN           6500      78000
+        122 Kaufling                  ST_MAN           7900      94800
+        120 Weiss                     ST_MAN           8000      96000
+        121 Fripp                     ST_MAN           8200      98400
+        162 Vishney                   SA_REP          10500     126000
+        149 Zlotkey                   SA_MAN          10500     126000
+        148 Cambrault                 SA_MAN          11000     132000
+        174 Abel                      SA_REP          11000     132000
+        114 Raphaely                  PU_MAN          11000     132000
+        168 Ozer                      SA_REP          11500     138000
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL
+----------- ------------------------- ---------- ---------- ----------
+        147 Errazuriz                 SA_MAN          12000     144000
+        108 Greenberg                 FI_MGR          12008     144096
+        205 Higgins                   AC_MGR          12008     144096
+        201 Hartstein                 MK_MAN          13000     156000
+        146 Partners                  SA_MAN          13500     162000
+        145 Russell                   SA_MAN          14000     168000
+        102 De Haan                   AD_VP           17000     204000
+        101 Kochhar                   AD_VP           17000     204000
+        100 King                      AD_PRES         24000     288000
+
+20 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL"
+  2  FROM employees
+  3  WHERE job_id like '%MAN%'
+  4  OR salary>10000
+  5* ORDER BY salary DESC
+SQL> /
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL
+----------- ------------------------- ---------- ---------- ----------
+        100 King                      AD_PRES         24000     288000
+        101 Kochhar                   AD_VP           17000     204000
+        102 De Haan                   AD_VP           17000     204000
+        145 Russell                   SA_MAN          14000     168000
+        146 Partners                  SA_MAN          13500     162000
+        201 Hartstein                 MK_MAN          13000     156000
+        205 Higgins                   AC_MGR          12008     144096
+        108 Greenberg                 FI_MGR          12008     144096
+        147 Errazuriz                 SA_MAN          12000     144000
+        168 Ozer                      SA_REP          11500     138000
+        174 Abel                      SA_REP          11000     132000
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL
+----------- ------------------------- ---------- ---------- ----------
+        114 Raphaely                  PU_MAN          11000     132000
+        148 Cambrault                 SA_MAN          11000     132000
+        149 Zlotkey                   SA_MAN          10500     126000
+        162 Vishney                   SA_REP          10500     126000
+        121 Fripp                     ST_MAN           8200      98400
+        120 Weiss                     ST_MAN           8000      96000
+        122 Kaufling                  ST_MAN           7900      94800
+        123 Vollman                   ST_MAN           6500      78000
+        124 Mourgos                   ST_MAN           5800      69600
+
+20 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL"
+  2  FROM employees
+  3  WHERE job_id like '%MAN%'
+  4  OR salary>10000
+  5* ORDER BY salary ASC
+SQL> /
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL
+----------- ------------------------- ---------- ---------- ----------
+        124 Mourgos                   ST_MAN           5800      69600
+        123 Vollman                   ST_MAN           6500      78000
+        122 Kaufling                  ST_MAN           7900      94800
+        120 Weiss                     ST_MAN           8000      96000
+        121 Fripp                     ST_MAN           8200      98400
+        162 Vishney                   SA_REP          10500     126000
+        149 Zlotkey                   SA_MAN          10500     126000
+        148 Cambrault                 SA_MAN          11000     132000
+        174 Abel                      SA_REP          11000     132000
+        114 Raphaely                  PU_MAN          11000     132000
+        168 Ozer                      SA_REP          11500     138000
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL
+----------- ------------------------- ---------- ---------- ----------
+        147 Errazuriz                 SA_MAN          12000     144000
+        108 Greenberg                 FI_MGR          12008     144096
+        205 Higgins                   AC_MGR          12008     144096
+        201 Hartstein                 MK_MAN          13000     156000
+        146 Partners                  SA_MAN          13500     162000
+        145 Russell                   SA_MAN          14000     168000
+        102 De Haan                   AD_VP           17000     204000
+        101 Kochhar                   AD_VP           17000     204000
+        100 King                      AD_PRES         24000     288000
+
+20 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL"
+  2  FROM employees
+  3  WHERE job_id like '%MAN%'
+  4  OR salary>10000
+  5* ORDER BY "ANN SAL" ASC
+SQL> /
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL
+----------- ------------------------- ---------- ---------- ----------
+        124 Mourgos                   ST_MAN           5800      69600
+        123 Vollman                   ST_MAN           6500      78000
+        122 Kaufling                  ST_MAN           7900      94800
+        120 Weiss                     ST_MAN           8000      96000
+        121 Fripp                     ST_MAN           8200      98400
+        162 Vishney                   SA_REP          10500     126000
+        149 Zlotkey                   SA_MAN          10500     126000
+        148 Cambrault                 SA_MAN          11000     132000
+        174 Abel                      SA_REP          11000     132000
+        114 Raphaely                  PU_MAN          11000     132000
+        168 Ozer                      SA_REP          11500     138000
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL
+----------- ------------------------- ---------- ---------- ----------
+        147 Errazuriz                 SA_MAN          12000     144000
+        108 Greenberg                 FI_MGR          12008     144096
+        205 Higgins                   AC_MGR          12008     144096
+        201 Hartstein                 MK_MAN          13000     156000
+        146 Partners                  SA_MAN          13500     162000
+        145 Russell                   SA_MAN          14000     168000
+        102 De Haan                   AD_VP           17000     204000
+        101 Kochhar                   AD_VP           17000     204000
+        100 King                      AD_PRES         24000     288000
+
+20 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL" department_id
+  2  FROM employees
+  3  WHERE job_id like '%MAN%'
+  4  OR salary>10000
+  5* ORDER BY "ANN SAL" ASC
+SQL> /
+SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL" department_id
+                                                                   *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL>
+SQL> /
+SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL" department_id
+                                                                   *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL", department_id
+  2  FROM employees
+  3  WHERE job_id like '%MAN%'
+  4  OR salary>10000
+  5* ORDER BY "ANN SAL" ASC
+SQL> /
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL
+----------- ------------------------- ---------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        124 Mourgos                   ST_MAN           5800      69600
+           50
+
+        123 Vollman                   ST_MAN           6500      78000
+           50
+
+        122 Kaufling                  ST_MAN           7900      94800
+           50
+
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL
+----------- ------------------------- ---------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        120 Weiss                     ST_MAN           8000      96000
+           50
+
+        121 Fripp                     ST_MAN           8200      98400
+           50
+
+        162 Vishney                   SA_REP          10500     126000
+           80
+
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL
+----------- ------------------------- ---------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        149 Zlotkey                   SA_MAN          10500     126000
+           80
+
+        148 Cambrault                 SA_MAN          11000     132000
+           80
+
+        174 Abel                      SA_REP          11000     132000
+           80
+
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL
+----------- ------------------------- ---------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        114 Raphaely                  PU_MAN          11000     132000
+           30
+
+        168 Ozer                      SA_REP          11500     138000
+           80
+
+        147 Errazuriz                 SA_MAN          12000     144000
+           80
+
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL
+----------- ------------------------- ---------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        108 Greenberg                 FI_MGR          12008     144096
+          100
+
+        205 Higgins                   AC_MGR          12008     144096
+          110
+
+        201 Hartstein                 MK_MAN          13000     156000
+           20
+
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL
+----------- ------------------------- ---------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        146 Partners                  SA_MAN          13500     162000
+           80
+
+        145 Russell                   SA_MAN          14000     168000
+           80
+
+        102 De Haan                   AD_VP           17000     204000
+           90
+
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL
+----------- ------------------------- ---------- ---------- ----------
+DEPARTMENT_ID
+-------------
+        101 Kochhar                   AD_VP           17000     204000
+           90
+
+        100 King                      AD_PRES         24000     288000
+           90
+
+
+20 rows selected.
+
+SQL> set lines 400
+SQL> /
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL DEPARTMENT_ID
+----------- ------------------------- ---------- ---------- ---------- -------------
+        124 Mourgos                   ST_MAN           5800      69600            50
+        123 Vollman                   ST_MAN           6500      78000            50
+        122 Kaufling                  ST_MAN           7900      94800            50
+        120 Weiss                     ST_MAN           8000      96000            50
+        121 Fripp                     ST_MAN           8200      98400            50
+        162 Vishney                   SA_REP          10500     126000            80
+        149 Zlotkey                   SA_MAN          10500     126000            80
+        148 Cambrault                 SA_MAN          11000     132000            80
+        174 Abel                      SA_REP          11000     132000            80
+        114 Raphaely                  PU_MAN          11000     132000            30
+        168 Ozer                      SA_REP          11500     138000            80
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL DEPARTMENT_ID
+----------- ------------------------- ---------- ---------- ---------- -------------
+        147 Errazuriz                 SA_MAN          12000     144000            80
+        108 Greenberg                 FI_MGR          12008     144096           100
+        205 Higgins                   AC_MGR          12008     144096           110
+        201 Hartstein                 MK_MAN          13000     156000            20
+        146 Partners                  SA_MAN          13500     162000            80
+        145 Russell                   SA_MAN          14000     168000            80
+        102 De Haan                   AD_VP           17000     204000            90
+        101 Kochhar                   AD_VP           17000     204000            90
+        100 King                      AD_PRES         24000     288000            90
+
+20 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL", department_id
+  2  FROM employees
+  3  WHERE job_id like '%MAN%'
+  4  OR salary>10000
+  5* ORDER BY "ANN SAL" ASC
+SQL> /
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL DEPARTMENT_ID
+----------- ------------------------- ---------- ---------- ---------- -------------
+        124 Mourgos                   ST_MAN           5800      69600            50
+        123 Vollman                   ST_MAN           6500      78000            50
+        122 Kaufling                  ST_MAN           7900      94800            50
+        120 Weiss                     ST_MAN           8000      96000            50
+        121 Fripp                     ST_MAN           8200      98400            50
+        162 Vishney                   SA_REP          10500     126000            80
+        149 Zlotkey                   SA_MAN          10500     126000            80
+        148 Cambrault                 SA_MAN          11000     132000            80
+        174 Abel                      SA_REP          11000     132000            80
+        114 Raphaely                  PU_MAN          11000     132000            30
+        168 Ozer                      SA_REP          11500     138000            80
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL DEPARTMENT_ID
+----------- ------------------------- ---------- ---------- ---------- -------------
+        147 Errazuriz                 SA_MAN          12000     144000            80
+        108 Greenberg                 FI_MGR          12008     144096           100
+        205 Higgins                   AC_MGR          12008     144096           110
+        201 Hartstein                 MK_MAN          13000     156000            20
+        146 Partners                  SA_MAN          13500     162000            80
+        145 Russell                   SA_MAN          14000     168000            80
+        102 De Haan                   AD_VP           17000     204000            90
+        101 Kochhar                   AD_VP           17000     204000            90
+        100 King                      AD_PRES         24000     288000            90
+
+20 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL", department_id
+  2  FROM employees
+  3  WHERE job_id LIKE'%MAN%'
+  4  OR salary>10000
+  5* ORDER BY "ANN SAL" DESC
+SQL> /
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL DEPARTMENT_ID
+----------- ------------------------- ---------- ---------- ---------- -------------
+        100 King                      AD_PRES         24000     288000            90
+        101 Kochhar                   AD_VP           17000     204000            90
+        102 De Haan                   AD_VP           17000     204000            90
+        145 Russell                   SA_MAN          14000     168000            80
+        146 Partners                  SA_MAN          13500     162000            80
+        201 Hartstein                 MK_MAN          13000     156000            20
+        205 Higgins                   AC_MGR          12008     144096           110
+        108 Greenberg                 FI_MGR          12008     144096           100
+        147 Errazuriz                 SA_MAN          12000     144000            80
+        168 Ozer                      SA_REP          11500     138000            80
+        174 Abel                      SA_REP          11000     132000            80
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL DEPARTMENT_ID
+----------- ------------------------- ---------- ---------- ---------- -------------
+        114 Raphaely                  PU_MAN          11000     132000            30
+        148 Cambrault                 SA_MAN          11000     132000            80
+        149 Zlotkey                   SA_MAN          10500     126000            80
+        162 Vishney                   SA_REP          10500     126000            80
+        121 Fripp                     ST_MAN           8200      98400            50
+        120 Weiss                     ST_MAN           8000      96000            50
+        122 Kaufling                  ST_MAN           7900      94800            50
+        123 Vollman                   ST_MAN           6500      78000            50
+        124 Mourgos                   ST_MAN           5800      69600            50
+
+20 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL", department_id
+  2  FROM employees
+  3  WHERE job_id LIKE'%MAN%'
+  4  OR salary>10000
+  5* ORDER BY 5 DESC
+SQL> /
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL DEPARTMENT_ID
+----------- ------------------------- ---------- ---------- ---------- -------------
+        100 King                      AD_PRES         24000     288000            90
+        101 Kochhar                   AD_VP           17000     204000            90
+        102 De Haan                   AD_VP           17000     204000            90
+        145 Russell                   SA_MAN          14000     168000            80
+        146 Partners                  SA_MAN          13500     162000            80
+        201 Hartstein                 MK_MAN          13000     156000            20
+        205 Higgins                   AC_MGR          12008     144096           110
+        108 Greenberg                 FI_MGR          12008     144096           100
+        147 Errazuriz                 SA_MAN          12000     144000            80
+        168 Ozer                      SA_REP          11500     138000            80
+        174 Abel                      SA_REP          11000     132000            80
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL DEPARTMENT_ID
+----------- ------------------------- ---------- ---------- ---------- -------------
+        114 Raphaely                  PU_MAN          11000     132000            30
+        148 Cambrault                 SA_MAN          11000     132000            80
+        149 Zlotkey                   SA_MAN          10500     126000            80
+        162 Vishney                   SA_REP          10500     126000            80
+        121 Fripp                     ST_MAN           8200      98400            50
+        120 Weiss                     ST_MAN           8000      96000            50
+        122 Kaufling                  ST_MAN           7900      94800            50
+        123 Vollman                   ST_MAN           6500      78000            50
+        124 Mourgos                   ST_MAN           5800      69600            50
+
+20 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL", department_id
+  2  FROM employees
+  3  WHERE job_id LIKE'%MAN%'
+  4  OR salary>10000
+  5* ORDER BY 1 DESC
+SQL>
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL", department_id
+  2  FROM employees
+  3  WHERE job_id LIKE'%MAN%'
+  4  OR salary>10000
+  5* ORDER BY 1 DESC
+SQL> /
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL DEPARTMENT_ID
+----------- ------------------------- ---------- ---------- ---------- -------------
+        205 Higgins                   AC_MGR          12008     144096           110
+        201 Hartstein                 MK_MAN          13000     156000            20
+        174 Abel                      SA_REP          11000     132000            80
+        168 Ozer                      SA_REP          11500     138000            80
+        162 Vishney                   SA_REP          10500     126000            80
+        149 Zlotkey                   SA_MAN          10500     126000            80
+        148 Cambrault                 SA_MAN          11000     132000            80
+        147 Errazuriz                 SA_MAN          12000     144000            80
+        146 Partners                  SA_MAN          13500     162000            80
+        145 Russell                   SA_MAN          14000     168000            80
+        124 Mourgos                   ST_MAN           5800      69600            50
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL DEPARTMENT_ID
+----------- ------------------------- ---------- ---------- ---------- -------------
+        123 Vollman                   ST_MAN           6500      78000            50
+        122 Kaufling                  ST_MAN           7900      94800            50
+        121 Fripp                     ST_MAN           8200      98400            50
+        120 Weiss                     ST_MAN           8000      96000            50
+        114 Raphaely                  PU_MAN          11000     132000            30
+        108 Greenberg                 FI_MGR          12008     144096           100
+        102 De Haan                   AD_VP           17000     204000            90
+        101 Kochhar                   AD_VP           17000     204000            90
+        100 King                      AD_PRES         24000     288000            90
+
+20 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL", department_id
+  2  FROM employees
+  3  WHERE job_id LIKE'%MAN%'
+  4  OR salary>10000
+  5* ORDER BY 2 DESC
+SQL> /
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL DEPARTMENT_ID
+----------- ------------------------- ---------- ---------- ---------- -------------
+        149 Zlotkey                   SA_MAN          10500     126000            80
+        120 Weiss                     ST_MAN           8000      96000            50
+        123 Vollman                   ST_MAN           6500      78000            50
+        162 Vishney                   SA_REP          10500     126000            80
+        145 Russell                   SA_MAN          14000     168000            80
+        114 Raphaely                  PU_MAN          11000     132000            30
+        146 Partners                  SA_MAN          13500     162000            80
+        168 Ozer                      SA_REP          11500     138000            80
+        124 Mourgos                   ST_MAN           5800      69600            50
+        101 Kochhar                   AD_VP           17000     204000            90
+        100 King                      AD_PRES         24000     288000            90
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL DEPARTMENT_ID
+----------- ------------------------- ---------- ---------- ---------- -------------
+        122 Kaufling                  ST_MAN           7900      94800            50
+        205 Higgins                   AC_MGR          12008     144096           110
+        201 Hartstein                 MK_MAN          13000     156000            20
+        108 Greenberg                 FI_MGR          12008     144096           100
+        121 Fripp                     ST_MAN           8200      98400            50
+        147 Errazuriz                 SA_MAN          12000     144000            80
+        102 De Haan                   AD_VP           17000     204000            90
+        148 Cambrault                 SA_MAN          11000     132000            80
+        174 Abel                      SA_REP          11000     132000            80
+
+20 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL", department_id
+  2  FROM employees
+  3  WHERE job_id LIKE'%MAN%'
+  4  OR salary>10000
+  5* ORDER BY 2
+SQL> /
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL DEPARTMENT_ID
+----------- ------------------------- ---------- ---------- ---------- -------------
+        174 Abel                      SA_REP          11000     132000            80
+        148 Cambrault                 SA_MAN          11000     132000            80
+        102 De Haan                   AD_VP           17000     204000            90
+        147 Errazuriz                 SA_MAN          12000     144000            80
+        121 Fripp                     ST_MAN           8200      98400            50
+        108 Greenberg                 FI_MGR          12008     144096           100
+        201 Hartstein                 MK_MAN          13000     156000            20
+        205 Higgins                   AC_MGR          12008     144096           110
+        122 Kaufling                  ST_MAN           7900      94800            50
+        100 King                      AD_PRES         24000     288000            90
+        101 Kochhar                   AD_VP           17000     204000            90
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL DEPARTMENT_ID
+----------- ------------------------- ---------- ---------- ---------- -------------
+        124 Mourgos                   ST_MAN           5800      69600            50
+        168 Ozer                      SA_REP          11500     138000            80
+        146 Partners                  SA_MAN          13500     162000            80
+        114 Raphaely                  PU_MAN          11000     132000            30
+        145 Russell                   SA_MAN          14000     168000            80
+        162 Vishney                   SA_REP          10500     126000            80
+        123 Vollman                   ST_MAN           6500      78000            50
+        120 Weiss                     ST_MAN           8000      96000            50
+        149 Zlotkey                   SA_MAN          10500     126000            80
+
+20 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL", department_id
+  2  FROM employees
+  3  WHERE job_id LIKE'%MAN%'
+  4  OR salary>10000
+  5* ORDER BY 3
+  6  /
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL DEPARTMENT_ID
+----------- ------------------------- ---------- ---------- ---------- -------------
+        205 Higgins                   AC_MGR          12008     144096           110
+        100 King                      AD_PRES         24000     288000            90
+        101 Kochhar                   AD_VP           17000     204000            90
+        102 De Haan                   AD_VP           17000     204000            90
+        108 Greenberg                 FI_MGR          12008     144096           100
+        201 Hartstein                 MK_MAN          13000     156000            20
+        114 Raphaely                  PU_MAN          11000     132000            30
+        147 Errazuriz                 SA_MAN          12000     144000            80
+        149 Zlotkey                   SA_MAN          10500     126000            80
+        148 Cambrault                 SA_MAN          11000     132000            80
+        146 Partners                  SA_MAN          13500     162000            80
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL DEPARTMENT_ID
+----------- ------------------------- ---------- ---------- ---------- -------------
+        145 Russell                   SA_MAN          14000     168000            80
+        174 Abel                      SA_REP          11000     132000            80
+        168 Ozer                      SA_REP          11500     138000            80
+        162 Vishney                   SA_REP          10500     126000            80
+        120 Weiss                     ST_MAN           8000      96000            50
+        121 Fripp                     ST_MAN           8200      98400            50
+        124 Mourgos                   ST_MAN           5800      69600            50
+        123 Vollman                   ST_MAN           6500      78000            50
+        122 Kaufling                  ST_MAN           7900      94800            50
+
+20 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL", department_id
+  2  FROM employees
+  3  WHERE job_id LIKE'%MAN%'
+  4  OR salary>10000
+  5* ORDER BY 3 DESC
+  6  /
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL DEPARTMENT_ID
+----------- ------------------------- ---------- ---------- ---------- -------------
+        121 Fripp                     ST_MAN           8200      98400            50
+        124 Mourgos                   ST_MAN           5800      69600            50
+        123 Vollman                   ST_MAN           6500      78000            50
+        122 Kaufling                  ST_MAN           7900      94800            50
+        120 Weiss                     ST_MAN           8000      96000            50
+        174 Abel                      SA_REP          11000     132000            80
+        162 Vishney                   SA_REP          10500     126000            80
+        168 Ozer                      SA_REP          11500     138000            80
+        147 Errazuriz                 SA_MAN          12000     144000            80
+        148 Cambrault                 SA_MAN          11000     132000            80
+        145 Russell                   SA_MAN          14000     168000            80
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL DEPARTMENT_ID
+----------- ------------------------- ---------- ---------- ---------- -------------
+        146 Partners                  SA_MAN          13500     162000            80
+        149 Zlotkey                   SA_MAN          10500     126000            80
+        114 Raphaely                  PU_MAN          11000     132000            30
+        201 Hartstein                 MK_MAN          13000     156000            20
+        108 Greenberg                 FI_MGR          12008     144096           100
+        102 De Haan                   AD_VP           17000     204000            90
+        101 Kochhar                   AD_VP           17000     204000            90
+        100 King                      AD_PRES         24000     288000            90
+        205 Higgins                   AC_MGR          12008     144096           110
+
+20 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL", department_id
+  2  FROM employees
+  3  WHERE job_id LIKE'%MAN%'
+  4  OR salary>10000
+  5* ORDER BY 4 DESC
+SQL> /
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL DEPARTMENT_ID
+----------- ------------------------- ---------- ---------- ---------- -------------
+        100 King                      AD_PRES         24000     288000            90
+        101 Kochhar                   AD_VP           17000     204000            90
+        102 De Haan                   AD_VP           17000     204000            90
+        145 Russell                   SA_MAN          14000     168000            80
+        146 Partners                  SA_MAN          13500     162000            80
+        201 Hartstein                 MK_MAN          13000     156000            20
+        205 Higgins                   AC_MGR          12008     144096           110
+        108 Greenberg                 FI_MGR          12008     144096           100
+        147 Errazuriz                 SA_MAN          12000     144000            80
+        168 Ozer                      SA_REP          11500     138000            80
+        174 Abel                      SA_REP          11000     132000            80
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL DEPARTMENT_ID
+----------- ------------------------- ---------- ---------- ---------- -------------
+        114 Raphaely                  PU_MAN          11000     132000            30
+        148 Cambrault                 SA_MAN          11000     132000            80
+        149 Zlotkey                   SA_MAN          10500     126000            80
+        162 Vishney                   SA_REP          10500     126000            80
+        121 Fripp                     ST_MAN           8200      98400            50
+        120 Weiss                     ST_MAN           8000      96000            50
+        122 Kaufling                  ST_MAN           7900      94800            50
+        123 Vollman                   ST_MAN           6500      78000            50
+        124 Mourgos                   ST_MAN           5800      69600            50
+
+20 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL", department_id
+  2  FROM employees
+  3  WHERE job_id LIKE'%MAN%'
+  4  OR salary>10000
+  5* ORDER BY 6 DESC
+SQL> /
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL DEPARTMENT_ID
+----------- ------------------------- ---------- ---------- ---------- -------------
+        205 Higgins                   AC_MGR          12008     144096           110
+        108 Greenberg                 FI_MGR          12008     144096           100
+        101 Kochhar                   AD_VP           17000     204000            90
+        102 De Haan                   AD_VP           17000     204000            90
+        100 King                      AD_PRES         24000     288000            90
+        145 Russell                   SA_MAN          14000     168000            80
+        147 Errazuriz                 SA_MAN          12000     144000            80
+        146 Partners                  SA_MAN          13500     162000            80
+        162 Vishney                   SA_REP          10500     126000            80
+        168 Ozer                      SA_REP          11500     138000            80
+        174 Abel                      SA_REP          11000     132000            80
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL DEPARTMENT_ID
+----------- ------------------------- ---------- ---------- ---------- -------------
+        148 Cambrault                 SA_MAN          11000     132000            80
+        149 Zlotkey                   SA_MAN          10500     126000            80
+        123 Vollman                   ST_MAN           6500      78000            50
+        122 Kaufling                  ST_MAN           7900      94800            50
+        121 Fripp                     ST_MAN           8200      98400            50
+        120 Weiss                     ST_MAN           8000      96000            50
+        124 Mourgos                   ST_MAN           5800      69600            50
+        114 Raphaely                  PU_MAN          11000     132000            30
+        201 Hartstein                 MK_MAN          13000     156000            20
+
+20 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL", department_id
+  2  FROM employees
+  3  WHERE job_id LIKE'%MAN%'
+  4  OR salary>10000
+  5* ORDER BY 2, 6 DESC
+SQL> /
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL DEPARTMENT_ID
+----------- ------------------------- ---------- ---------- ---------- -------------
+        174 Abel                      SA_REP          11000     132000            80
+        148 Cambrault                 SA_MAN          11000     132000            80
+        102 De Haan                   AD_VP           17000     204000            90
+        147 Errazuriz                 SA_MAN          12000     144000            80
+        121 Fripp                     ST_MAN           8200      98400            50
+        108 Greenberg                 FI_MGR          12008     144096           100
+        201 Hartstein                 MK_MAN          13000     156000            20
+        205 Higgins                   AC_MGR          12008     144096           110
+        122 Kaufling                  ST_MAN           7900      94800            50
+        100 King                      AD_PRES         24000     288000            90
+        101 Kochhar                   AD_VP           17000     204000            90
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL DEPARTMENT_ID
+----------- ------------------------- ---------- ---------- ---------- -------------
+        124 Mourgos                   ST_MAN           5800      69600            50
+        168 Ozer                      SA_REP          11500     138000            80
+        146 Partners                  SA_MAN          13500     162000            80
+        114 Raphaely                  PU_MAN          11000     132000            30
+        145 Russell                   SA_MAN          14000     168000            80
+        162 Vishney                   SA_REP          10500     126000            80
+        123 Vollman                   ST_MAN           6500      78000            50
+        120 Weiss                     ST_MAN           8000      96000            50
+        149 Zlotkey                   SA_MAN          10500     126000            80
+
+20 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL", department_id
+  2  FROM employees
+  3  WHERE job_id LIKE'%MAN%'
+  4  OR salary>10000
+  5* ORDER BY 2 DESC, 6 DESC, salary DESC
+SQL> /
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL DEPARTMENT_ID
+----------- ------------------------- ---------- ---------- ---------- -------------
+        149 Zlotkey                   SA_MAN          10500     126000            80
+        120 Weiss                     ST_MAN           8000      96000            50
+        123 Vollman                   ST_MAN           6500      78000            50
+        162 Vishney                   SA_REP          10500     126000            80
+        145 Russell                   SA_MAN          14000     168000            80
+        114 Raphaely                  PU_MAN          11000     132000            30
+        146 Partners                  SA_MAN          13500     162000            80
+        168 Ozer                      SA_REP          11500     138000            80
+        124 Mourgos                   ST_MAN           5800      69600            50
+        101 Kochhar                   AD_VP           17000     204000            90
+        100 King                      AD_PRES         24000     288000            90
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL DEPARTMENT_ID
+----------- ------------------------- ---------- ---------- ---------- -------------
+        122 Kaufling                  ST_MAN           7900      94800            50
+        205 Higgins                   AC_MGR          12008     144096           110
+        201 Hartstein                 MK_MAN          13000     156000            20
+        108 Greenberg                 FI_MGR          12008     144096           100
+        121 Fripp                     ST_MAN           8200      98400            50
+        147 Errazuriz                 SA_MAN          12000     144000            80
+        102 De Haan                   AD_VP           17000     204000            90
+        148 Cambrault                 SA_MAN          11000     132000            80
+        174 Abel                      SA_REP          11000     132000            80
+
+20 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL", department_id
+  2  FROM employees
+  3  WHERE job_id LIKE'%MAN%'
+  4  OR salary>10000
+  5* ORDER BY 2 DESC, 6 DESC, salary ASC
+SQL> /
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL DEPARTMENT_ID
+----------- ------------------------- ---------- ---------- ---------- -------------
+        149 Zlotkey                   SA_MAN          10500     126000            80
+        120 Weiss                     ST_MAN           8000      96000            50
+        123 Vollman                   ST_MAN           6500      78000            50
+        162 Vishney                   SA_REP          10500     126000            80
+        145 Russell                   SA_MAN          14000     168000            80
+        114 Raphaely                  PU_MAN          11000     132000            30
+        146 Partners                  SA_MAN          13500     162000            80
+        168 Ozer                      SA_REP          11500     138000            80
+        124 Mourgos                   ST_MAN           5800      69600            50
+        101 Kochhar                   AD_VP           17000     204000            90
+        100 King                      AD_PRES         24000     288000            90
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL DEPARTMENT_ID
+----------- ------------------------- ---------- ---------- ---------- -------------
+        122 Kaufling                  ST_MAN           7900      94800            50
+        205 Higgins                   AC_MGR          12008     144096           110
+        201 Hartstein                 MK_MAN          13000     156000            20
+        108 Greenberg                 FI_MGR          12008     144096           100
+        121 Fripp                     ST_MAN           8200      98400            50
+        147 Errazuriz                 SA_MAN          12000     144000            80
+        102 De Haan                   AD_VP           17000     204000            90
+        148 Cambrault                 SA_MAN          11000     132000            80
+        174 Abel                      SA_REP          11000     132000            80
+
+20 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL", department_id
+  2  FROM employees
+  3  WHERE job_id LIKE'%MAN%'
+  4  OR salary>10000
+  5  ORDER BY 2 DESC, 6 DESC, salary ASC
+  6* FETCH FIRST 5 ROWS
+SQL> /
+FETCH FIRST 5 ROWS
+                 *
+ERROR at line 6:
+ORA-00905: missing keyword
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL", department_id
+  2  FROM employees
+  3  WHERE job_id LIKE'%MAN%'
+  4  OR salary>10000
+  5  ORDER BY 2 DESC, 6 DESC, salary ASC
+  6* FETCH FIRST 5 ROWS ONLY
+SQL> /
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL DEPARTMENT_ID
+----------- ------------------------- ---------- ---------- ---------- -------------
+        149 Zlotkey                   SA_MAN          10500     126000            80
+        120 Weiss                     ST_MAN           8000      96000            50
+        123 Vollman                   ST_MAN           6500      78000            50
+        162 Vishney                   SA_REP          10500     126000            80
+        145 Russell                   SA_MAN          14000     168000            80
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL", department_id
+  2  FROM employees
+  3  WHERE job_id LIKE'%MAN%'
+  4  OR salary>10000
+  5  ORDER BY 2 DESC, 6 DESC, salary ASC
+  6* OFFSET FIRST 5 ROWS FETCH NEXT 5 ROWS ONLY
+SQL> /
+OFFSET FIRST 5 ROWS FETCH NEXT 5 ROWS ONLY
+             *
+ERROR at line 6:
+ORA-00905: missing keyword
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL", department_id
+  2  FROM employees
+  3  WHERE job_id LIKE'%MAN%'
+  4  OR salary>10000
+  5  ORDER BY 2 DESC, 6 DESC, salary ASC
+  6* OFFSET 5 ROWS FETCH NEXT 5 ROWS ONLY
+SQL> /
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY    ANN SAL DEPARTMENT_ID
+----------- ------------------------- ---------- ---------- ---------- -------------
+        114 Raphaely                  PU_MAN          11000     132000            30
+        146 Partners                  SA_MAN          13500     162000            80
+        168 Ozer                      SA_REP          11500     138000            80
+        124 Mourgos                   ST_MAN           5800      69600            50
+        101 Kochhar                   AD_VP           17000     204000            90
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, job_id, salary, salary*12 "ANN SAL", department_id
+  2  FROM employees
+  3  WHERE job_id LIKE'%MAN%'
+  4  OR salary>10000
+  5* WHERE EMPLOYEE_ID -&EMPLOYEE_NUM
+SQL> /
+Enter value for employee_num: 100
+old   5: WHERE EMPLOYEE_ID -&EMPLOYEE_NUM
+new   5: WHERE EMPLOYEE_ID -100
+WHERE EMPLOYEE_ID -100
+*
+ERROR at line 5:
+ORA-00933: SQL command not properly ended
+
+
+SQL> /
+Enter value for employee_num: 122
+old   5: WHERE EMPLOYEE_ID -&EMPLOYEE_NUM
+new   5: WHERE EMPLOYEE_ID -122
+WHERE EMPLOYEE_ID -122
+*
+ERROR at line 5:
+ORA-00933: SQL command not properly ended
+
+
+SQL> SELECT employee_id, last_name, salary, department_id
+  2  FROM employees
+  3  WHERE job_i='&job';
+Enter value for job: IT_PROG
+old   3: WHERE job_i='&job'
+new   3: WHERE job_i='IT_PROG'
+WHERE job_i='IT_PROG'
+      *
+ERROR at line 3:
+ORA-00904: "JOB_I": invalid identifier
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, salary, department_id
+  2  FROM employees
+  3* WHERE job_i='&JOB'
+SQL> /
+Enter value for job:
+old   3: WHERE job_i='&JOB'
+new   3: WHERE job_i=''
+WHERE job_i=''
+      *
+ERROR at line 3:
+ORA-00904: "JOB_I": invalid identifier
+
+
+SQL> /
+Enter value for job: IT_PROG
+old   3: WHERE job_i='&JOB'
+new   3: WHERE job_i='IT_PROG'
+WHERE job_i='IT_PROG'
+      *
+ERROR at line 3:
+ORA-00904: "JOB_I": invalid identifier
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id, last_name, salary, department_id
+  2  FROM employees
+  3* WHERE job_id='&JOB'
+SQL> /
+Enter value for job: IT_PROG
+old   3: WHERE job_id='&JOB'
+new   3: WHERE job_id='IT_PROG'
+
+EMPLOYEE_ID LAST_NAME                     SALARY DEPARTMENT_ID
+----------- ------------------------- ---------- -------------
+        103 Hunold                          9000            60
+        104 Ernst                           6000            60
+        105 Austin                          4800            60
+        106 Pataballa                       4800            60
+        107 Lorentz                         4200            60
+
+SQL> /
+Enter value for job:
+old   3: WHERE job_id='&JOB'
+new   3: WHERE job_id=''
+
+no rows selected
+
+SQL>
+SQL> /
+Enter value for job: sa_rep
+old   3: WHERE job_id='&JOB'
+new   3: WHERE job_id='sa_rep'
+
+no rows selected
+
+SQL> /
+Enter value for job: SA_REP
+old   3: WHERE job_id='&JOB'
+new   3: WHERE job_id='SA_REP'
+
+EMPLOYEE_ID LAST_NAME                     SALARY DEPARTMENT_ID
+----------- ------------------------- ---------- -------------
+        150 Tucker                         10000            80
+        151 Bernstein                       9500            80
+        152 Hall                            9000            80
+        153 Olsen                           8000            80
+        154 Cambrault                       7500            80
+        155 Tuvault                         7000            80
+        156 King                           10000            80
+        157 Sully                           9500            80
+        158 McEwen                          9000            80
+        159 Smith                           8000            80
+        160 Doran                           7500            80
+
+EMPLOYEE_ID LAST_NAME                     SALARY DEPARTMENT_ID
+----------- ------------------------- ---------- -------------
+        161 Sewall                          7000            80
+        162 Vishney                        10500            80
+        163 Greene                          9500            80
+        164 Marvins                         7200            80
+        165 Lee                             6800            80
+        166 Ande                            6400            80
+        167 Banda                           6200            80
+        168 Ozer                           11500            80
+        169 Bloom                          10000            80
+        170 Fox                             9600            80
+        171 Smith                           7400            80
+
+EMPLOYEE_ID LAST_NAME                     SALARY DEPARTMENT_ID
+----------- ------------------------- ---------- -------------
+        172 Bates                           7300            80
+        173 Kumar                           6100            80
+        174 Abel                           11000            80
+        175 Hutton                          8800            80
+        176 Taylor                          8600            80
+        177 Livingston                      8400            80
+        178 Grant                           7000
+        179 Johnson                         6200            80
+
+30 rows selected.
+
+SQL> SELECT employee_id, last_name, job_id, &column_name
+  2  FROM employees
+  3  WHERE &condition
+  4  ORDER BY &order_column
+  5  /
+Enter value for column_name: salary
+old   1: SELECT employee_id, last_name, job_id, &column_name
+new   1: SELECT employee_id, last_name, job_id, salary
+Enter value for condition: salary >1999
+old   3: WHERE &condition
+new   3: WHERE salary >1999
+Enter value for order_column: 2
+old   4: ORDER BY &order_column
+new   4: ORDER BY 2
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY
+----------- ------------------------- ---------- ----------
+        174 Abel                      SA_REP          11000
+        166 Ande                      SA_REP           6400
+        130 Atkinson                  ST_CLERK         2800
+        105 Austin                    IT_PROG          4800
+        204 Baer                      PR_REP          10000
+        116 Baida                     PU_CLERK         2900
+        167 Banda                     SA_REP           6200
+        172 Bates                     SA_REP           7300
+        192 Bell                      SH_CLERK         4000
+        151 Bernstein                 SA_REP           9500
+        129 Bissot                    ST_CLERK         3300
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY
+----------- ------------------------- ---------- ----------
+        169 Bloom                     SA_REP          10000
+        185 Bull                      SH_CLERK         4100
+        187 Cabrio                    SH_CLERK         3000
+        154 Cambrault                 SA_REP           7500
+        148 Cambrault                 SA_MAN          11000
+        110 Chen                      FI_ACCOUNT       8200
+        188 Chung                     SH_CLERK         3800
+        119 Colmenares                PU_CLERK         2500
+        142 Davies                    ST_CLERK         3100
+        102 De Haan                   AD_VP           17000
+        186 Dellinger                 SH_CLERK         3400
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY
+----------- ------------------------- ---------- ----------
+        189 Dilly                     SH_CLERK         3600
+        160 Doran                     SA_REP           7500
+        104 Ernst                     IT_PROG          6000
+        147 Errazuriz                 SA_MAN          12000
+        193 Everett                   SH_CLERK         3900
+        109 Faviet                    FI_ACCOUNT       9000
+        202 Fay                       MK_REP           6000
+        197 Feeney                    SH_CLERK         3000
+        181 Fleaur                    SH_CLERK         3100
+        170 Fox                       SA_REP           9600
+        121 Fripp                     ST_MAN           8200
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY
+----------- ------------------------- ---------- ----------
+        190 Gates                     SH_CLERK         2900
+        135 Gee                       ST_CLERK         2400
+        183 Geoni                     SH_CLERK         2800
+        206 Gietz                     AC_ACCOUNT       8300
+        178 Grant                     SA_REP           7000
+        199 Grant                     SH_CLERK         2600
+        108 Greenberg                 FI_MGR          12008
+        163 Greene                    SA_REP           9500
+        152 Hall                      SA_REP           9000
+        201 Hartstein                 MK_MAN          13000
+        205 Higgins                   AC_MGR          12008
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY
+----------- ------------------------- ---------- ----------
+        118 Himuro                    PU_CLERK         2600
+        103 Hunold                    IT_PROG          9000
+        175 Hutton                    SA_REP           8800
+        179 Johnson                   SA_REP           6200
+        195 Jones                     SH_CLERK         2800
+        122 Kaufling                  ST_MAN           7900
+        115 Khoo                      PU_CLERK         3100
+        100 King                      AD_PRES         24000
+        156 King                      SA_REP          10000
+        101 Kochhar                   AD_VP           17000
+        173 Kumar                     SA_REP           6100
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY
+----------- ------------------------- ---------- ----------
+        137 Ladwig                    ST_CLERK         3600
+        127 Landry                    ST_CLERK         2400
+        165 Lee                       SA_REP           6800
+        177 Livingston                SA_REP           8400
+        107 Lorentz                   IT_PROG          4200
+        133 Mallin                    ST_CLERK         3300
+        128 Markle                    ST_CLERK         2200
+        131 Marlow                    ST_CLERK         2500
+        164 Marvins                   SA_REP           7200
+        143 Matos                     ST_CLERK         2600
+        203 Mavris                    HR_REP           6500
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY
+----------- ------------------------- ---------- ----------
+        194 McCain                    SH_CLERK         3200
+        158 McEwen                    SA_REP           9000
+        126 Mikkilineni               ST_CLERK         2700
+        124 Mourgos                   ST_MAN           5800
+        125 Nayer                     ST_CLERK         3200
+        198 OConnell                  SH_CLERK         2600
+        153 Olsen                     SA_REP           8000
+        132 Olson                     ST_CLERK         2100
+        168 Ozer                      SA_REP          11500
+        146 Partners                  SA_MAN          13500
+        106 Pataballa                 IT_PROG          4800
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY
+----------- ------------------------- ---------- ----------
+        140 Patel                     ST_CLERK         2500
+        191 Perkins                   SH_CLERK         2500
+        136 Philtanker                ST_CLERK         2200
+        113 Popp                      FI_ACCOUNT       6900
+        141 Rajs                      ST_CLERK         3500
+        114 Raphaely                  PU_MAN          11000
+        134 Rogers                    ST_CLERK         2900
+        145 Russell                   SA_MAN          14000
+        184 Sarchand                  SH_CLERK         4200
+        111 Sciarra                   FI_ACCOUNT       7700
+        139 Seo                       ST_CLERK         2700
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY
+----------- ------------------------- ---------- ----------
+        161 Sewall                    SA_REP           7000
+        159 Smith                     SA_REP           8000
+        171 Smith                     SA_REP           7400
+        138 Stiles                    ST_CLERK         3200
+        182 Sullivan                  SH_CLERK         2500
+        157 Sully                     SA_REP           9500
+        180 Taylor                    SH_CLERK         3200
+        176 Taylor                    SA_REP           8600
+        117 Tobias                    PU_CLERK         2800
+        150 Tucker                    SA_REP          10000
+        155 Tuvault                   SA_REP           7000
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY
+----------- ------------------------- ---------- ----------
+        112 Urman                     FI_ACCOUNT       7800
+        144 Vargas                    ST_CLERK         2500
+        162 Vishney                   SA_REP          10500
+        123 Vollman                   ST_MAN           6500
+        196 Walsh                     SH_CLERK         3100
+        120 Weiss                     ST_MAN           8000
+        200 Whalen                    AD_ASST          4400
+        149 Zlotkey                   SA_MAN          10500
+
+107 rows selected.
+
+SQL> SELECT employee_id, last_name, job_id, &column_name
+  2  FROM employees
+  3  WHERE &condition
+  4  ORDER BY &order_column;
+Enter value for column_name: SALARY
+old   1: SELECT employee_id, last_name, job_id, &column_name
+new   1: SELECT employee_id, last_name, job_id, SALARY
+Enter value for condition: SALARY> 10000
+old   3: WHERE &condition
+new   3: WHERE SALARY> 10000
+Enter value for order_column: SALARY
+old   4: ORDER BY &order_column
+new   4: ORDER BY SALARY
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY
+----------- ------------------------- ---------- ----------
+        162 Vishney                   SA_REP          10500
+        149 Zlotkey                   SA_MAN          10500
+        174 Abel                      SA_REP          11000
+        114 Raphaely                  PU_MAN          11000
+        148 Cambrault                 SA_MAN          11000
+        168 Ozer                      SA_REP          11500
+        147 Errazuriz                 SA_MAN          12000
+        205 Higgins                   AC_MGR          12008
+        108 Greenberg                 FI_MGR          12008
+        201 Hartstein                 MK_MAN          13000
+        146 Partners                  SA_MAN          13500
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID         SALARY
+----------- ------------------------- ---------- ----------
+        145 Russell                   SA_MAN          14000
+        102 De Haan                   AD_VP           17000
+        101 Kochhar                   AD_VP           17000
+        100 King                      AD_PRES         24000
+
+15 rows selected.
+
+SQL>
