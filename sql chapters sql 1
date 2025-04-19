@@ -1,0 +1,50 @@
+-- chap 2
+-- Basic SELECT Statement syntax
+SELECT  *|{[DISTINCT] column [alias],...} 
+FROM    table;
+/* A SELECT clause, which specifies the columns to be displayed 
+• A FROM clause, which identifies the table containing the columns that are listed in the SELECT clause 
+
+In the syntax: 
+SELECT Is a list of one or more columns 
+* Selects all columns 
+DISTINCT Suppresses duplicates 
+column|expression Selects the named column or the expression
+alias Gives different headings to the selected columns
+FROM table Specifies the table containing the columns*/
+
+SELECT * FROM   departments;
+
+-- You can also display all columns in the table by listing them after the SELECT keyword. 
+-- For example, the following SQL statement (like the example in the slide) displays all columns and all rows of the DEPARTMENTS table: 
+SELECT  department_id, department_name, manager_id, location_id 
+FROM    departments; 
+
+
+-- Selecting Specific Columns
+SELECT department_id, location_id 
+FROM   departments;
+
+-- to display location before department number (from left to right), you use the following statement:
+SELECT location_id, department_id 
+FROM   departments 6;
+
+--  column headings are displayed in uppercase and are left-aligned.
+SELECT last_name, hire_date, salary 
+FROM   employees;
+-- Using Arithmetic Operators
+SELECT last_name, salary, salary + 300 
+FROM   employees;
+-- Operator Precedence
+SELECT last_name, salary, 12*(salary+100)
+FROM   employees;
+
+SELECT last_name, salary, 12*salary+100 
+FROM   employees;
+-- e parentheses to reinforce the standard order of precedence and to improve clarity. For example, the expression in the slide can be written as (12*salary)+100 with no change in the result. 
+-- Using Parentheses You can override the rules of precedence by using parentheses to specify the desired order in which the operators are to be executed. 
+
+--  Null is not the same as zero or a blank space.
+SELECT last_name, job_id, salary, commission_pct FROM   employees;
+
+last_name, 12*salary*commission_pct FROM   employees;
