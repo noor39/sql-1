@@ -1,0 +1,54 @@
+ SELECT employee_id, last_name, hire_date
+  2  FROm employees
+  3  WHERE hire_date > '20-JAN-05';
+
+
+  //sir er problem
+  SQL> SELECT e.employee_id, e.last_name, e.job_id, e.salary, d.department_name, l.city,c.country_name,r.region_name
+  2  FROM employees e join departments d
+  3  USING (department_id)
+  4  JOIN locations l
+  5  USING (location_id)
+  6  JOIN countries c
+  7  USING (country_id)
+  8  JOIN regions r
+  9  USING (region_id);
+
+
+  ///
+   1  SELECT last_name, hire_date
+  2  FROM employees
+  3  WHERE last_name> ( SELECT last_name
+  4                     FROM employees
+  5*                    WHERE hire_date = '23-MAY-06')
+
+  // 
+  SQL> SELECT last_name, hire_date
+  2  FROM employees
+  3  WHERE hire_date>(SELECT hire_date
+  4                     FROM employees
+  5                     WHERE last_name='Davies');
+  //display the employees whose job_id is the same as that of employee 141 
+  
+  SELECT last_name, job_id
+  FROM employees
+  WHERE job_id= (
+                SELECT job_id
+                FROM employees
+                WHERE employee_id=141 );
+// executing single row subqueries
+   1  SELECT last_name, job_id, salary
+  2  FROM employees
+  3  WHERE job_id =
+  4                     (SELECT job_id
+  5                     FROM employees
+  6                     WHERE last_name ='Abel')
+  7  AND        salary >
+  8                     (SELECT salary
+  9                     FROM  employees
+ 10*                    WHERE last_name ='Abel')
+SQL> /
+
+LAST_NAME                 JOB_ID         SALARY
+------------------------- ---------- ----------
+Ozer                      SA_REP          11500

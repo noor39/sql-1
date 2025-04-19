@@ -1,0 +1,58 @@
+DECLARE v_lname employees.last_name%TYPE;
+BEGIN 
+SELECT last_name INTO v_lname
+FROM employees
+WHERE employee_id=100;
+DBMS_OUTPUT.PUT_LINE('the haramzadas name is : '|| v_lname);
+END;
+DECLARE 
+v_lname employees.last_name%TYPE;
+BEGIN
+SELECT last_name INTO v_lname
+FROM employees
+WHERE employee_id =100;
+DBMS_OUTPUT.PUT_LINE('the mofiz is :' ||v_lname);
+END;
+/
+
+set serveroutput on 
+
+
+
+DECLARE 
+v_hiredate employees.hire_date%TYPE;
+v_salary employees.salary%TYPE;
+BEGIN
+SELECT hire_date, salary INTO v_hiredate, v_salary
+FROM employees
+WHERE employee_id =100;
+DBMS_OUTPUT.PUT_LINE('the mofiz  started his work in :' ||v_hiredate);
+DBMS_OUTPUT.PUT_LINE('the mofiz  earns his salary is :' ||v_salary);
+END;
+/
+
+
+DECLARE 
+v_hiredate employees.hire_date%TYPE;
+v_salary employees.salary%TYPE;
+BEGIN
+SELECT hire_date+30, salary*COMMISSION_PCT INTO v_hiredate, v_salary
+FROM employees
+WHERE employee_id =100;
+DBMS_OUTPUT.PUT_LINE('the mofiz  started his work in :' ||v_hiredate);
+DBMS_OUTPUT.PUT_LINE('the mofiz  earns his salary is :' ||v_salary);
+END;
+/
+
+
+DECLARE 
+v_sumsal NUMBER(10,2);
+BEGIN
+SELECT SUM(SALARY) INTO    v_sumsal
+FROM employees
+WHERE department_id =60;
+
+DBMS_OUTPUT.PUT_LINE('the sum salary is :' ||v_sumsal);
+
+END;
+/

@@ -1,0 +1,51 @@
+1 
+select last_name, job_id, employee_id, hire_date, hire_date "STARTDATE"
+FROM employees
+order by employee_id;
+2
+select job_id
+from employees;
+
+3
+select employee_id, employee_id "Emp#", job_id "Job", hire_date
+From employees 
+order by hire_date;
+
+4
+select last_name||','||job_id "Employee and Title"
+from employees;
+
+5
+select last_name, job_id, hire_date "STARTDATE"
+from employees
+WHERE last_name IN ('Matos', 'Taylor')
+ORDER BY hire_date ASC;
+
+6
+select last_name, salary, department_id
+from employees
+where salary BETWEEN 5000 and 12000
+AND  department_id IN (20,50);
+
+
+
+7
+select last_name, hire_date 
+from employees
+Where hire_date BETWEEN '1-JAN-05' and '31-DEC-05';
+
+8
+select last_name, salary, commission_pct
+from employees
+WHERE commission_pct is NOT NULL
+order by salary desc, commission_pct desc;
+
+9
+select last_name
+from employees
+WHERE last_name like '%a%'
+AND last_name like '%e%'
+
+
+
+

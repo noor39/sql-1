@@ -1,0 +1,31 @@
+1.	
+
+SELECT last_name, job_id, hire_date
+FROM employees 
+WHERE last_Name in ('Matos','Taylor')
+ORDER BY hire_date ASC; 
+
+2.
+SELECT last_name, job_id
+FROM employees
+WHERE manager_id is null;
+
+3.
+SELECT last_name
+FROM employees
+WHERE last_name LIKE ('%a%') AND last_name LIKE ('%e%');
+
+
+4.
+
+SELECT last_name, ROUND(MONTHS_BETWEEN(SYSDATE, HIRE_DATE)) AS MONTHS_WORKED
+FROM employees
+ORDER BY  MONTHS_WORKED;
+
+
+5.
+
+SELECT last_name, NVL(To_char(commission_pct), 'No Commission.') AS "COMM"
+FROM employees;
+
+

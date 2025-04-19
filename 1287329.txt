@@ -1,0 +1,15 @@
+1
+SELECT e.last_name, e.job_id, e.department_id, d.department_name 
+FROM   employees e JOIN departments d  
+ON     (e.department_id = d.department_id) JOIN   locations l 
+USING  (location_id) WHERE LOWER(l.city) = 'toronto';
+
+2
+SELECT last_name, e.department_id, employee_id
+FROM employees
+
+3.
+SELECT e.last_name, e.hire_date 
+FROM employees e JOIN employees davies
+ON(davies.last_name='Davies')
+WHERE davies.hire_date<e.hire_date;
