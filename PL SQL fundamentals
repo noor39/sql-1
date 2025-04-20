@@ -1,0 +1,68 @@
+pl sql fundamentals 
+-- CHAPTER 8 USING Explicit cursors
+
+DECLARE
+CURSOR c_emp_cursor IS
+SELECT employee_id, last_name FROM employees
+		WHERE department_id=30;
+v_empno employees.employee_id%TYPE;
+V_lname employees.last_name%TYPE;
+BEGIN
+	OPEN c_emp_cursor;
+	FETCH c_emp_cursor INTO v_empno, v_lname;
+	DBMS_OUTPUT.PUT_LINE (v_empno||' '||v_lname);
+END;
+/
+
+
+
+DECLARE
+CURSOR c_emp_cursor IS
+SELECT employee_id, last_name FROM employees
+		WHERE department_id=50; --eikhane dept id te change korlei moja hobe
+v_empno employees.employee_id%TYPE;
+V_lname employees.last_name%TYPE;
+BEGIN
+	OPEN c_emp_cursor;
+    LOOP
+	FETCH c_emp_cursor INTO v_empno, v_lname;
+    EXIT WHEN c_emp_cursor%NOTFOUND;
+	DBMS_OUTPUT.PUT_LINE (v_empno||' '||v_lname);
+    END LOOP;
+END;
+/
+
+
+-- closing the cursor 
+DECLARE
+CURSOR c_emp_cursor IS
+SELECT employee_id, last_name FROM  
+WHERE department_id=50; --eikhane dept id te change korlei moja hobeemployees
+		
+v_empno employees.employee_id%TYPE;
+V_lname employees.last_name%TYPE;
+BEGIN
+	OPEN c_emp_cursor;
+    LOOP
+	FETCH c_emp_cursor INTO v_empno, v_lname;
+    EXIT WHEN c_emp_cursor%NOTFOUND;
+	DBMS_OUTPUT.PUT_LINE (v_empno||' '||v_lname);
+    END LOOP;
+    CLOSE c_emp_cursor;
+END;
+/
+
+
+-- 
+DECLARE 
+CURSOR c_emp_cursor  IS  
+SELECT employee_id, last_name FROM  employees
+WHERE department_id=30;
+v_emp_record c_emp_cursor%ROWTYPE; --cursor based record 
+
+BEGIN 
+    OPEN c_emp_cursor ;
+    LOOP
+        FETCH c_emp_cursor INTO v_emp_record;
+    EXIT WHEN c_emp_cursor%NOTFOUND;
+    DBMS_OUTPUT.PUT_LINE()
