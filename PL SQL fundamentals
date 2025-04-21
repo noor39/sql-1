@@ -1,4 +1,96 @@
 pl sql fundamentals 
+-- CHAPTER 7 Working with composite data type;
+set autoprint on
+set serveroutput on
+
+--  creating a PL/SQL record
+DECLARE
+TYPE t_rec IS RECORD 
+(v_sal number(8),
+v_minsal number(8) DEFAULT 1000,
+v_hire_date employees.hire_date%type,
+v_recl employees%ROWTYPE);
+v_myrec t_rec;
+BEGIN
+    v_myrec.v_sal :=v_myrec.v_minsal +500;
+    v_myrec.v_hire_date := SYSDATE;
+    SELECT * INTO v_myrec.v_recl
+            FROM employees WHERE employee_id=100;
+    DBMS_OUTPUT.PUT_LINE(v_myrec.v_recl.last_name||' '||
+    TO_CHAR (v_myrec.v_hire_date)||' '||TO_CHAR(v_myrec.v_sal));
+END;
+/
+
+
+DECLARE
+v_employee_number number:=125;
+v_emp_rec employees%ROWTYPE;
+
+BEGIN
+SELECT * INTO v_emp_rec FROM employees
+WHERE employee_id=v_employee_number;
+
+
+END;
+/
+
+
+
+
+DECLARE
+
+BEGIN
+END;
+/
+
+
+DECLARE
+
+BEGIN
+END;
+/
+
+
+
+
+DECLARE
+
+BEGIN
+END;
+/
+
+
+DECLARE
+
+BEGIN
+END;
+/
+
+
+
+
+DECLARE
+
+BEGIN
+END;
+/
+
+
+DECLARE
+
+BEGIN
+END;
+/
+
+
+
+
+
+
+
+
+
+
 -- CHAPTER 8 USING Explicit cursors
 
 DECLARE
@@ -36,8 +128,8 @@ END;
 -- closing the cursor 
 DECLARE
 CURSOR c_emp_cursor IS
-SELECT employee_id, last_name FROM  
-WHERE department_id=50; --eikhane dept id te change korlei moja hobeemployees
+SELECT employee_id, last_name FROM  employees
+WHERE department_id=50; --eikhane dept id te change korlei moja hobe
 		
 v_empno employees.employee_id%TYPE;
 V_lname employees.last_name%TYPE;
@@ -66,3 +158,75 @@ BEGIN
         FETCH c_emp_cursor INTO v_emp_record;
     EXIT WHEN c_emp_cursor%NOTFOUND;
     DBMS_OUTPUT.PUT_LINE()
+
+
+
+    DECLARE 
+    CURSOR c_emp_cursor IS
+    SELECT employee_id, last_name FROM employees
+    WHERE department_id=30;
+    BEGIN
+        FOR v_emp_record IN c_emp_cursor
+         LOOP
+          DBMS_OUTPUT.PUT_LINE(v_emp_record.employee_id
+          ||' '||v_emp_record.last_name);
+         END LOOP;
+    END;
+    /
+    -- IS OPEN cursor open ase kina oita test kore
+    --%NOTFOUND cursor je row fetch korse,shey jodi oikhane data fetch na korte pare tahole notfound 1 tao painai
+    -- ROWCOUNT cursor koyta shongkha fetch korse sheta return kore
+    -- 
+
+DECLARE
+CURSOR c_emp_cursor IS
+SELECT employee_id, last_name FROM  employees
+ORDER BY employee_id;
+		
+v_emp_record c_emp_cursor%ROWTYPE;
+
+BEGIN
+	OPEN c_emp_cursor;
+    LOOP
+	FETCH c_emp_cursor INTO v_emp_record;
+    EXIT WHEN c_emp_cursor%ROWCOUNT>10; --rowcount jehetu 10 deya hoise tai eikhane 10 row show korbe
+	DBMS_OUTPUT.PUT_LINE (v_emp_record.employee_id||' '||v_emp_record.last_name);
+    END LOOP;
+    CLOSE c_emp_cursor;
+END;
+/
+
+-- Cursor FOR Loops Using Subqueries
+BEGIN
+    FOR v_emp_record IN (SELECT employee_id, last_name FROM employees WHERE department_id=30)
+    LOOP
+        DBMS_OUTPUT.PUT_LINE(v_emp_record.employee_id||' '||v_emp_record.last_name);
+    END LOOP;
+END;
+/
+
+
+
+-- Cursors with parameters
+DECLARE
+CURSOR c_emp_cursor (deptno NUMBER) IS  
+SELECT employee_id, last_name, department_id, job_id
+FROM employees
+WHERE department_id=deptno;
+
+BEGIN
+    FOR emp_record IN c_emp_cursor(10)
+    LOOP
+        DBMS_OUTPUT.PUT_LINE(emp_record.employee_id     ||' '||emp_record.last_name||' '||emp_record.department_id||' '||emp_record.job_id);
+    END LOOP;
+    FOR emp_record IN c_emp_cursor(30)
+   LOOP
+        DBMS_OUTPUT.PUT_LINE(emp_record.employee_id     ||' '||emp_record.last_name||' '||emp_record.department_id||' '||emp_record.job_id);
+    END LOOP;
+      FOR emp_record IN c_emp_cursor(50)
+
+     LOOP
+        DBMS_OUTPUT.PUT_LINE(emp_record.employee_id     ||' '||emp_record.last_name||' '||emp_record.department_id||' '||emp_record.job_id);
+    END LOOP;
+    END;
+    /
