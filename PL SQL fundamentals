@@ -3,7 +3,19 @@ pl sql fundamentals
 set autoprint on
 set serveroutput on
 
+flashback table v_emp_rec to before drop
 --  creating a PL/SQL record
+-- syntax
+TYPE type_name IS RECORD 
+    (field_declaration[,field_declaration]...);
+
+
+IDENTIFIER type_name;
+    field_declaration:
+        field_name{field_type|variable%TYPE
+        |table.coulumn%TYPE|table%ROWTYPE}
+        [[NOT NULL]{:=|DEFAULT}expr]
+--/syntax 
 DECLARE
 TYPE t_rec IS RECORD 
 (v_sal number(8),
@@ -21,28 +33,61 @@ BEGIN
 END;
 /
 
+CREATE TABLE retired_emps as select *%TYPE from employees; 
+create table v_emp_rec as select * from employees;
+TRUNCATE TABLE retired_emps; --removes all data from table 
+DROP TABLE retired_emps;
 
+CREATE TABLE retired_emps (empno NUMBER, ename VARCHAR2(45),job VARCHAR2(23),
+mgr NUMBER, hiredate DATE, leavedate DATE,
+ sal NUMBER, comm NUMBER, deptno NUMBER);
+
+
+CREATE TABLE retired_emps (empno NUMBER(4), ename VARCHAR2(45),job VARCHAR2(9),
+mgr NUMBER(4), hiredate DATE, leavedate DATE,
+ sal NUMBER(7,2), comm NUMBER(7,2), deptno NUMBER(2));
+
+
+-- 
 DECLARE
 v_employee_number number:=125;
 v_emp_rec employees%ROWTYPE;
 
 BEGIN
+
+
 SELECT * INTO v_emp_rec FROM employees
 WHERE employee_id=v_employee_number;
+INSERT INTO retired_emps(empno, ename,job,
+mgr, hiredate, leavedate,
+ sal, comm, deptno)
+VALUES(v_emp_rec.employee_id, v_emp_rec.last_name,v_emp_rec.job_id,
+v_emp_rec.manager_id,v_emp_rec.hire_date,SYSDATE,
+v_emp_rec.salary,v_emp_rec.commission_pct,v_emp_rec.department_id);
 
 
 END;
 /
 
-
-
+-- INSERTING  a Record Using %ROWTYPE
 
 DECLARE
+v_employee_number number:=125;
+v_emp_rec retired_emps%ROWTYPE;
 
 BEGIN
+
+
+SELECT employee_id, last_name, job_id, manager_id, hire_date, hire_date,salary, commission_pct,
+department_id INTO v_emp_rec FROM employees;
+WHERE employee_id=v_employee_number;
+INSERT INTO retired_emps VALUES v_emp_rec;
+
+
 END;
 /
 
+select * from retired_emps;
 
 DECLARE
 
@@ -230,3 +275,30 @@ BEGIN
     END LOOP;
     END;
     /
+
+
+-- using for update and WHERE CURRENT OF clause 
+
+create table test_emp as select employee_id, job_id, salary
+from employees where employee_id<114;
+
+DECLARE
+CURSOR c1 IS 
+SELECT employee_id, job_id, salary
+FROM test_emp FOR UPDATE;
+emp_record test_emp%ROWTYPE;
+
+BEGIN
+OPEN c1 ;
+LOOP  
+    FETCH c1 INTO emp_record;
+IF emp_record.job_id ='IT_PROG' THEN  
+UPDATE test_emp
+SET salary =emp_record.salary+1000
+    WHERE CURRENT OF c1;--you can use WHERE CURRENT OF clause FOR UPDATE of WHERE clause for satisfy the partivular condition
+END IF;
+    EXIT WHEN c1%NOTFOUND;
+END LOOP;
+END;
+/
+
