@@ -89,9 +89,79 @@ END;
 
 select * from retired_emps;
 
+
+-- Updating a Row in a Table by Using a Record
+
 DECLARE
+v_employee_number number:=125;
+v_emp_rec retired_emps%ROWTYPE;
 
 BEGIN
+
+
+SELECT * INTO v_emp_rec FROM retired_emps
+WHERE empno=v_employee_number;
+v_emp_rec.leavedate:=CURRENT_DATE;
+UPDATE retired_emps SET ROW =v_emp_rec WHERE
+empno =v_employee_number;
+
+END;
+/
+
+-- Steps to create an associative array
+-- Syntax
+TYPE type_name IS TABLE OF  
+{column_type[NOT NULL]|variable%TYPE[NOT NULL]
+|table.column%TYPE[NOT NULL]
+|table%ROWTYPE}
+INDEX BY {PLS_INTEGER|BINARY_INTEGER
+|VARCHAR2(<size>)};
+identifier type_name;
+
+-- example
+...
+TYPE ename_table_type IS TABLE OF 
+employees.last_name%TYPE
+INDEX BY PLS_INTEGER;
+...
+ename_table ename_table_type;
+
+
+-- Creating and accessing associative arrays
+...
+DECLARE
+TYPE ename_table IS TABLE OF 
+employees.last_name%TYPE
+INDEX BY PLS_INTEGER;
+TYPE hiredate_table_type IS TABLE OF DATE 
+INDEX BY PLS_INTEGER;
+ename_table ename_table_type;
+hiredate_table hiredate_table_type;
+
+BEGIN
+ename_table(1) :='CAMERON';
+hiredate_table(8):=SYSDATE+7;
+IF ename_table.EXISTS(1) THEN 
+INSERT INTO ...
+...
+END;
+/
+...
+
+-- index by table of records open
+DECLARE
+TYPE dept_table_type
+IS  
+    TABLE OF departments%ROWTYPE INDEX BY VARCHAR2(20) ;
+    dept_table dept_table_type ;
+    -- Each element of dept_table is a record
+
+BEGIN
+    SELECT * INTO dept_table(1) FROM departments 
+    WHERE department_id =10;
+    DBMS_OUTPUT.PUT_LINE(dept_table(1).department_id||
+    ' '||dept_table(1).department_name||
+    ' '||dept_table(1).manager_id);
 END;
 /
 
@@ -99,24 +169,23 @@ END;
 
 
 DECLARE
+TYPE emp_table_type IS TABLE OF 
+    employees%ROWTYPE INDEX BY PLS_INTEGER;
+    my_emp_table emp_table_type;
+    max_count NUMBER(3):=104;
 
 BEGIN
-END;
-/
+    FOR i IN 100..max_count
+    LOOP
 
+        SELECT * INTO my_emp_table(i) FROM employees
+        WHERE employee_id=i;
 
-DECLARE
-
-BEGIN
-END;
-/
-
+    END LOOP;
+    FOR i IN my_emp_table.FIRST..my_emp_table.LAST
 
 
 
-DECLARE
-
-BEGIN
 END;
 /
 
@@ -301,4 +370,271 @@ END IF;
 END LOOP;
 END;
 /
+
+
+-- CHAPTER 9  HANDLING EXCEPTION
+
+DECLARE v_lname VARCHAR2(15);
+
+BEGIN 
+    SELECT last_name INTO v_lname
+    FROM employees
+    WHERE first_name='John';
+     DBMS_OUTPUT.PUT_LINE('John''s last name is :'||v_lname);
+END;
+/
+DECLARE 
+v_lname VARCHAR2(15);
+BEGIN 
+    SELECT last_name INTO v_lname
+    FROM employees
+    WHERE first_name='John';
+
+    DBMS_OUTPUT.PUT_LINE('John''s last name is :'||v_lname);
+    EXCEPTION
+    WHEN TOO_MANY_ROWS THEN  
+    DBMS_OUTPUT.PUT_LINE('Your select statement retrieved multiple rows. consider using a cursor' );
+END;
+/
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- evidence ques
+    -- create a pl/sql block to perform the following:
+    a use the cursor FOR loop to operate on the data retrieved. if the salary of the employee is less than 5000 and if the manager id is either 101 or 124, display the massage "<<last_name>> Not Due for a raise"
+    -- Otherwise, display the massage "<<last_name>>Not due for a raise" 
+
+    --shohan 
+DECLARE
+    CURSOR emp_cursor IS 
+        SELECT last_name, salary, manager_id 
+        FROM employees
+        where department_id=20;
+BEGIN
+    FOR emp_rec IN emp_cursor LOOP  -- Cursor FOR loop
+        IF emp_rec.salary < 5000 
+           AND (emp_rec.manager_id=101 OR emp_rec.manager_id= 124) 
+        THEN
+            DBMS_OUTPUT.PUT_LINE(
+                emp_rec.last_name || ':  Due for a raise');
+        ELSE
+            DBMS_OUTPUT.PUT_LINE(
+                emp_rec.last_name || ':  Not due for a raise');
+        END IF;
+    END LOOP;
+END;
+/
+
+-- shohan
+
+DECLARE
+    CURSOR emp_cursor IS 
+        SELECT last_name, salary, manager_id 
+        FROM employees;
+BEGIN
+    FOR emp_rec IN emp_cursor LOOP  -- Cursor FOR loop
+        IF emp_rec.salary < 5000 
+           AND emp_rec.manager_id IN (101, 124) 
+        THEN
+            DBMS_OUTPUT.PUT_LINE(
+                emp_rec.last_name || ':  Due for a raise');
+        ELSE
+            DBMS_OUTPUT.PUT_LINE(
+                emp_rec.last_name || ':  Not due for a raise');
+        END IF;
+    END LOOP;
+END;
+/
+
+
+
+
+
+-- create a pl/sql block that uses an explicit cursor to determine the loop n salaries of employees;
+-- shohan
+
+
+
+DECLARE
+    -- 1. Declare explicit cursor
+    CURSOR emp_salary_cursor IS
+        SELECT salary
+        FROM employees;
+    
+    v_salary employees.salary%TYPE;
+BEGIN
+    -- 2. Open the cursor
+    OPEN emp_salary_cursor;
+    
+    LOOP
+        -- 3. Fetch data from cursor
+        FETCH emp_salary_cursor INTO v_salary;
+        
+        -- 4. Exit condition
+        EXIT WHEN emp_salary_cursor%NOTFOUND;
+        
+        -- 5. Process data (display salary)
+        DBMS_OUTPUT.PUT_LINE('Employee Salary: ' || TO_CHAR(v_salary, 'L99G999G999D00'));
+    END LOOP;
+    
+    -- 6. Close the cursor
+    CLOSE emp_salary_cursor;
+END;
+/
+
+-- shohan \
+
+
+DECLARE N Number :=5
+CURSOR sal_cursor IS 
+SELECT employee_id, salary
+FROM employees
+order by salary desc)
+-- shohan 
+
+
+
+
+
+
+-- create bkash transaction
+CREATE TABLE bkash_transactions (
+    transaction_id   NUMBER PRIMARY KEY,
+    sender_msisdn    VARCHAR2(15),
+    receiver_msisdn  VARCHAR2(15),
+    amount           NUMBER(10,2),
+    transaction_date DATE,
+    status           VARCHAR2(20)
+);
+
+DECLARE
+    v_transaction_id   NUMBER := 1001; -- Example ID (use a sequence in practice)
+    v_sender_msisdn    VARCHAR2(15) := '017XXXXXXXX'; -- Sender's mobile number
+    v_receiver_msisdn  VARCHAR2(15) := '019XXXXXXXX'; -- Receiver's mobile number
+    v_amount           NUMBER(10,2) := 500.00; -- Amount to send
+    v_status           VARCHAR2(20);
+BEGIN
+    -- Simulate balance check (replace with actual logic)
+    -- For simplicity, assume sender has sufficient balance
+    IF v_amount <= 0 THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Invalid amount.');
+    END IF;
+
+    -- Insert the transaction
+    INSERT INTO bkash_transactions (
+        transaction_id,
+        sender_msisdn,
+        receiver_msisdn,
+        amount,
+        transaction_date,
+        status
+    ) VALUES (
+        v_transaction_id,
+        v_sender_msisdn,
+        v_receiver_msisdn,
+        v_amount,
+        SYSDATE,
+        'PENDING'
+    );
+
+    -- Simulate transaction processing
+    -- (In reality, this would involve calling bKash's API)
+    v_status := 'COMPLETED';
+    
+    -- Update transaction status
+    UPDATE bkash_transactions
+    SET status = v_status
+    WHERE transaction_id = v_transaction_id;
+
+    DBMS_OUTPUT.PUT_LINE('Transaction successful!');
+    COMMIT;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error: ' || SQLERRM);
+        ROLLBACK;
+END;
+/
+
+
+
+
+
+
+
+-- evidence ques
+    -- create a pl/sql block to perform the following:
+    a use the cursor FOR loop to operate on the data retrieved. if the salary of the employee is less than 5000 and if the manager id is either 101 or 124, display the massage "<<last_name>> Not Due for a raise"
+    -- Otherwise, display the massage "<<last_name>>Not due for a raise" 
+
+    
+DECLARE
+    CURSOR emp_cursor IS 
+        SELECT last_name, salary, manager_id 
+        FROM employees;
+BEGIN
+    FOR emp_rec IN emp_cursor LOOP  -- Cursor FOR loop
+        IF emp_rec.salary < 5000 
+           AND emp_rec.manager_id =101 OR emp_rec.manager_id=  124 
+        THEN
+            DBMS_OUTPUT.PUT_LINE(
+                emp_rec.last_name || ':  Due for a raise');
+        ELSE
+            DBMS_OUTPUT.PUT_LINE(
+                emp_rec.last_name || ':  Not due for a raise');
+        END IF;
+    END LOOP;
+END;
+/
+
+DECLARE 
+cursor emp_cursor IS SELECT last_name, salary, job_id 
+FROM employees
+WHERE department_id=10;
+BEGIN
+    FOR emp_cursor IN emp_record
+    IF  
+
+
+
+
+
+-- create a pl/sql block that uses an explicit cursor to determine the loop n salaries of employees;
+
+DECLARE
+       CURSOR emp_salary_cursor IS
+        SELECT salary
+        FROM employees;
+    
+    v_salary employees.salary%TYPE;
+BEGIN
+    -- 2. Open the cursor
+    OPEN emp_salary_cursor;
+    
+    LOOP
+        -- 3. Fetch data from cursor
+        FETCH emp_salary_cursor INTO v_salary;
+        
+        -- 4. Exit condition
+        EXIT WHEN emp_salary_cursor%NOTFOUND;
+        
+        -- 5. Process data (display salary)
+        DBMS_OUTPUT.PUT_LINE('Employee Salary: ' || TO_CHAR(v_salary, 'L99G999G999D00'));
+    END LOOP;
+    
+    -- 6. Close the cursor
+    CLOSE emp_salary_cursor;
+END;
+/
+
 
