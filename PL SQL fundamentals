@@ -167,7 +167,7 @@ END;
 
 
 
-
+-- index by table of records 
 DECLARE
 TYPE emp_table_type IS TABLE OF 
     employees%ROWTYPE INDEX BY PLS_INTEGER;
@@ -183,16 +183,43 @@ BEGIN
 
     END LOOP;
     FOR i IN my_emp_table.FIRST..my_emp_table.LAST
+    LOOP 
+        DBMS_OUTPUT.PUT_LINE(my_emp_table(i).last_name);
+    END LOOP;
 
 
 
 END;
 /
+-- NESTED TABLE SYNTAX
+TYPE type_name IS TABLE OF  
+{column_type|variable%TYPE
+|table.column%TYPE}[NOT NULL]
+|table.%ROWTYPE
 
+-- 
+TYPE location_type IS TABLE OF locations.city%TYPE;
+offices location_type;
+
+-- IF WE DONT INITIALIZE A NESTED TABLE ITS AUTOMATICALLY INITIALIZED TO NULL
+    offices := location_type('Dhaka','Tokyo','Shanghai','Oxford');
+
+    SET serveroutput on ;
+
+    
 
 DECLARE
-
+ TYPE location_type IS TABLE OF locations.city%TYPE;
+    offices location_type;
+    table_count NUMBER;
+    
 BEGIN
+    offices:=location_type('Dhaka','Tokyo','Shanghai','Oxford');
+
+    FOR i in 1..offices.COUNT() 
+    LOOP
+        DBMS_OUTPUT.PUT_LINE(offices(i));
+    END LOOP;
 END;
 /
 
@@ -567,11 +594,171 @@ END;
 /
 
 
+DECLARE
+CURSOR c_emp IS  
+    SELECT * FROM employees
+    WHERE employee_id>300;
+v_lname VARCHAR2(15);
+r_emp employees%ROWTYPE;
+BEGIN
+/* SELECT * INTO r_emp FROM employees
+WHERE employee_id>500;
+SELECT last_name INTO v_lname
+FROM employees
+WHERE first_name='John';
+DBMS_OUTPUT.PUT_LINE('John''s last name is :' ||v_lname);
+*/
+CLOSE c_emp;
+EXCEPTION 
+WHEN NO_DATA_FOUND THEN 
+DBMS_OUTPUT.PUT_LINE('Select statement returned no data.');
+WHEN TOO_MANY_ROWS THEN  
+DBMS_OUTPUT.PUT_LINE('Select statement retreived multiple rows. Consider using a cursor.');
+WHEN OTHERS THEN  
+DBMS_OUTPUT.PUT_LINE('For all other errors.');
+END;
+/
+
+DECLARE
+CURSOR c_emp IS  
+    SELECT * FROM employees
+    WHERE employee_id>300;
+v_lname VARCHAR2(15);
+r_emp employees%ROWTYPE;
+BEGIN
+ SELECT * INTO r_emp FROM employees
+WHERE employee_id>500;
+SELECT last_name INTO v_lname
+FROM employees
+WHERE first_name='John';
+DBMS_OUTPUT.PUT_LINE('John''s last name is :' ||v_lname);
+
+CLOSE c_emp;
+EXCEPTION 
+WHEN NO_DATA_FOUND THEN 
+DBMS_OUTPUT.PUT_LINE('Select statement returned no data.');
+WHEN TOO_MANY_ROWS THEN  
+DBMS_OUTPUT.PUT_LINE('Select statement retreived multiple rows. Consider using a cursor.');
+WHEN OTHERS THEN  
+DBMS_OUTPUT.PUT_LINE('For all other errors.');
+END;
+/
+
+
+
+-- NON PREDEFINED ERROR TRAPPING
+
+
+ BEGIN
+     INSERT INTO departments (department_id, department_name)
+     VALUES(280, NULL);
+ END;
+/
+
+
+
+DECLARE 
+e_insert_excep EXCEPTION ;
+PRAGMA EXCEPTION_INIT(e_insert_excep, -01400);
+BEGIN 
+    INSERT INTO departments (department_id, department_name)
+    VALUES(280, NULL);
+    EXCEPTION 
+    WHEN 
+    e_insert_excep
+    THEN 
+        DBMS_OUTPUT.PUT_LINE('Insert operation failed');
+        DBMS_OUTPUT.PUT_LINE(SQLERRM);
+        DBMS_OUTPUT.PUT_LINE(SQLCODE);
+END;
+/
+
+-- PROPAGATING EXCEPTIONS IN A SUBBLOCK
+DECLARE 
+...
+e_no_rows EXCEPTION;
+e_integrity EXCEPTION;
+PRAGMA EXCEPTION_INIT(e_integrity,-2292);
+BEGIN 
+    FOR c_record IN  emp_cursor 
+    LOOP  
+        BEGIN
+            SELECT ...
+            UPDATE ...
+            IF SQL%NOTFOUND THEN   
+            RAISE e_no_rows;
+            END IF;
+        END;
+    END LOOP;
+
+EXCEPTION
+    WHEN e_integrity THEN...
+    WHEN e_no_rows THEN...
+END;
+/
+
+-- RAISE APPLICATION ERROR PROCEDURE  
+-- SYNTAX(RAISE APPLICATION ERROR)
+-- raise_application_erro(error_number, message[,{TRUE|FALSE}]); 
+
+-- SYNTAX(RAISE )
+-- RAISE EXCEPTION_NAME;
+
+-- EXECUTABLE SECTION
+BEGIN
+...
+DELETE FROM employees
+    WHERE manager_id=v_mgr;
+IF  SQL%NOTFOUND THEN   
+RAISE_APPLICATION_ERROR(-20202,'This is not  a valid manager');
+END IF;
+...
+-- EXCEPTION SECTION
+...
+EXCEPTION 
+    WHEN  NO_DATA_FOUND THEN   
+    RAISE_APPLICATION_ERROR(-20201,'Manager is not a valid employee.');
+END;
+/
+
+DECLARE e_name EXCEPTION;
+BEGIN
+    ...
+    DELETE FROM  employees
+    WHERE last_name='Higgins';
+    IF SQL%NOTFOUND THEN RAISE e_name;
+    END IF;
+EXCEPTION
+    WHEN e_name THEN  
+    RAISE_APPLICATION_ERROR(-20999,'This is not a valid last name');
+    ...
+    END;
+    /
 
 
 
 
+DECLARE
+v_mgr number:=300;
+e_mgr EXCEPTION;
+PRAGMA EXCEPTION_INIT (e_mgr,-20202);
+BEGIN
+    delete  from employees 
+    where manager_id=v_mgr;
+    IF SQL%NOTFOUND THEN
+    RAISE e_mgr;
+    END IF;
+    EXCEPTION
+    WHEN  e_mgr THEN 
+    RAISE_APPLICATION_ERROR(-20202, 'This is not a valid manager');
+    END;
+    /
 
+    DECLARE
+/*
+ERROR at line 1:
+ORA-20202: This is not a valid manager
+ORA-06512: at line 13*/
 -- evidence ques
     -- create a pl/sql block to perform the following:
     a use the cursor FOR loop to operate on the data retrieved. if the salary of the employee is less than 5000 and if the manager id is either 101 or 124, display the massage "<<last_name>> Not Due for a raise"
@@ -637,4 +824,12 @@ BEGIN
 END;
 /
 
+-- startup of device
+sys as sysdba
+sys
+alter session set container=orclpdb;
+alter pluggable database open;
+conn hr/hr@orclpdb;
+cl scr
 
+hr/hr@orclpdb
