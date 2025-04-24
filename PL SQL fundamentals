@@ -606,6 +606,33 @@ END;
 -- ********************CHAPTER 9  HANDLING EXCEPTION******************************************
 -- ********************CHAPTER 9  HANDLING EXCEPTION******************************************
 
+-- evidence
+-- write a PL/SQL block that applies a predefined exception in order to process only one record at  a time. The PL/SQL block selects the name of the employee with a given salary value
+CREATE table massage(results varchar2(50))
+ 
+ 
+  DECLARE
+  v_lastname employees.last_name%TYPE;
+  v_sal employees.salary%TYPE:=6000;
+  BEGIN
+  SELECT last_name INTO v_lastname
+  FROM employees
+  WHERE salary = v_sal;
+  INSERT INTO massage (results)
+  VALUES (v_lastname||'  ' ||v_sal);
+  EXCEPTION
+  WHEN NO_DATA_FOUND THEN
+  INSERT INTO massage (results)
+  VALUES('no data'||TO_CHAR(v_lastname));
+  WHEN TOO_MANY_ROWS THEN
+  INSERT INTO massage (results)
+  VALUES('TOO many ROWS'||TO_CHAR(v_lastname));
+  WHEN OTHERS THEN
+  INSERT INTO massage (results)
+  VALUES('PROBLEMS OCCURED');
+  END;
+ /
+
 -- SYNTAX TO TRAP EXCEPTIONs 
 EXCEPTION
     WHEN exception1 [OR exception2 ...] THEN   
