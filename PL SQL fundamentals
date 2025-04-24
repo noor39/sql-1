@@ -866,3 +866,179 @@ conn hr/hr@orclpdb;
 cl scr
 
 hr/hr@orclpdb
+
+
+
+-- chapter 10 STORED procedure and fucntions
+-- syntax
+CREATE [OR REPLACE] PROCEDURE procedure_name
+[(argument1 [mode1] datatype1,
+  argument2 [mode2] datatype2,
+  ...)]
+IS |AS
+procedure_body;
+
+
+
+
+
+
+
+
+select * from user_source;
+
+select * from user_source where name = add_dept;
+
+
+
+-- CREATING a procedure example
+
+drop table dept PURGE;
+
+CREATE TABLE dept AS SELECT * FROM departments;
+CREATE OR REPLACE PROCEDURE add_dept IS  
+        v_dept_id dept.department_id%TYPE;
+        v_dept_name dept.department_name%TYPE;
+    BEGIN 
+        v_dept_id:=200;
+        v_dept_name:='ST-Curriculum';
+
+        INSERT INTO  dept(department_id, department_name)
+                VALUES (v_dept_id, v_dept_name);
+        DBMS_OUTPUT.PUT_LINE(' Inserted '||SQL%ROWCOUNT||' row ');
+    END;
+    /
+    show errors  --lekhle error dekhay 
+
+
+    -- user_objects table for store created objects
+    Select object_name, object_type FROM user_objects;
+
+    -- the source of the procedure is stored in the user_source table 
+    select * from user_source where name ='ADD_DEPT';
+
+    -- invoking a procedure 
+    begin 
+            add_dept ;
+    end;
+    /    
+
+    select * from dept
+    where department_id=200;
+
+
+
+
+
+    -- FUCTION syntax
+  CREATE [OR REPLACE] FUNCTION function_name
+[(argument1 [mode1] datatype1,
+  argument2 [mode2] datatype2,
+  ...)]
+RETURN datatype
+IS |AS
+function_body;
+
+-- function and procecure are bothe the subprograms
+
+CREATE OR REPLACE FUNCTION get_sal
+(p_id employees.employee_id%TYPE) RETURN NUMBER  
+IS 
+v_sal employees.salary%TYPE:=0;
+BEGIN
+    SELECT salary INTO v_sal
+    FROM employees
+    WHERE employee_id=p_id;
+    RETURN v_sal;
+    END get_sal;
+    /
+
+
+set serveroutput on 
+
+EXECUTE DBMS_OUTPUT.PUT_LINE(get_sal(100))
+
+EXECUTE DBMS_OUTPUT.PUT_LINE(get_sal(111))
+
+-- creating a function
+CREATE FUNCTION check_sal RETURN Boolean IS    
+v_dept_id employees.department_id%TYPE;
+v_empno employees.employee_id%TYPE;
+v_sal employees.salary%TYPE;
+v_avg_sal employees.salary%type;
+
+BEGIN 
+    v_empno:=205;
+    SELECT salary,department_id INTO v_sal, v_dept_id FROM  employees
+    WHERE employee_id =v_empno;
+    SELECT avg(salary) INTO v_avg_sal FROM employees WHERE department_id=v_dept_id;
+    IF v_sal > v_avg_sal THEN   
+    RETURN TRUE;
+    ELSE  
+    RETURN FALSE;
+    END IF;
+    EXCEPTION 
+    WHEN NO_DATA_FOUND THEN
+    RETURN NULL;
+END;
+/
+
+-- INVOKING A FUNCTION 
+DBMS_OUTPUT.PUT_LINE()
+
+BEGIN 
+    IF (check_sal IS NULL) THEN
+    DBMS_OUTPUT.PUT_LINE('Salary>average');
+    ELSE
+    DBMS_OUTPUT.PUT_LINE('Salary<average');
+    END IF;
+END;
+/
+
+-- Passing a Parameter to the Function
+
+DROP FUNCTION check_sal;
+CREATE OR REPLACE FUNCTION check_sal(p_empno employees.employee_id%TYPE)
+RETURN Boolean IS 
+v_dept_id employees.department_id%TYPE;
+v_sal employees.salary%TYPE;
+v_avg_sal employees.salary%TYPE;
+BEGIN
+    SELECT salary, department_id INTO v_sal, v_dept_id FROM employees 
+    WHERE employee_id=p_empno;
+    SELECT avg(salary) INTO v_avg_sal FROM employees
+    WHERE department_id =v_dept_id;
+    IF v_sal>v_avg_sal THEN   
+    RETURN TRUE;
+    ELSE 
+    RETURN FALSE;
+    END IF;
+    EXCEPTION
+    WHEN NO_DATA_FOUND THEN  
+    RETURN NULL;
+
+END;
+/       
+
+--  Invoking the function with a parameter
+BEGIN 
+    DBMS_OUTPUT.PUT_LINE ('Checking for employee with id 205');
+    IF (check_sal(205) IS NULL )THEN 
+    DBMS_OUTPUT.PUT_LINE('The function returned NULL due to exception');
+    ELSIF  (check_sal(205)) THEN   
+    DBMS_OUTPUT.PUT_LINE('Salary>average');
+    ELSE
+    DBMS_OUTPUT.PUT_LINE('Salary<average');
+    END IF;
+
+    DBMS_OUTPUT.PUT_LINE('Checking for employee with id 70');
+    IF (check_sal(70) IS NULL ) THEN   
+    DBMS_OUTPUT.PUT_LINE('The function returned NULL due to exception');
+
+    ELSIF  (check_sal(70)) THEN   
+    DBMS_OUTPUT.PUT_LINE('Salary>average');
+    ELSE
+      DBMS_OUTPUT.PUT_LINE('Salary<average');
+    END IF  ;
+END;
+/
