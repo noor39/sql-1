@@ -632,6 +632,7 @@ CREATE table massage(results varchar2(50))
   VALUES('PROBLEMS OCCURED');
   END;
  /
+ select * from massage;
 
 -- SYNTAX TO TRAP EXCEPTIONs 
 EXCEPTION
