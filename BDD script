@@ -1,0 +1,106 @@
+conn/as sysdba
+DROP USER bdd CASCADE;
+CREATE USER bdd IDENTIFIED BY bdd;
+GRANT CONNECT,RESOURCE TO bdd;
+ALTER USER bdd DEFAULT TABLESPACE users;
+ALTER USER bdd TEMPORARY TABLESPACE temp;
+ALTER USER bdd QUOTA UNLIMITED on users;
+CONN bdd/bdd@orclpdb;
+
+--publisher table
+CREATE TABLE publisher(
+publisher_id NUMBER(3) PRIMARY KEY NOT NULL,
+name VARCHAR2(32) UNIQUE NOT NULL);
+
+INSERT INTO publisher VALUES(1, 'Overlook Press');
+INSERT INTO publisher VALUES(2, 'Ballantine Books');
+INSERT INTO publisher VALUES(3, 'Bantam Books');
+INSERT INTO publisher VALUES(4, 'Spectra');
+INSERT INTO publisher VALUES(5, 'Oxford University Press');
+INSERT INTO publisher VALUES(6, 'Bt Bound');
+INSERT INTO publisher VALUES(7, 'L P Books');
+INSERT INTO publisher VALUES(8, 'Del Rey Books');
+INSERT INTO publisher VALUES(9, 'Books on Tape');
+INSERT INTO publisher VALUES(10, 'Harper Collins Publishers');
+INSERT INTO publisher VALUES(11, 'Fawcett Books');
+INSERT INTO publisher VALUES(12, 'Berkley Publishing Group');
+INSERT INTO publisher VALUES(41, 'Gavin Powell');
+
+--author table
+CREATE TABLE author(
+author_id NUMBER(3) PRIMARY KEY NOT NULL,
+name VARCHAR2(32) UNIQUE NOT NULL);
+
+INSERT INTO author VALUES(1, 'Orson Scott Card');
+INSERT INTO author VALUES(2, 'James Blish');
+INSERT INTO author VALUES(3, 'Isaac Azimov');
+INSERT INTO author VALUES(4, 'Larry Niven');
+INSERT INTO author VALUES(5, 'Jerry Pournelle');
+INSERT INTO author VALUES(6, 'William Shakespeare');
+INSERT INTO author VALUES(7, 'Kurt Vonnegut');
+
+--subject table
+CREATE TABLE subject(
+subject_id NUMBER(3) PRIMARY KEY NOT NULL,
+parent_id NUMBER(3) REFERENCES SUBJECT NULL,
+name VARCHAR2(32) UNIQUE NOT NULL);
+
+INSERT INTO subject VALUES(1, NULL, 'Fiction');
+INSERT INTO subject VALUES(2, NULL, 'Non-Fiction');
+INSERT INTO subject VALUES(3, NULL, 'Literature');
+INSERT INTO subject VALUES(4, 2, 'Self Help');
+INSERT INTO subject VALUES(5, 2, 'Esoteric');
+INSERT INTO subject VALUES(6, 2, 'Metaphysics');
+INSERT INTO subject VALUES(7, 2, 'Computers');
+INSERT INTO subject VALUES(8, 1, 'Science Fiction');
+INSERT INTO subject VALUES(9, 1, 'Fantasy');
+INSERT INTO subject VALUES(10, 1, 'Drama');
+INSERT INTO subject VALUES(11, 1, 'Whodunnit');
+INSERT INTO subject VALUES(12, 1, 'Suspense');
+INSERT INTO subject VALUES(13, 3, 'Poetry');
+INSERT INTO subject VALUES(14, 3, 'Victorian');
+INSERT INTO subject VALUES(15, 3, 'Shakespearian');
+INSERT INTO subject VALUES(16, 3, 'Modern American');
+INSERT INTO subject VALUES(17, 3, '19th Century American');
+
+--publication table
+CREATE TABLE publication(
+publication_id NUMBER(3) PRIMARY KEY NOT NULL,
+subject_id NUMBER(3) REFERENCES SUBJECT NOT NULL,
+author_id NUMBER(3) REFERENCES AUTHOR NOT NULL,
+title VARCHAR2(64) UNIQUE NOT NULL);
+
+INSERT INTO publication VALUES(1, 15, 6, 'The Complete Works of Shakespeare');
+INSERT INTO publication VALUES(2, 9, 4, 'Footfall');
+INSERT INTO publication VALUES(3, 16, 4, 'Ringworld');
+INSERT INTO publication VALUES(4, 10, 3, 'Foundation');
+INSERT INTO publication VALUES(5, 14, 2, 'A Case of Conscience');
+INSERT INTO publication VALUES(6, 10, 4, 'Lucifer''s Hammer');
+INSERT INTO publication VALUES(7, 14, 2, 'Cities in Flight');
+INSERT INTO publication VALUES(8, 17,3, 'Prelude to Foundation');
+INSERT INTO publication VALUES(9, 16, 3, 'Second Foundation');
+INSERT INTO publication VALUES(10, 10, 3, 'Foundation and Empire');
+
+--edition table
+CREATE TABLE edition(
+isbn NUMBER(15) PRIMARY KEY NOT NULL,
+publisher_id NUMBER(3) REFERENCES PUBLISHER NOT NULL,
+publication_id NUMBER(3) REFERENCES PUBLICATION NOT NULL,
+print_date DATE NULL,
+pages NUMBER(5) NULL,
+list_price NUMBER(6,2) NULL,
+format VARCHAR2(32) NULL,
+rank NUMBER(3) NULL,
+ingram_units NUMBER(3) NULL);
+
+INSERT INTO edition VALUES(198711905, 5, 1, NULL, 1232, 39.95, 'Hardcover', NULL, NULL);
+INSERT INTO edition VALUES(345323440, 8, 2, NULL, 298, 52, 'Paperback', NULL, NULL);
+INSERT INTO edition VALUES(345333926, 2, 3, '31-JUL-86', 265, 48, 'Hardcover', NULL, NULL);
+INSERT INTO edition VALUES(345334787, 8, 3, NULL, 321, 25, 'Paperback', NULL, NULL);
+INSERT INTO edition VALUES(345438353, 2, 2, NULL, 256, 12, 'Paperback', NULL, NULL);
+INSERT INTO edition VALUES(449208133, 11, 4, NULL, 185, 25, 'Hardcover', NULL, NULL);
+INSERT INTO edition VALUES(553278398, 4, 8, '28-APR-96', 265, 36, 'Hardcover', NULL, NULL);
+INSERT INTO edition VALUES(553293362, 3, 9, NULL, 232, 39, 'Hardcover', NULL, NULL);
+INSERT INTO edition VALUES(553293370, 4, 10, '25-JAN-01', 132, 15, 'Hardcover', NULL, NULL);
+INSERT INTO edition VALUES(1585670081, 1, 7, NULL, 590, 34.5, 'Hardcover', NULL, NULL);
+COMMIT;
