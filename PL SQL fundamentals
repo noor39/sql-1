@@ -602,7 +602,27 @@ EXCEPTION
         ROLLBACK;
 END;
 /
--- CHAPTER 9  HANDLING EXCEPTION
+-- ********************CHAPTER 9  HANDLING EXCEPTION******************************************
+-- ********************CHAPTER 9  HANDLING EXCEPTION******************************************
+-- ********************CHAPTER 9  HANDLING EXCEPTION******************************************
+
+-- SYNTAX TO TRAP EXCEPTIONs 
+EXCEPTION
+    WHEN exception1 [OR exception2 ...] THEN   
+        statement1;
+        statement2;
+        ...
+        [WHEN exception3 [OR exception4...] THEN
+        statement1;
+        statement2;
+        ...]
+        [WHEN OTHERS THEN 
+        statement1;
+        statement2;
+        ...]
+
+-- SYNTAX TO TRAP EXCEPTIONs 
+
 
 DECLARE v_lname VARCHAR2(15);
 
