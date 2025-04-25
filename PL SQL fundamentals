@@ -1,4 +1,65 @@
 pl sql fundamentals 
+--  chapter 2 
+-- examining an pl sql block
+
+Declare
+v_fname VARCHAR2 (20);
+BEGIN
+    SELECT first_name INTO v_fname FROM employees
+    WHERE employee_id=100;
+    DBMS_OUTPUT.PUT_LINE('the first name of the employee is '||v_fname);
+
+END;
+/
+-- enabling output of plsql block
+SET SERVEROUTPUT ON
+-- use  a predefined
+-- oracl package and its procedure 
+-- in the anonymous block
+DBMS_OUTPUT.PUT_LINE('the first name of the employee is '||v_fname);
+
+-- chapter3
+-- declaring and initializing plsql variable
+-- syntax
+
+identifier [CONSTANT] datatype [NOT NULL]
+[:=| DEFAULT expr];
+
+DECLARE 
+v_hire_date DATE;
+v_location VARCHAR2(14):='Atlanta';
+v_deptno NUMBER (2) NOT NULL:=10;
+c_comm CONSTANT NUMBER :=1400;
+
+-- declaring and initializing pl sql variable
+DECLARE 
+v_myName VARCHAR2(20);
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('My name is '||v_myName);
+    v_myName:='Anim';
+    DBMS_OUTPUT.PUT_LINE('My name is '||v_myName);
+    END;
+    /
+
+-- declaring and initializing pl sql variable
+DECLARE 
+v_myName VARCHAR2(20):='NOOR';
+BEGIN
+    v_myName:='Anim';
+    DBMS_OUTPUT.PUT_LINE('My name is '||v_myName);
+    END;
+    /
+-- delimeters in the string literals 
+DECLARE
+    v_event VARCHAR2(25);
+BEGIN
+    v_event:=q'!Fathers day!';
+    DBMS_OUTPUT.PUT_LINE('1st Friday in September is :'||v_event);
+    v_event:=q'!Mothers day!';
+    DBMS_OUTPUT.PUT_LINE('2nd Sunday in October is :'||v_event);
+    
+END;
+/
 
 DECLARE v_lname employees.last_name%TYPE;
 BEGIN 
