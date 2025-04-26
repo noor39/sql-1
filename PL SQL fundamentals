@@ -2300,7 +2300,7 @@ END [function_name];
 
 -- Creating and Invoking a stored Function Using the CREATE FUNCTION statement
 CREATE OR REPLACE FUNCTION get_sal
-(p_id employees.employee_id%TYPE) RETURN NUMBER` IS     
+(p_id employees.employee_id%TYPE) RETURN NUMBER IS     
 v_sal employees.salary%TYPE:=0;
 BEGIN
     SELECT Salary
