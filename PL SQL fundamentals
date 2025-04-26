@@ -75,6 +75,79 @@ BEGIN
 END;
 /
 
+-- declaring scaler variables
+DECLARE 
+    v_emp_job VARCHAR2(9);
+    v_count_loop BINARY_INTEGER:=0;
+    v_dept_total_sal NUMBER(9,2):=0;
+    v_orderdate DATE:=SYSDATE +7;
+    c_tax_rate CONSTANT NUMBER(3,2):=8.25;
+    v_valid BOOLEAN NOT NULL := TRUE;
+    ...
+
+
+    -- declaring variables with % TYPE attribute
+    -- syntax
+    identifier table.column_name%TYPE;
+
+    -- BIND variable
+    VARIABLE b_result NUMBER
+    BEGIN
+        SELECT (salary*12)+NVL(COMMISSION_PCT,0) INTO :b_result
+        FROM employees WHERE employee_id =144;
+    END;
+    /
+    PRINT b_result
+
+    set autoprint on;
+
+    -- referencing bind variables
+    VARIABLE b_emp_salary NUMBER
+    BEGIN
+    SELECT salary INTO :b_emp_salary
+    FROM employees WHERE employee_id =170;
+    END;
+    /
+    PRINT b_emp_salary
+    SELECT first_name, last_name
+    FROM employees   
+     WHERE salary=:b_emp_salary;
+
+-- ussing AUTOPRINT with Bind variables
+VARIABLE b_emp_salary
+SET AUTOPRINT ON
+DECLARE
+    v_empno NUMBER(6):=&empno;
+BEGIN
+    SELECT SALARY INTO :b_emp_salary
+    FROM employees WHERE employee_id=v_empno;
+END;
+/
+
+-- sql FUNTIONS IN PL/SQL;
+-- GET THE LENGTH OF A STIRING
+v_desc_size INTEGER(5);
+v_product_description VARCHAR2(70):-'You can use this  product with your radios for higer frequency';
+-- get the length of the string in the prod_description
+v_desc_size:=LENGTH(v_product_description);
+-- get the number of months an employee has worked;
+v_tenure := MONTHS_BETWEEN(CURRENT_DATE, v_hiredate);
+-- using sequences in PLSQL 
+Declare 
+v_new_id NUMBER;
+BEGIN
+v_new_id:=my_seq.NEXTVAL;
+END;
+/
+
+
+
+
+
+
+
+
+
 DECLARE v_lname employees.last_name%TYPE;
 BEGIN 
 SELECT last_name INTO v_lname
