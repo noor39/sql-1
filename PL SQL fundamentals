@@ -1,3 +1,17 @@
+-- startup of device
+sys as sysdba
+sys
+alter session set container=orclpdb;
+alter pluggable database open;
+conn hr/hr@orclpdb;
+set SERVEROUTPUT ON
+set autoprint on
+
+cl scr
+
+hr/hr@orclpdb
+
+
 pl sql fundamentals 
 --  chapter 2 
 -- examining an pl sql block
