@@ -364,8 +364,12 @@ SET SERVEROUTPUT ON
 -- oracl package and its procedure 
 -- in the anonymous block
 DBMS_OUTPUT.PUT_LINE('the first name of the employee is '||v_fname);
+-- #############################################################################################################
 
--- chapter3
+-- chapter3   declaring  plsql variable
+
+-- #############################################################################################################
+
 -- declaring and initializing plsql variable
 -- syntax
 
@@ -457,6 +461,18 @@ BEGIN
 END;
 /
 
+
+
+
+-- #############################################################################################################
+
+-- *******************CHAPTER 4    Writing executable statements  ***************
+-- #############################################################################################################
+
+v_name:='Henderson';
+-- commenting code 
+-- SQL function
+
 -- sql FUNTIONS IN PL/SQL;
 -- GET THE LENGTH OF A STIRING
 v_desc_size INTEGER(5);
@@ -466,17 +482,56 @@ v_desc_size:=LENGTH(v_product_description);
 -- get the number of months an employee has worked;
 v_tenure := MONTHS_BETWEEN(CURRENT_DATE, v_hiredate);
 -- using sequences in PLSQL 
+
+-- starting in 11g
 Declare 
 v_new_id NUMBER;
 BEGIN
 v_new_id:=my_seq.NEXTVAL;
 END;
 /
+-- before 11g
+DECLARE 
+v_new_id NUMBER;
+BEGIN
+    SELECT my_seq.NEXTVAL INTO v_new_id FROM dual;
+    
+END;
+/
+-- DATA TYPE conversion
+DECLARE
+v_salary NUMBER(6) :=6000;
+v_sal_hike VARCHAR2 (5):='1000';
+v_total_salary v_salary%TYPE;
+BEGIN
+    v_total_salary:=v_salary+v_sal_hike;
+    DBMS_OUTPUT.PUT_LINE(v_total_salary);
+END;
+/
+
+-- data type conversion
+-- implicit data type conversion
+v_date_of_joining DATE:='02-Feb-2000';
+
+-- error in data type conversion 
+v_date_of_joining DATE:='February 02, 2000';
+-- explicit data type conversion
+v_date_of_joining DATE:=TO_DATE('February 02, 2000','Month DD,YYYY');
 
 
-
-
-
+-- NESTED BLOCKS
+DECLARE 
+v_outer_varaible VARCHAR2 (20):='GLOBAL VARIABLE';
+BEGIN
+    DECLARE
+    v_inner_variable VARCHAR2(20):='LOCAL VARIABLE';
+    BEGIN 
+        DBMS_OUTPUT.PUT_LINE(v_inner_variable);
+        DBMS_OUTPUT.PUT_LINE(v_outer_varaible);
+    END;
+            DBMS_OUTPUT.PUT_LINE(v_outer_varaible);
+    END;
+    /
 
 
 
@@ -2760,6 +2815,7 @@ END get_sal;
 
 -- Using Different Methods for Executing Functions
 -- As a PL/SQL expression , get the results using host variables
+SET AUTOPRINT ON
 VARIABLE b_salary NUMBER
 EXECUTE :b_salary :=get_sal(100)
 
