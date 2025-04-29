@@ -1,0 +1,66 @@
+Greetings. Analyzing the provided data on PL/SQL fundamentals, I have synthesized the salient information from Chapters 7, 8, 9, and 10 into a structured bulleted list, as requested.
+
+Here are the key points from those chapters:
+
+**Chapter 10: Introducing Stored Procedures and Functions**
+
+*   **Anonymous blocks are unnamed PL/SQL executable blocks and cannot be reused or stored**.
+*   **Procedures and functions are named PL/SQL blocks, also known as subprograms**.
+*   Subprograms, like anonymous blocks, contain sections: a mandatory **executable section (BEGIN...END)**, and optional declarative and exception sections.
+*   You can **create simple procedures and invoke them from an anonymous block**.
+*   You can **create simple functions**, including those that **accept parameters**.
+*   Functions can be **invoked from an anonymous block**, potentially passing parameters.
+*   The document distinguishes between **procedures and functions**. The syntax for creating a procedure includes an optional argument list.
+
+**Chapter 9: Handling Exceptions**
+
+*   A **PL/SQL exception is a warning or error condition that occurs at run time**.
+*   **Unhandled exceptions** can occur if no corresponding handler is present.
+*   To deal with exceptions at run time, you **add an EXCEPTION section to your PL/SQL block**.
+*   The EXCEPTION section allows you to trap specific exceptions using `WHEN exception_name THEN` clauses.
+*   The **`WHEN OTHERS THEN` handler can trap any error** that is not specifically handled by preceding `WHEN` clauses.
+*   There are different types of exceptions: **predefined Oracle Server errors**, **non-predefined Oracle Server errors**, and **user-defined exceptions**.
+*   You can use the **`PRAGMA EXCEPTION_INIT`** function to associate a declared exception name with a standard Oracle Server error number.
+*   The effect of **exception propagation in nested blocks** is discussed; **subblocks can handle an exception or pass it to the enclosing block**.
+*   You can use the **`RAISE` statement** to re-raise an exception or raise a user-defined exception.
+*   The **`RAISE_APPLICATION_ERROR`** procedure allows you to customize PL/SQL exception messages.
+
+**Chapter 8: Using Explicit Cursors**
+
+*   The Oracle Server uses **private SQL areas (work areas)** to execute SQL statements and store processing information.
+*   A **cursor is a PL/SQL construct used to name a work area and access its stored information**.
+*   There are **two types of cursors: implicit and explicit**.
+*   **Implicit cursors** are automatically created and managed by the Oracle Server for all SQL DML statements and single-row queries.
+*   **Explicit cursors** are declared by programmers **to process queries that return multiple rows**, one row at a time, enabling manual control.
+*   The operations for controlling an explicit cursor are **DECLARE, OPEN, FETCH, and CLOSE**.
+    *   **DECLARE**: Name the cursor and define the multi-row query (without an `INTO` clause).
+    *   **OPEN**: Executes the query, binds variables, positions the cursor at the first row, and identifies the active set. Opening a cursor for a query that returns no rows does not raise an exception.
+    *   **FETCH**: Retrieves the current row from the cursor into variables (using `INTO`) or a record, and advances the pointer to the next row. Looping is required to fetch all rows.
+    *   **CLOSE**: Releases the active set of rows.
+*   You can use **simple loops** (requiring explicit OPEN, FETCH, and CLOSE) or **cursor FOR loops** (which implicitly handle OPEN, FETCH, EXIT, and CLOSE) to process multiple rows from a cursor. The cursor FOR loop also implicitly declares a record to hold the fetched data.
+*   Explicit cursors and cursor variables have four attributes: **%FOUND, %ISOPEN, %NOTFOUND, and %ROWCOUNT**, used to obtain status information. These attributes are used in procedural statements.
+    *   `%ISOPEN`: Returns TRUE if the cursor is open.
+    *   `%FOUND`: Returns TRUE if the most recent FETCH returned a row.
+    *   `%NOTFOUND`: Returns TRUE if the most recent FETCH did not return a row.
+    *   `%ROWCOUNT`: Returns the number of rows fetched so far.
+*   You can **define a record based on the selected columns in an explicit cursor** (often using %ROWTYPE) and fetch directly into this record.
+*   Cursors can be declared **with parameters**, allowing different active sets to be returned when the cursor is opened multiple times with varying parameter values.
+*   The **`FOR UPDATE` clause** can be included in a cursor query to lock the rows in the active set, preventing other sessions from updating or deleting them.
+*   The **`WHERE CURRENT OF` clause** is used in conjunction with `FOR UPDATE` to reference the specific row currently fetched by the cursor when performing an update or delete operation.
+
+**Chapter 7: Working with Composite Data Types**
+
+*   **Composite data types** in PL/SQL include **records and collections**.
+*   A **record is a group of related data items (fields)**, each with its own name and data type. Fields are accessed using dot notation (`record_name.field_name`).
+*   You can **create user-defined PL/SQL records**.
+*   The **%ROWTYPE attribute is used to declare a record that can hold an entire row of a table or view**.
+*   Using **%ROWTYPE simplifies maintenance**, as the record's structure dynamically reflects changes in the underlying table. It is particularly **useful when retrieving an entire row** or when the table structure is unknown.
+*   **Collections are used to treat data as a single unit**.
+*   The three types of PL/SQL collections are **Associative Arrays, Nested Tables, and VARRAYs**.
+*   This chapter focuses on **Associative Arrays (also known as INDEX BY tables)**. They are user-defined, composite types consisting of key-value pairs, indexed by a primary key that is not necessarily sequential.
+*   Creating an associative array involves declaring a TABLE data type with the `INDEX BY` option and then declaring a variable of that type.
+*   Associative array elements are accessed using the syntax `identifier(index)`, where the index can be a `PLS_INTEGER`, `BINARY_INTEGER`, or `VARCHAR2`. The index value can be negative, and indexing doesn't need to start at 1.
+*   **INDEX BY table methods** are built-in procedures or functions (like **EXISTS, COUNT, FIRST, LAST, PRIOR, NEXT, DELETE**) that operate on associative arrays using dot notation (`table_name.method_name`). The `exists(i)` method is useful for checking if an element with a given index exists.
+*   The **INDEX BY table of records option** allows an associative array definition to store all fields of a database table for multiple rows, typically using %ROWTYPE in the type definition.
+*   Nested tables are similar to associative arrays.
+*   VARRAYs are similar to associative arrays but have a constrained size. (Nested Tables and VARRAYs are covered in detail in the *Advanced PL/SQL* course).
