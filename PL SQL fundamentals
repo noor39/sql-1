@@ -2788,8 +2788,6 @@ BEGIN
  -- #############################################################################################################
 
 
-
-
 --  creating functions
 CREATE  [OR REPLACE] FUCTION function_name
 [(parameter1 [mode1] datatype1,...)]
@@ -2999,8 +2997,43 @@ CREATE OR REPLACE FUNCTION get_location(p_deptname IN varchar2)
  
  --******************** Chapter 4 creating Packages************
 --******************************************************************************************
+-- creating package
+CREATE OR REPLACE PACKAGE test_pkg IS 
+PROCEDURE add_dept(
+    p_name VARCHAR2,
+    p_loc NUMBER);
+    FUNCTION tax(p_value IN NUMBER)
+    RETURN NUMBER;
+    END test_pkg;
+    /
+-- creating package body
+    CREATE OR REPLACE PACKAGE BODY test_pkg IS     
+    PROCEDURE add_dept(
+        p_name VARCHAR2,
+        p_loc NUMBER)
+    IS 
+    BEGIN
+        INSERT INTO departments(department_id, department_name, location_id)
+        VALUES (departments_seq.NEXTVAL, p_name, p_loc);
+        END add_dept;
+        FUNCTION tax (p_value IN NUMBER)
+        RETURN NUMBER IS 
+        BEGIN
+            RETURN(p_value*0.08) ;
+            END tax;
+            END test_pkg;
+            /
+set serveroutput on;
+-- executing the package
+EXECUTE test_pkg.add_dept('TEST',1800);
+EXECUTE test_pkg.add_dept('Ttsas',1800);
+-- 
+SELECT department_id, department_name, location_id FROM departments;
 
 
+
+
+-- syntax
 CREATE [OR REPLACE ] PACKAGE package_name IS|AS 
 public type and variable declarations
 subprogram specifications
@@ -3100,7 +3133,9 @@ BEGIN
     WHERE name='COMM_PKG' AND type='PACKAGE BODY'
     ORDER BY LINE;
 
-    -- Remobe the package specification and body
+    -- Remove the package specification and body
     DROP PACKAGE package_name;
     -- Remove the package body only
     DROP PACKAGE BODY package_name;
+
+    lukeb.co/sql_jobs_db
