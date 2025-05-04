@@ -7,11 +7,11 @@ SELECT table_name
 FROM dictionary
 WHERE LOWER(comments) LIKE '%columns%';
 
-
+-- User objects view
 SELECT  object_name, object_type, created, status
 FROM USER_OBJECTS
 ORDER BY object_type;
-
+-- table information
 DESCRIBE user_tables
 
 SELECT table_name
@@ -19,12 +19,11 @@ FROM user_tables;
 
 SELECT table_name
 FROM tabs;
-
- select constraint_name, constraint_type from user_constraints
- where table_name='EMPLOYEES';
-
- select constraint_name, constraint_type from user_constraints;
 DESCRIBE user_tab_columns
+
+
+
+
 
 --  column information
 
@@ -36,14 +35,30 @@ SELECT column_name, data_type, data_length, data_precision, data_scale
 FROM user_unused_col_tabs
 WHERE table_name='EMPLOYEES';
 
+-- Constraint information
+
+ select constraint_name, constraint_type from user_constraints
+ where table_name='EMPLOYEES';
+
+ select constraint_name, constraint_type from user_constraints;
+
+
 describe user_constraints -- constraint definitions on your tables
 DESCRIBE user_cons_columns --columns owned by you 
 
+-- adding comments to your table
 COMMENT ON TABLE employees
 IS 'Employee Information';
 
 COMMENT ON COLUMN employees.first_name
 IS 'First name of the employee';
+
+
+
+
+-- chapter 3 creating sequences synonyms and indexes
+
+
 /* 
 comments can be views through the data dicitonary
 =ALL_COL_COMMENTS
@@ -52,11 +67,17 @@ ALL_TAB_COMMENTS
 USER_TAB_COMMENTS
 
 */
+
+
+
+
 select * 
 FROM userB.employees;
 
 SELECT * 
 useraA.employees;
+-- Syntax
+
 
 CREATE SEQUENCE dept_deptid_seq
 START WITH 280
@@ -287,7 +308,6 @@ Table altered.
 
 SQL> alter table emp27
   2  add constraint my_emp27_emp_id_fk froe
-
 
 
 
