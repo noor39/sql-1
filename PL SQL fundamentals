@@ -2558,6 +2558,97 @@ END;
 -- #############################################################################################################
 -- #############################################################################################################
 
+CREAte , compile and invoke the ADD_JOB procedura and review the results
+create a procedure called UPD_JOB to modify a job in the JOBS table;
+create a procedure called DEL_JOB to delete a job from the JOBS table;
+
+create a procedure called GET_EMPLOYEE to query the Employees TABLE;
+create a procedure called RAISE_SALARY to increase the employee salary;
+create a procedure called QUERY_EMP to query the employeee 
+
+
+
+
+
+-- /1
+CREATE OR REPLACE procedure ADD_JOB (p_id jobs.job_id%TYPE, p_title jobs.job_title%TYPE) IS 
+BEGIN
+insert into jobs (job_id, job_title)
+values (p_id , p_title);
+END ADD_JOB;
+/
+-- 2
+CREATE OR REPLACE procedure UPD_JOB (p_id jobs.job_id%TYPE, p_title jobs.job_title%TYPE) IS 
+BEGIN
+UPDATE JOBS SET JOB_ID=p_id
+WHERE job_title=p_title;
+end UPD_JOB;
+/
+-- 3
+CREATE OR REPLACE procedure DEL_JOB (p_id jobs.job_id%TYPE ) IS 
+BEGIN
+DELETE FROM  JOBS WHERE  JOB_ID=p_id;
+end DEL_JOB;
+/
+-- 4
+
+CREATE OR REPLACE procedure GET_EMPLOYEE (p_id IN employees.employee_id%TYPE,p_sal OUT employees.salary%TYPE, p_job OUT employees.job_id%TYPE) IS 
+BEGIN
+
+SELECT SALARY, job_id INTO p_sal, p_job
+FROM EMPLOYEES
+WHERE employee_id=p_id;
+
+end GET_EMPLOYEE;
+/
+
+VARIABLE v_sal number 
+VARIABLE v_job varchar2(15)
+EXECUTE GET_EMPLOYEE (100,:v_sal, :v_job);
+
+-- 5
+
+CREATE OR REPLACE procedure RAISE_SALARY (p_id IN employees.employee_id%TYPE,
+p_sal OUT employees.salary%TYPE) IS 
+BEGIN
+
+SELECT (SALARY+1000) INTO p_sal
+FROM EMPLOYEES
+WHERE employee_id=p_id;
+end RAISE_SALARY;
+/
+
+VARIABLE v_sal NUMBER
+VARIABLE v_sal NUMBER
+
+-- 6
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3139,3 +3230,17 @@ BEGIN
     DROP PACKAGE BODY package_name;
 
     lukeb.co/sql_jobs_db
+
+
+-- chapter 5
+
+CREATE OR REPLACE PACKAGE  dept_pkg IS
+PROCEDURE add_department
+(p_deptno departments.department_id%TYPE, p_name departments.department_name%TYPE:='Unknown',
+p_loc departments.location_id%TYPE:=1700);
+
+PROCEDURE add_department
+(p_deptno departments.department_id%TYPE, p_name departments.department_name%TYPE:='Unknown',
+p_loc departments.location_id%TYPE:=1700);
+END dept_pkg;
+/
