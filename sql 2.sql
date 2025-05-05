@@ -1,4 +1,349 @@
+01.
+conn sys / as sysdba
+create user patel identified by patel;
 
+02.
+grant create table, create session, create constraint, create view, create sequence to patel;
+grant unlimited tablespace to patel;
+conn patel /patel@orclpdb;
+
+03.
+create table dept27
+(dept_id number(5) constraint dept_id_pk primary key, name varchar2(30));
+
+04.
+create table emp27 (
+emp_id number(5),
+l_name varchar2(30),
+f_name varchar2(30),
+salary number(8) constraint emp27_chk_salary check(salary>500),
+user_id varchar2(10));
+
+05.
+alter table emp27
+add dept_id number(5);
+
+06.
+alter table dept27
+modify name varchar2(35);
+
+07.
+alter table emp27
+drop column user_id;
+
+08.
+alter table emp27
+add constraint my__emp27_emp_id_pk primary key (emp_id);
+
+09.
+alter table emp27
+add constraint my_emp27_dept_id_fk
+foreign key (dept_id) references dept27;
+
+10.
+select constraint_name, constraint_type
+from user_constraints
+where table_name = 'EMP27';
+
+11.
+alter table emp27
+modify l_name varchar(30) not null;
+
+12.
+drop table emp27;
+flashback table emp27 to before drop;
+
+16.
+select last_name, department_id, salary
+from employees
+where (department_id,salary) in(select department_id, salary from employees 
+where commission_pct is not null);
+
+17.
+SELECT e.last_name, d.department_name, e.salary
+FROM employees e JOIN departments d
+ON e.department_id = d.department_id
+AND (salary, job_id) IN
+(SELECT e.salary, e.job_id
+FROM employees e JOIN
+departments d
+ON e.department_id =
+d.department_id
+AND d.location_id = 1700);
+
+18.
+SELECT last_name, hire_date, salary
+FROM employees
+WHERE (salary, manager_id) IN
+(SELECT salary, manager_id
+FROM employees
+WHERE last_name = 'Kochhar')
+AND last_name != 'Kochhar';
+
+19.
+SELECT last_name, job_id, salary
+FROM employees
+WHERE salary > ALL
+(SELECT salary
+FROM employees
+WHERE job_id = 'SA_MAN')
+ORDER BY salary DESC;
+
+20.
+SELECT employee_id, last_name, department_id
+FROM employees
+WHERE department_id IN (SELECT department_id
+FROM departments
+WHERE location_id IN
+(SELECT location_id
+FROM locations
+WHERE city LIKE 'T%'));
+
+21.
+SELECT last_name
+FROM employees outer
+WHERE outer.salary < (SELECT AVG(inner.salary)
+FROM employees inner
+WHERE inner.department_id
+= outer.department_id);
+
+
+
+
+
+
+
+
+
+DECLARE
+BEGIN
+END;
+/
+
+
+
+DECLARE
+BEGIN
+END;
+/
+
+DECLARE
+BEGIN
+END;
+/
+
+
+DECLARE
+BEGIN
+END;
+/
+
+
+
+DECLARE
+BEGIN
+END;
+/
+
+
+
+DECLARE
+BEGIN
+END;
+/
+
+DECLARE
+BEGIN
+END;
+/
+
+
+DECLARE
+BEGIN
+END;
+/
+
+
+
+DECLARE
+BEGIN
+END;
+/
+
+
+ 
+
+--  CHAP 9 SQL 2
+
+-- USING EXPLICIT DEFAULT VALUES
+CREATE TABLE DEPTM3(DEPARTMENT_ID NUMBER, department_name VARCHAR2(50), MANAGER_ID NUMBER(38));
+
+INSERT INTO DEPTM3
+(DEPARTMENT_ID, department_name, MANAGER_ID)
+VALUES(300, 'ENGINEERING',DEFAULT);
+
+UPDATE DEPTM3
+SET MANAGER_ID=DEFAULT
+WHERE DEPARTMENT_ID=10;
+
+
+-- UNCONDITIONAL INSERT ALL
+
+CREATE TABLE SAL_HISTORY(EMP_ID NUMBER, HIRE_DATE DATE,SALARY NUMBER, MANAGER_ID NUMBER(38));
+INSERT ALL
+          INTO SAL_HISTORY 
+          VALUES(EMP_ID,HIRE_DATE,SALARY)
+          INTO SAL_HISTORY 
+          VALUES(EMP_ID,HIRE_DATE, SALARY)
+          SELECT employee_id EMPID, HIRE_DATE HIREDATE, SALARY SAL, MANAGER_ID MGR
+          FROM EMPLOYEES
+          WHERE employee_id>200;
+
+CREATE USER USER
+IDENTIFIED BY PASSWORD
+
+CREATE USER DEMO1
+IDENTIFIED BY DEMO1;
+
+GRANT CREATE SESSION, CREATE TABLE, CREATE sequence, CREATE VIEW, CREATE PROCEDURE 
+TO DEMO1;
+
+GRANT UNLIMITED TABLESPACE TO DEMO1;
+
+CREATE ROLE MANAGER1;
+
+GRANT CREATE TABLE, CREATE VIEW TO MANAGER1;
+
+
+CREATE USER NOORK IDENTIFIED BY NOORK;
+GRANT MANAGER1 TO NOORK;
+-- DEMO1 ER PASSWORD EKHON EMPLOY HOYE GELO RE
+ALTER USER DEMO1 
+IDENTIFIED BY EMPLOY;
+
+-- GRANTING OBJECT PRIVILEDGES
+GRANT SELECT 
+ON EMPLOYEES
+TO DEMO1;
+
+-- 
+GRANT UPDATE ( department_name, location_id)
+ON DEPARTMENTS
+TO DEMO1, MANAGER1;
+
+
+
+
+-- CHAP2
+
+--  how to use the dictionary views
+DESC DICTIONARY
+
+SELECT * FROM DICTIONARY
+WHERE TABLE_NAME='USER_OBJECTS';
+
+SELECT TABLE_NAME
+FROM DICTIONARY
+WHERE LOWER (COMMENTS) LIKE'%columns%';
+-- user_objects view
+
+
+SELECT object_name, object_type, created , status
+FROM USER_OBJECTS
+ORDER BY object_type;
+
+-- table info
+DESCRIBE user_tables
+
+
+SELECT TABLE_NAME
+from user_tables;
+
+select TABLE_NAME
+from tabs;
+-- column info
+DESCRIBE user_tab_columns;
+
+SELECT column_name, data_type, data_length,
+data_precision, data_scale, nullable
+FROM user_tab_columns
+WHERE TABLE_NAME ='EMPLOYEES';
+
+-- constraints informations
+describe user_constraints
+
+select constraint_name, constraint_type, search_condition, r_constraint_name, delete_rule, status
+FROM user_constraints
+WHERE TABLE_NAME='EMPLOYEES';
+
+-- QUERYING USER_CONS_COLUMNS
+DESCRIBE USER_CONS_COLUMNS
+
+SELECT constraint_name, column_name
+FROM USER_CONS_COLUMNS
+WHERE table_name='EMPLOYEES';
+
+-- CHAP4
+-- CHAP5
+-- CHAP6
+SELECT department_name, city
+FROM departments
+NATURAL JOIN (SELECT l.location_id, l.city, l.country_id
+              FROM locations l 
+              join countries c 
+              ON (l.country_id=c.country_id)
+              join regions
+              using (region_id)
+              where region_name='Europe');
+
+              -- create a database view 
+create or replace view european_cities
+as select l.location_id, l.city, l.country_id
+from locations l  
+join countries C
+on (l.country_id=c.country_id)
+join regions using (region_id)
+where region_name='Europe';
+
+
+create table empl_demo as select * from employees;
+
+select last_name, first_name, manager_id, department_id
+from empl_demo
+WHERE manager_id IN ( SELECT manager_id
+                    FROM empl_demo
+                    WHERE first_name='Daniel')
+AND department_id IN  (select department_id
+                      from empl_demo
+                      where first_name='Daniel');
+--  pairwise comparision subquery
+select employee_id, manager_id, department_id
+from employees
+where ( manager_id, department_id) IN ( select manager_id, department_id
+                                        from employees
+                                        where employee_id IN (174, 199))
+and employee_id not in ( 174,199);
+-- non pairwise comparision subquery
+select employee_id, manager_id, department_id
+from employees
+where manager_id IN  ( select manager_id
+                      from employees
+                      where employee_id IN (174,141))
+AND department_id IN ( select department_id
+                      from employees
+                      where employee_id IN (174,141))
+and employee_id not in ( 174, 141);
+-- scaler subqueries
+
+select employee_id, last_name
+(CASE 
+WHEN  department_id=(select department_id
+                      from departments
+                      where location_id=1800)
+                      then 'canada 'else 'usa ' end ) location
+                      from employees;
+
+-- CHAP7
 
 
 
