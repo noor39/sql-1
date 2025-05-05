@@ -12,7 +12,66 @@ cl scr
 hr/hr@orclpdb
 
 
+-- 1 Create a PL/SQL block that return the sum of salaries for all the employees in the specified department. Department Number will be given in run time.
 
+SET SERVEROUTPUT ON;
+DECLARE
+    v_total_sal  NUMBER;
+    v_deptno        NUMBER := &sum_deptno;  
+BEGIN
+
+    SELECT NVL(SUM(salary), 0)
+    INTO v_total_sal
+    FROM employees
+    WHERE department_id = v_deptno;
+
+
+    DBMS_OUTPUT.PUT_LINE('Sum of salaries for all the employees for department ' || v_deptno || 
+                        ' is: $' || TO_CHAR(v_total_sal, 'FM999,999,999'));
+
+END;
+/
+
+
+-- 2 Create a PL/SQL block that determines the top 3 salaries of the employees.
+--  Insert the data to a new table called TEST which has only one column (salary).
+
+create table test(salary NUMBER);
+
+
+
+DECLARE
+    CURSOR c_topsal IS
+        SELECT salary
+        FROM employees
+        ORDER BY salary DESC
+        FETCH FIRST 3 ROWS ONLY;
+BEGIN
+      FOR sal_rec IN c_topsal LOOP
+        INSERT INTO test (salary) VALUES (sal_rec.salary);
+    END LOOP;
+    DBMS_OUTPUT.PUT_LINE(' Congrats ! Top 3 salaries have now successfully inserted into the test table');
+END;
+/
+
+SELECT * FROM TEST;
+
+DROP TABLE TEST;
+
+-- 3. Write down the general syntax of using an explicit cursor in PL/SQL.
+
+DECLARE
+   CURSOR cursor_name IS select_statement;
+BEGIN
+   OPEN cursor_name;
+   LOOP
+      FETCH cursor_name INTO variable_list;
+      EXIT WHEN cursor_name%NOTFOUND;
+   END LOOP;
+
+   CLOSE cursor_name;
+END;
+/
 
 -- #############################################################################################################
 
