@@ -1,0 +1,137 @@
+Here is a comprehensive response to your questions, drawing on the provided sources:
+
+1.  **What is PL/SQL?**
+    **PL/SQL** stands for “Procedural Language extension to SQL”. It is **Oracle Corporation’s standard data access language for relational databases**. PL/SQL seamlessly integrates procedural constructs with SQL. This integration of procedural constructs with SQL is considered the most important advantage of PL/SQL, giving you better control of your SQL statements and their execution. PL/SQL defines a **block structure** for writing code, which helps with maintenance and debugging. It offers modern software engineering features like **data encapsulation, exception handling, information hiding, and object orientation**. PL/SQL provides all the procedural constructs available in any third-generation language (3GL), such as variables, constants, data types, control structures (conditional statements and loops), and reusable program units.
+
+2.  **WHAT are the sections available for PL/SQL block Structure?**
+    A PL/SQL block consists of four sections:
+    *   **Declarative (optional)**: This section begins with the keyword `DECLARE` and ends when the executable section starts. It contains declarations of all variables, constants, cursors, and user-defined exceptions that are referenced in the executable and exception sections.
+    *   **Executable (mandatory)**: This section begins with the keyword `BEGIN` and ends with `END`. It contains SQL statements to retrieve data from the database and PL/SQL statements to manipulate data. This section needs to have at least one statement. Any number of PL/SQL blocks can be included within the executable section.
+    *   **Exception handling (optional)**: This section is nested within the executable section. It begins with the keyword `EXCEPTION`. This section specifies the actions to perform when errors and abnormal conditions arise in the executable section.
+    *   **End (mandatory)**: All PL/SQL blocks must conclude with an `END` statement, which is terminated with a semicolon.
+    The keywords `DECLARE`, `BEGIN`, and `EXCEPTION` are not terminated by a semicolon, but the keyword `END` and all SQL and PL/SQL statements must be terminated with a semicolon. Anonymous blocks form the basic PL/SQL block structure and include these sections.
+
+3.  **WHAT ARE THE available block Types in PL/SQL?**
+    There are three types of blocks that make up a PL/SQL program: **Anonymous blocks, Procedures, and Functions**. These blocks can be entirely separate or nested.
+    The sources also list other program constructs that use the basic PL/SQL block structure, available based on the environment:
+    *   **Anonymous blocks**: Unnamed PL/SQL blocks embedded within an application or issued interactively. They are compiled each time they are executed and are not stored in the database.
+    *   **Procedures** and **Functions**: Named PL/SQL blocks that are also known as subprograms. They are stored in the database, compiled only once, can be invoked repeatedly by name, and can take parameters. A procedure typically performs an action, while a function computes and returns a value.
+    *   **Packages** (application or stored): Named PL/SQL modules that group related procedures, functions, and identifiers.
+    *   **Database triggers**: PL/SQL blocks associated with a database table and fired automatically by various events.
+    *   **Application triggers**: PL/SQL blocks associated with database tables or system events in Oracle Developer components.
+    *   **Application procedures or functions**: Named PL/SQL blocks stored in Oracle Forms Developer applications or shared libraries.
+    *   **Object types**.
+
+4.  **WHAT is the difference between variable and an identifier?**
+    **Identifiers** are the names given to PL/SQL objects. **Variables** are a type of PL/SQL object, specifically used for the storage of data and manipulation of stored values. You must declare all PL/SQL identifiers in the declaration section before referencing them. Keywords cannot be used as identifiers. Examples of identifiers include names for variables (`v_fname`), constants (`c_percent`), delimiters (`;`, `,`, `+`), literals (`John`, `428`, `True`), and comments (`--`, `/* */`) are also considered lexical units.
+
+5.  **Write down the types of PL/SQL variable?**
+    PL/SQL variables have a data type that specifies storage format, constraints, and valid value ranges. PL/SQL supports several variable data type categories:
+    *   **Scalar data types**: Hold a single value. They can be classified into four categories: number, character, date, and Boolean.
+    *   **Reference data types**: (Mentioned but not covered in detail in this course's excerpt).
+    *   **Large object (LOB) data type variables**.
+    *   **Composite data types**: These include **Records** and **Collections**. Collections include Associative Arrays (INDEX BY Tables), Nested Tables, and VARRAYs.
+    Additionally, there are **Non-PL/SQL variables** known as **Bind variables**.
+
+6.  **How can you comment on the PL/SQL code?**
+    You can comment on PL/SQL code using lexical units designated as comments. The available comment indicators are:
+    *   `--`: Used for single-line comments.
+    *   `/* */`: Used for multi-line comments, where `/*` is the beginning delimiter and `*/` is the ending delimiter.
+
+7.  **Define LOOP Structure?**
+    A **LOOP structure** is a type of control structure in PL/SQL that is used to repeat a statement or sequence of statements multiple times. Loops are primarily used to execute statements repeatedly until a specified exit condition is met. It is mandatory for a loop to have an exit condition; otherwise, the loop will be infinite.
+
+8.  **What are the types of LOOP available?**
+    PL/SQL provides the following types of loops:
+    *   **Basic loops**: These loops perform repetitive actions without overall conditions.
+    *   **FOR loops**: These loops perform iterative actions based on a count.
+    *   **WHILE loops**: These loops perform iterative actions based on a condition.
+    Loops can be nested within one another (e.g., FOR, WHILE, and basic loops). The `CONTINUE` statement can also be used within loops.
+
+9.  **What is an exception?**
+    An **exception** is defined as a **PL/SQL error that is raised during program execution**. It represents a warning or error condition that occurs at run time. An exception can be raised implicitly by the Oracle Server or explicitly by the program itself. PL/SQL allows you to handle exceptions, either by trapping them with a handler within an `EXCEPTION` section or by allowing them to propagate to the calling environment.
+
+10. **Write down the types of exception?**
+    There are different types of PL/SQL exceptions:
+    *   **Predefined Oracle Server exceptions**: These are error conditions that are defined by the Oracle Server. They are implicitly raised.
+    *   **Nonpredefined Oracle Server exceptions**: These can be any standard Oracle Server errors that are not predefined. They are implicitly raised.
+    *   **User-defined exceptions**: These are exceptions specific to your application. They are explicitly raised.
+
+11. **draw the basic steps to process an explicit cursor?**
+    The basic steps to process an explicit cursor are:
+    1.  **Declare the cursor**: This is done in the declarative section of a PL/SQL block. You give the cursor a name and define the structure of the associated query. The syntax is `CURSOR cursor_name IS select_statement;`, where the `select_statement` does not include an `INTO` clause.
+    2.  **Open the cursor**: This executes the query associated with the cursor.
+    3.  **Fetch data from the cursor**: This retrieves rows from the active set of the cursor, often processing them individually.
+    4.  **Close the cursor**: This releases the resources associated with the cursor.
+
+12. **What is meant by procedure?**
+    A **procedure** is a type of PL/SQL subprogram. Procedures are **named PL/SQL blocks** that can be compiled and stored in the database as schema objects. Procedures are typically used to **perform an action**. They can be called with a set of parameters. Procedures promote reusability and maintainability.
+
+13. **What are parameters?**
+    **Parameters** (sometimes referred to as arguments) are used with named PL/SQL blocks like procedures and functions to **pass values** to and from the subprogram. Every argument in a procedure declaration is associated with a mode and data type. The parameter modes available are **IN** (the default), **OUT**, and **IN OUT**. When passing actual parameters to a subprogram, you can use positional, named, or mixed notation. The data type of parameters in the declaration cannot have an explicit size; instead, the `%TYPE` attribute should be used.
+
+14. **WHAT is meant by function?**
+    A **function** is a type of PL/SQL subprogram. Like procedures, functions are **named PL/SQL blocks** that can be compiled and stored in the database. Functions are typically used to **compute and return a value**. A key characteristic is that a function **must return a value**. Functions can also be called with a set of parameters.
+
+15. **What is the basic difference between a procedure and function?**
+    The basic difference between a procedure and a function lies in their purpose and return value:
+    *   A **procedure** is typically used to **perform an action**.
+    *   A **function** is typically used to **compute and return a value**. A function **must return a value**, whereas a procedure does not have this requirement.
+    Both are named PL/SQL blocks that can be stored in the database, compiled once, invoked by other applications, and can take parameters.
+
+16. **What are the different methods available for executing a function?**
+    Functions are named PL/SQL blocks that are stored in the database, allowing them to be invoked whenever needed. The sources mention several ways to execute or invoke functions:
+    *   Invoking functions using the `CREATE FUNCTION` statement example.
+    *   Executing functions using SQL Developer.
+    *   Using a function in a SQL expression.
+    *   Calling user-defined functions in SQL statements.
+    Stored functions can be invoked from any application code that can connect to an Oracle database and execute PL/SQL code. A PL/SQL anonymous block, a SQL `CALL` statement, or a SQL query can invoke a PL/SQL function with parameters.
+
+17. **What is a package?**
+    A **package** is a **schema object that groups logically related PL/SQL types, variables, and subprograms**. Packages usually consist of two main parts: a **specification** (or spec) and a **body**. The specification serves as the interface, declaring the public types, variables, constants, exceptions, cursors, and subprograms available for use outside the package. The body defines the code for the subprograms declared in the specification, the queries for cursors, and can also define private constructs.
+
+18. **What are the advantages of using package?**
+    Using packages offers several advantages based on the sources:
+    *   They facilitate **modularized program development**. Modularization helps break down complex applications into smaller, manageable, and logically related modules.
+    *   They group related PL/SQL types, variables, and subprograms together.
+    *   Modular applications using packages can improve **functionality, security, and overall performance**.
+    *   Packages can support advanced features such as overloading subprograms, forward declarations, initialization blocks, and maintaining a persistent state for data within a session.
+
+19. **Write five Oracle-Supplied packages names?**
+    Here are five names of Oracle-Supplied packages mentioned in the sources:
+    1.  `DBMS_OUTPUT`
+    2.  `UTL_FILE`
+    3.  `UTL_MAIL`
+    4.  `DBMS_SQL`
+    5.  `DBMS_WARNING`
+
+20. **WHAT is meant by trigger?**
+    A **trigger** is defined as a **PL/SQL block that is stored in the database**. It is **fired (executed) automatically in response to a specified event**.
+
+21. **Where can we Define a trigger?**
+    Triggers are PL/SQL blocks that are typically **associated with a database table**. They can also be associated with **system events**. Triggers can be created using the `CREATE TRIGGER` statement. Triggers in Oracle Developer components consist of anonymous blocks.
+
+22. **Waht do you know about trigger event types?**
+    Triggers are fired automatically when triggered by various events. The sources discuss **Trigger Event Types**. DML triggers are associated with DML events. The sources also specifically mention creating triggers on **DDL statements** and **system events**.
+
+23. **describe the types of Trigger?**
+    Based on the sources, the types of triggers include:
+    *   **Application triggers** and **Database triggers**.
+    *   **DML triggers**: Fired by DML events on a table. These can be **Statement-Level Triggers** or **Row-Level Triggers**.
+    *   **DDL triggers**: Created on DDL statements.
+    *   **System Event triggers**: Created on system events.
+    *   **Compound triggers**: A single trigger that can fire at multiple timing points.
+
+24. **write down the busineess application scenarios for implementing triggers?**
+    The source material lists "Business Application Scenarios for Implementing Triggers" as a topic covered in the course. However, the specific details or examples of these scenarios are not provided within the given excerpts.
+
+25. **Define trigger body?**
+    The **trigger body** is the PL/SQL block that contains the code to be executed when the trigger is fired. Source lists "Trigger Event Types and Body", indicating the body is a distinct part of the trigger definition, but does not elaborate on its content in the provided text beyond stating it is a PL/SQL block.
+
+26. **What do you understand by dependent object and referenced object?**
+    In the context of schema object dependencies, when one schema object references another, the object doing the referencing is the **dependent object**, and the object being referenced is the **referenced object**. For example, if a PL/SQL procedure (the dependent object) selects data from a table (the referenced object), a dependency exists. If the referenced object is changed in a way that affects the dependent object, the dependent object may become invalid.
+
+27. **what do you understand about local dependencies and remote dependencies?**
+    Dependencies between schema objects can be either local or remote:
+    *   **Local dependencies**: These occur when a schema object references another object that resides within the **same database instance**.
+    *   **Remote dependencies**: These occur when a PL/SQL program unit references an object located in a **different, remote database instance**, typically accessed through a database link. The `REMOTE_DEPENDENCIES_MODE` parameter can affect how remote dependencies are handled.
