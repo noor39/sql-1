@@ -6357,5 +6357,64 @@ BEGIN
 INSERT INTO departments (deparment_id, department_name, location_id) 
 values(departments_seq.NEXTVAL, p_name, p_loc);
 END add_department;
-END dept_pkg;
+END dept_pkg;/
+
+
+ -- #############################################################################################################
+ --                     ******************** Chapter 6 working with Packages************
+-- #############################################################################################################
+
+ -- #############################################################################################################
+ --                     ******************** Chapter 7 working with Packages************
+-- #############################################################################################################
+
+ -- #############################################################################################################
+ --                     ******************** Chapter 8 working with Packages************
+-- #############################################################################################################
+
+ -- #############################################################################################################
+ --                     ******************** Chapter 9 Creating Triggers ************
+-- #############################################################################################################
+trigger is a pl sql block stored in database like procedure function.
+time specify kore rakhbe, jei specification diso shei shomoy trigger executable hobe. onekta alarm er moto.
+
+time set kore rakhbe AUTOMATICALLY oi trigger e thaka pl sql code execute hobe.
+condition set kore rakhba specified condition ghotle ba true hole trigger AUTOMATICALLY execute hoy.
+a trigger is defined in table view schema . 
+
+***  DML, DDL, database operation servererror, logon logoff, startup, shutdown
+trigger 2 , database trigger(dml ddl occurs), APPLICATION trigger
+
+use trigger for security, audit, data integrity, referencial integrity
+
+simple dml before after instead of compound , non dml trigger 
+trigger event type kon dml statement kokhon exevute hobe (insert update delete)
+
+trigger body determine ki action perform korebe plsql blok naki CALL to procedure. 
+create trigger statement diye trigger kokhon 
+
++
+
+
+
+-- creating a trigger 
+CREATE OR REPLACE trigger secure_emp 
+before insert on employees
+begin
+IF (TO_CHAR (sysdate , 'DY') IN ('SAT', 'SUN')) OR (TO_CHAR(sysdate, 'HH24:MI') NOT BETWEEN '08:00' AND '18:00') THEN 
+RAISE_APPLICATION_ERROR( -20500 ,'khankir pola kamer shomoy kaj koros na you dont have a life office hour e entry de');
+end if ; 
+END;
 /
+
+insert into employees (employee_id, last_name, first_name, email, hire_date, job_id, salary, department_id)
+values(3004, 'Marc', 'manson', 'mmson', sysdate, 'IT_PROG', 5398893, 60);
+
+
+-- #############################################################################################################
+--                     ******************** Chapter 10 working with triggers ************
+-- #############################################################################################################
+
+-- #############################################################################################################
+--                     ******************** Chapter 5 working with Packages************
+-- #############################################################################################################
