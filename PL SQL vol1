@@ -1,6 +1,34 @@
 -- #############################################################################################################
 -- #############################################################################################################
 -- ****************************************volume 1 (plsql)************************************************
+1 What is PL/SQL?
+2 WHAT are the sections available for PL/SQL block Structure?
+3 WHAT ARE THE available block Types in PL/SQL?
+4 WHAT is the difference between variable and an identifier?
+5  Write down the types of PL/SQL variable?
+6 How can you comment on the PL/SQL code?
+7 Define LOOP Structure?
+8 What are the types of LOOP available?
+9 What is an exception?
+10 Write down the types of exception?
+11 draw the basic steps to process an explicit cursor?
+12 What is meant by procedure?
+13 What are parameters?
+14 WHAT is meant by function?
+15 What is the basic difference between a procedure and function?
+16 What are the different methods available for executing a function?
+17 What is a package?
+18 What are the advantages of using package?
+19 Write five Oracle-Supplied packages names?
+20 WHAT is meant by trigger?
+21 Where can we Define  a trigger?
+22 Waht do you know about trigger event types?
+23 describe the types of Trigger?
+24 write down the busineess application scenarios for implementing triggers?
+25 Define trigger body?
+26 What do you understand by dependent object and referenced object?
+27 what do you understand  about local dependencies and remote dependencies? 
+
 
 -- 1. create  compile and invoke the ADD_JOB procedure  and review the results
 
