@@ -756,6 +756,77 @@ insert into employees (employee_id, last_name, first_name, email, hire_date, job
 values(3004, 'Marc', 'manson', 'mmson', sysdate, 'IT_PROG', 5398893, 60);
 
 
+
+-- Using conditional predicates
+CREATE OR REPLACE TRIGGER secure_emp
+BEFORE INSERT OR UPDATE OR DELETE ON employees
+BEGIN
+    IF (TO_CHAR(SYSDATE, 'DY') IN ('SAT', 'SUN') OR
+       TO_CHAR(SYSDATE, 'HH24') NOT BETWEEN '08' AND '18') THEN
+        IF DELETING THEN
+            RAISE_APPLICATION_ERROR(-20503,
+                'You may delete from EMPLOYEES table ' ||
+                'only during normal business hours');
+        ELSIF INSERTING THEN
+            RAISE_APPLICATION_ERROR(-20500,
+                'You may insert into EMPLOYEES table ' ||
+                'only during normal business hours.');
+        ELSIF UPDATING('SALARY') THEN
+            RAISE_APPLICATION_ERROR(-20503,
+                'You may update SALARY ' ||
+                'only during normal business hours.');
+        ELSE
+            RAISE_APPLICATION_ERROR(-20504,
+                'You may update EMPLOYEES table ' ||
+                'only during normal business hours');
+        END IF;
+    END IF;
+END;
+/
+
+
+
+CREATE OR REPLACE TRIGGER restrict_salary
+BEFORE INSERT OR UPDATE OF salary ON employees
+FOR EACH ROW
+BEGIN
+    IF NOT (:New.job_id IN('AD_PRES','AD_VP'))
+    AND :NEW.salary>15000 THEN 
+    RAISE_APPLICATION_ERROR(-20202,'Employee cannot earn more than $15000.');
+    END IF;
+    END;
+/
+    UPDATE employees
+    SET salary =15500
+    WHERE job_id='AD_PRES';
+
+
+
+
+-- 
+create table audit_emp(user_name varchar2(30),
+time_stamp date,
+ID number(6),
+old_last_name varchar2(25),
+new_last_name VARCHAR2(25),
+old_title varchar2(10),
+new_title varchar2(10),
+old_salary number(8,2),
+new_salary number(8,2))
+/
+
+
+
+
+
+CREATE OR REPLACE TRIGGER audit_emp_values
+AFTER DELETE OR INSERT OR UPDATE ON employees
+FOR EACH ROW
+BEGIN
+INSERT INTO audit_emp(user_name, time_stamp,id,old_last_name,new_last_name,old_title,new_title,old_salary,new_salary)
+VALUES (USER,SYSDATE,:OLD.employee_id,:OLD.last_name,:NEW.last_name,:OLD.JOB_ID,:NEW.JOB_ID,:OLD.SALARY,:NEW.SALARY);
+END;
+/
 -- #############################################################################################################
 --                     ******************** Chapter 10 working with triggers ************
 -- #############################################################################################################
