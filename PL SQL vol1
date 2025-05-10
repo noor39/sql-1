@@ -2,7 +2,2026 @@
 -- #############################################################################################################
 -- ****************************************volume 1 (plsql)************************************************
 
+-- 1. create  compile and invoke the ADD_JOB procedure  and review the results
 
+CREATE OR REPLACE PROCEDURE ADD_JOB(
+    p_id JOBS.JOB_ID%TYPE,
+    p_title JOBS.JOB_TITLE%TYPE
+) IS
+BEGIN
+    INSERT INTO JOBS (job_id, job_title)
+    VALUES (p_id, p_title);
+    COMMIT;
+END;
+/
+
+-- Invocation
+EXECUTE  ADD_JOB('IT_TEST', 'Test Engineer');
+
+
+-- Review Results
+SELECT * FROM JOBS WHERE JOB_ID = 'IT_TEST';
+  
+
+-- 2. create a procedure called UPD_JOB to modify a job in the JOBS table.
+
+CREATE OR REPLACE PROCEDURE UPD_JOB(
+    p_id JOBS.JOB_ID%TYPE,
+    p_title JOBS.JOB_TITLE%TYPE
+) IS
+BEGIN
+    UPDATE JOBS
+    SET job_title = p_title
+    WHERE job_id = p_id;
+
+    IF SQL%NOTFOUND THEN
+        RAISE_APPLICATION_ERROR(-20010, 'Job not found for update');
+    END IF;
+END;
+/
+
+-- Invocation
+EXECUTE UPD_JOB('IT_TEST', 'Senior Test Engineer');
+
+
+-- 3. create a procedure called DEL_JOB to delete a job from the JOBS table.
+CREATE OR REPLACE PROCEDURE DEL_JOB(
+    p_id JOBS.JOB_ID%TYPE
+) IS
+BEGIN
+    DELETE FROM JOBS
+    WHERE job_id = p_id;
+
+    IF SQL%NOTFOUND THEN
+        RAISE_APPLICATION_ERROR(-20011, 'Job not found for deletion');
+    END IF;
+END;
+/
+
+-- Invocation
+EXECUTE DEL_JOB('IT_TEST');
+
+-- 4. create a procedure called GET_EMPLOYEE to query the EMPLOYEES table.
+CREATE OR REPLACE PROCEDURE GET_EMPLOYEE (
+    p_empid IN EMPLOYEES.EMPLOYEE_ID%TYPE,
+    p_sal OUT EMPLOYEES.SALARY%TYPE,
+    p_job OUT EMPLOYEES.JOB_ID%TYPE
+) IS
+BEGIN
+    SELECT SALARY, JOB_ID INTO p_sal, p_job
+    FROM EMPLOYEES
+    WHERE EMPLOYEE_ID = p_empid;
+END;
+/
+
+-- Invocation
+VARIABLE v_sal NUMBER
+VARIABLE v_job VARCHAR2(20)
+EXECUTE GET_EMPLOYEE(100, :v_sal, :v_job)
+
+-- 5. Create a procedure called RAISE_SALARY to increase the employee salary?
+CREATE OR REPLACE PROCEDURE RAISE_SALARY (
+    p_id IN EMPLOYEES.EMPLOYEE_ID%TYPE,
+    p_percent IN NUMBER
+) IS
+BEGIN
+    UPDATE EMPLOYEES
+    SET salary = salary * (1 + p_percent / 100)
+    WHERE employee_id = p_id;
+END;
+/
+
+-- Invocation
+EXECUTE RAISE_SALARY(100, 10);
+
+
+-- 6. Create a procedure called QUERY_EMP to query the employee last_name and salary from the EMPLOYEES table.
+CREATE OR REPLACE PROCEDURE QUERY_EMP (
+    p_id IN EMPLOYEES.EMPLOYEE_ID%TYPE,
+    p_name OUT EMPLOYEES.LAST_NAME%TYPE,
+    p_salary OUT EMPLOYEES.SALARY%TYPE
+) IS
+BEGIN
+    SELECT last_name, salary INTO p_name, p_salary
+    FROM EMPLOYEES
+    WHERE EMPLOYEE_ID = p_id;
+END;
+/
+
+-- Invocation
+DECLARE
+    v_name EMPLOYEES.LAST_NAME%TYPE;
+    v_sal  EMPLOYEES.SALARY%TYPE;
+BEGIN
+    QUERY_EMP(100, v_name, v_sal);
+    DBMS_OUTPUT.PUT_LINE(v_name || ' earns ' || TO_CHAR(v_sal, '$999,999.00'));
+END;
+
+-- 7. Create a procedure called ADD_DEPT for adding new department into DEPARTMENTS table.
+CREATE OR REPLACE PROCEDURE ADD_DEPT (
+    p_name DEPARTMENTS.DEPARTMENT_NAME%TYPE,
+    p_loc  DEPARTMENTS.LOCATION_ID%TYPE
+) IS
+BEGIN
+    INSERT INTO DEPARTMENTS (department_id, department_name, location_id)
+    VALUES (departments_seq.NEXTVAL, p_name, p_loc);
+END;
+/
+
+-- Invocation
+EXECUTE ADD_DEPT('RESEARCH', 1700);
+-- 8. Create and invoke the GET_SAL function with a single input parameter and to returns the salary of inputted employee.
+CREATE OR REPLACE FUNCTION GET_SAL (
+    p_empid EMPLOYEES.EMPLOYEE_ID%TYPE
+) RETURN NUMBER IS
+    v_sal EMPLOYEES.SALARY%TYPE;
+BEGIN
+    SELECT SALARY INTO v_sal
+    FROM EMPLOYEES
+    WHERE EMPLOYEE_ID = p_empid;
+    RETURN v_sal;
+END;
+/
+-- Invocation
+SELECT GET_SAL(100) AS salary FROM DUAL;
+
+-- 9. Create and invoke the TAX function with a single input parameter and to returns the income tax based on simple flat tax rate for inputted salary.
+CREATE OR REPLACE FUNCTION TAX (
+    p_salary IN NUMBER
+) RETURN NUMBER IS
+    v_tax_rate CONSTANT NUMBER := 0.15;
+BEGIN
+    RETURN ROUND(p_salary * v_tax_rate, 2);
+END;
+/
+
+-- Invocation
+SELECT TAX(6000) AS tax_amount FROM DUAL;
+
+-- 10. Create and invoke the GET_JOB function to return job_title.
+CREATE OR REPLACE FUNCTION GET_JOB (
+    p_job_id JOBS.JOB_ID%TYPE
+) RETURN VARCHAR2 IS
+    v_title JOBS.JOB_TITLE%TYPE;
+BEGIN
+    SELECT JOB_TITLE INTO v_title
+    FROM JOBS
+    WHERE JOB_ID = p_job_id;
+    RETURN v_title;
+END;
+/
+
+-- Invocation
+SELECT GET_JOB('IT_PROG') AS job_title FROM DUAL;
+
+-- 11. Create function called GET_ANNUAL_COMP to return the annual salary computed from employee's monthly salary and commission passed as parameters.
+CREATE OR REPLACE FUNCTION GET_ANNUAL_COMP (
+    p_salary IN NUMBER,
+    p_commission IN NUMBER DEFAULT 0
+) RETURN NUMBER IS
+BEGIN
+    RETURN ROUND((p_salary + NVL(p_commission, 0)) * 12, 2);
+END;
+/
+
+-- Invocation
+SELECT GET_ANNUAL_COMP(5000, 500) AS annual_comp FROM DUAL;
+
+-- 12.Create a procedure ADD_EMPLOYEE to insert a new employee into the EMPLOYEES table. The procedure should call a VALID_DEPTID function to check wheather the department_id for the new employee exists in the DEPARTMENTS table.
+CREATE OR REPLACE FUNCTION VALID_DEPTID (
+    p_dept_id DEPARTMENTS.DEPARTMENT_ID%TYPE
+) RETURN BOOLEAN IS
+    v_count NUMBER;
+BEGIN
+    SELECT COUNT(*) INTO v_count
+    FROM DEPARTMENTS
+    WHERE DEPARTMENT_ID = p_dept_id;
+    RETURN v_count > 0;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE ADD_EMPLOYEE (
+    p_empid     EMPLOYEES.EMPLOYEE_ID%TYPE,
+    p_fname     EMPLOYEES.FIRST_NAME%TYPE,
+    p_lname     EMPLOYEES.LAST_NAME%TYPE,
+    p_email     EMPLOYEES.EMAIL%TYPE,
+    p_hire_date EMPLOYEES.HIRE_DATE%TYPE,
+    p_job_id    EMPLOYEES.JOB_ID%TYPE,
+    p_salary    EMPLOYEES.SALARY%TYPE,
+    p_dept_id   EMPLOYEES.DEPARTMENT_ID%TYPE
+) IS
+BEGIN
+    IF VALID_DEPTID(p_dept_id) THEN
+        INSERT INTO EMPLOYEES (employee_id, first_name, last_name, email, hire_date, job_id, salary, department_id)
+        VALUES (p_empid, p_fname, p_lname, p_email, p_hire_date, p_job_id, p_salary, p_dept_id);
+    ELSE
+        RAISE_APPLICATION_ERROR(-20020, 'Invalid Department ID');
+    END IF;
+END;
+/
+
+-- Invocation (ensure department_id exists)
+EXECUTE ADD_EMPLOYEE(300, 'Luna', 'Lovegood', 'luna.lovegood@hogwarts.com', SYSDATE, 'IT_PROG', 4500, 60);
+
+
+-- 13. Create a  function called GET_ANNUAL_COMP to return the annual salary computed from an employee's monthly salary and commission passed as parameters. 2.2 Use the function in a SELECT statement against the EMPLOYEES table for employees in department 30.
+
+SELECT LAST_NAME, GET_ANNUAL_COMP(SALARY, COMMISSION_PCT * SALARY) AS annual_comp
+FROM EMPLOYEES
+WHERE DEPARTMENT_ID = 30;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1
+CREATE OR REPLACE PROCEDURE ADD_JOB(
+    p_id Jobs.job_id%TYPE, p_title jobs.job_title%TYPE) IS 
+    BEGIN
+    INSERT INTO JOBS (job_id, job_title)
+    VALUES (p_id, p_title );
+    END ADD_JOB;
+    /
+
+EXECUTE ADD_JOB ('IT_PROOG','Noorkxd');
+2
+    CREATE OR REPLACE PROCEDURE UPD_JOB(
+    p_id Jobs.job_id%TYPE, p_title jobs.job_title%TYPE) IS 
+    BEGIN
+    UPDATE JOBS 
+    SET job_title=p_title
+    WHERE job_id =p_id;
+END UPD_JOB;
+    /
+
+EXECUTE UPD_JOB ('IT_PROOG','shohan vaiar gf is hot');
+
+3
+CREATE OR REPLACE PROCEDURE DEL_JOB(
+    p_id Jobs.job_id%TYPE, p_title jobs.job_title%TYPE) IS 
+    BEGIN
+    DELETE FROM JOBS 
+    WHERE job_id =p_id;
+END DEL_JOB;
+/
+
+EXECUTE DEL_JOB ('IT_PROOG','shohan vaiar gf is hot');
+
+4
+
+
+
+
+
+01.
+create or replace procedure add_job(
+p_jobid jobs.job_id%type,
+p_jobtitle jobs.job_title%type) is
+begin
+insert into jobs(job_id, job_title)
+values(p_jobid, p_jobtitle);
+commit;
+end add_job;
+/
+
+execute add_job('IT_DBA', 'Database Administration')
+
+select job_id, job_title from jobs
+where job_id='IT_DBA';
+
+02.
+create or replace procedure upd_job(
+p_jobid jobs.job_id%type,
+p_jobtitle jobs.job_title%type) is
+begin
+update jobs
+set job_title=p_jobtitle
+where job_id=p_jobid;
+if sql%notfound then
+raise_application_error(-20202, 'No job update');
+end if;
+end upd_job;
+/
+
+execute upd_job('IT_DBA', 'Database Administrator')
+
+03.
+create or replace procedure del_job(
+p_jobid jobs.job_id%type,
+p_jobtitle jobs.job_title%type) is
+begin
+delete from jobs
+where job_id=p_jobid;
+if sql%notfound then
+raise_application_error(-20203, 'No row deleted');
+end if;
+end del_job;
+/
+
+execute del_job('IT_DBA', 'Database Administrator')
+
+04.
+create or replace procedure get_employee(
+p_empid in employees.employee_id%type,
+p_sal out employees.salary%type,
+p_job out employees.job_id%type) is
+begin
+select salary, job_id into p_sal, p_job
+from employees
+where employee_id=p_empid;
+end get_employee;
+/
+
+variable v_salary number
+variable v_job varchar2(25)
+execute get_employee(120, :v_salary, :v_job)
+
+05.
+create or replace procedure raise_salary (
+p_id in employees.employee_id%type,
+p_percent in number) is
+begin
+update employees
+set salary = salary * (1+ p_percent/100)
+where employee_id=p_id;
+end raise_salary;
+/
+
+execute raise_salary(176, 10)
+
+06.
+create or replace procedure query_emp
+(p_id in employees.employee_id%type,
+p_name out employees.last_name%type,
+p_salary out employees.salary%type) is
+begin
+select last_name, salary into p_name, p_salary
+from employees
+where employee_id=p_id;
+end query_emp;
+/
+
+declare
+v_emp_name employees.last_name%type;
+v_sal employees.salary%type;
+begin
+query_emp (171, v_emp_name, v_sal);
+dbms_output.put_line(v_emp_name || ' earns ' || to_char(v_sal, '$999,999.00'));
+end;
+
+07.
+create or replace procedure add_dept(
+p_name departments.department_name%type,
+p_loc departments.location_id%type) is
+begin
+insert into departments(department_id, department_name, location_id)
+values(departments_seq.nextval, p_name, p_loc);
+end add_dept;
+/
+
+execute add_dept ('ADVERTISING', P_LOC=>1200)
+
+08.
+create or replace function get_sal (
+p_empid employees.employee_id%type) return number is
+p_sal employees.salary%type:=0;
+begin
+select salary into p_sal
+from employees
+where employee_id=p_empid;
+return p_sal;
+end get_sal;
+/
+
+execute dbms_output.put_line(get_sal(120))
+
+09.
+CREATE OR REPLACE FUNCTION tax(
+    p_salary IN NUMBER
+) RETURN NUMBER
+IS
+    v_tax_rate CONSTANT NUMBER := 0.15;
+    v_tax_amount NUMBER;
+BEGIN
+    IF p_salary IS NULL THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Salary cannot be null');
+    END IF;
+    
+    IF p_salary < 0 THEN
+        RAISE_APPLICATION_ERROR(-20002, 'Salary cannot be negative');
+    END IF;
+    v_tax_amount := p_salary * v_tax_rate;
+    v_tax_amount := GREATEST(v_tax_amount, 0);
+    RETURN ROUND(v_tax_amount, 2);
+    
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error calculating tax: ' || SQLERRM);
+        RETURN NULL;
+END tax;
+/
+
+10.
+CREATE OR REPLACE FUNCTION get_job(
+    p_job_id IN VARCHAR2
+) RETURN VARCHAR2
+IS
+    v_job_title VARCHAR2(100);
+BEGIN
+SELECT job_title
+    INTO v_job_title
+    FROM jobs
+    WHERE job_id = p_job_id;
+    
+    RETURN v_job_title;
+end get_job;
+/
+
+execute dbms_output.put_line(get_job('IT_PROG'))
+
+11.
+CREATE OR REPLACE FUNCTION get_annual_comp(
+    p_monthly_salary IN NUMBER,
+    p_commission_pct IN NUMBER DEFAULT NULL
+) RETURN NUMBER
+IS
+    v_annual_salary NUMBER;
+    v_annual_commission NUMBER := 0;
+BEGIN
+v_annual_salary := p_monthly_salary * 12;
+IF p_commission_pct IS NOT NULL THEN
+        v_annual_commission := (v_annual_salary * p_commission_pct);
+    END IF;
+RETURN ROUND(v_annual_salary + v_annual_commission, 2);
+END get_annual_comp;
+/
+execute dbms_output.put_line('Annual salary with commission: '||get_annual_comp(7500,.2))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE PROCEDURE ADD_JOB(P_ID JOBS.JOB_ID%TYPE, P_TITLE JOBS.JOB_TITLE%TYPE) IS
+  2  BEGIN
+  3  INSERT INTO JOBS ( JOB_ID, JOB_TITLE)
+  4  VALUES (P_ID,P_TITLE);
+  5* END ADD_JOB;
+SQL> /
+
+Procedure created.
+
+SQL> CXECUTE ADD_JOB('IT_PROGG', 'SHOAN');
+SP2-0734: unknown command beginning "CXECUTE AD..." - rest of line ignored.
+SQL> EXECUTE ADD_JOB('IT_PROGG', 'SHOAN');
+
+PL/SQL procedure successfully completed.
+
+SQL> SELECT * FRM JOBS WHERE JOB_ID='IT_PROGG';
+SELECT * FRM JOBS WHERE JOB_ID='IT_PROGG'
+         *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1* SELECT * FROM JOBS WHERE JOB_ID='IT_PROGG'
+SQL> /
+
+JOB_ID     JOB_TITLE                           MIN_SALARY MAX_SALARY
+---------- ----------------------------------- ---------- ----------
+IT_PROGG   SHOAN
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE PROCEDURE UPD_JOB(P_ID JOBS.JOB_ID%TYPE, P_TITLE JOBS.JOB_TITLE%TYPE) IS
+  2  BEGIN
+  3  UPDATE JOBS
+  4  SET JOB_TITLE= 'NOOR VAI'
+  5  WHERE JOB_ID='IT_PROGG';
+  6* END ADD_JOB;
+SQL> /
+
+Warning: Procedure created with compilation errors.
+
+SQL> SHOW ERROR
+Errors for PROCEDURE UPD_JOB:
+
+LINE/COL ERROR
+-------- -----------------------------------------------------------------
+6/5      PLS-00113: END identifier 'ADD_JOB' must match 'UPD_JOB' at line
+         1, column 11
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE PROCEDURE UPD_JOB(P_ID JOBS.JOB_ID%TYPE, P_TITLE JOBS.JOB_TITLE%TYPE) IS
+  2  BEGIN
+  3  UPDATE JOBS
+  4  SET JOB_TITLE= 'NOOR VAI'
+  5  WHERE JOB_ID='IT_PROGG';
+  6* END UPD_JOB;
+SQL> /
+
+Procedure created.
+
+SQL> EXECUTE UPD_JOB
+BEGIN UPD_JOB; END;
+
+      *
+ERROR at line 1:
+ORA-06550: line 1, column 7:
+PLS-00306: wrong number or types of arguments in call to 'UPD_JOB'
+ORA-06550: line 1, column 7:
+PL/SQL: Statement ignored
+
+
+SQL> EXECUTE UPD_JOB;
+BEGIN UPD_JOB; END;
+
+      *
+ERROR at line 1:
+ORA-06550: line 1, column 7:
+PLS-00306: wrong number or types of arguments in call to 'UPD_JOB'
+ORA-06550: line 1, column 7:
+PL/SQL: Statement ignored
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE PROCEDURE UPD_JOB(P_ID JOBS.JOB_ID%TYPE, P_TITLE JOBS.JOB_TITLE%TYPE) IS
+  2  BEGIN
+  3  UPDATE JOBS
+  4  SET JOB_TITLE= P_TITLE
+  5  WHERE JOB_ID=P_ID;
+  6* END UPD_JOB;
+SQL> /
+
+Procedure created.
+
+SQL> EXECUTE UPD_JOB('IT_PROGG', 'NOOR VAIER BIA KHAMU');
+
+PL/SQL procedure successfully completed.
+
+SQL> SELECT * FROM JOBS WHERE JOB_ID='IT_PROGG';
+
+JOB_ID     JOB_TITLE                           MIN_SALARY MAX_SALARY
+---------- ----------------------------------- ---------- ----------
+IT_PROGG   NOOR VAIER BIA KHAMU
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE PROCEDURE UPD_JOB(P_ID JOBS.JOB_ID%TYPE) IS
+  2  BEGIN
+  3  DELETE FROM JOBS
+  4  WHERE JOB_ID=P_ID;
+  5* END UPD_JOB;
+SQL> /
+
+Procedure created.
+
+SQL> EXECUTE UPD_JOB('IT_PROGG');
+
+PL/SQL procedure successfully completed.
+
+SQL> SELECT * FROM JOBS WHERE JOB_ID='IT_PROGG';
+
+no rows selected
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE PROCEDURE GET_EMPLOYEE(P_ID IN EMPLOYEES.EMPLOYEE_ID%TYPE, P_SAL OUT EMPLOYEES.SALARY%TYPE, P_name out employees.last_name%type) IS
+  2  BEGIN
+  3  select SALARY, last_name into P_SAL, P_name
+  4  from employees
+  5  where employee_id=P_ID;
+  6* END GET_EMPLOYEE;
+SQL> /
+
+Procedure created.
+
+SQL> variable b_sal number
+SQL> variable b_name varchar2(15)
+SQL> execute GET_EMPLOYEE(100, :b_sal,:b_name);
+
+PL/SQL procedure successfully completed.
+
+SQL> print
+
+     B_SAL
+----------
+     15500
+
+
+B_NAME
+--------------------------------------------------------------------------------
+King
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE PROCEDURE raise_salary (p_id employees.employee_id,P_SAL EMPLOYEES.SALARY%TYPE, P_persent number) IS
+  2  BEGIN
+  3  update employees
+  4  set salary= P_SAL*12 +(1*P_persent/100*P_SAL*12)
+  5  where employee_id=p_id;
+  6* END raise_salary;
+SQL> /
+
+Warning: Procedure created with compilation errors.
+
+SQL> show error
+Errors for PROCEDURE RAISE_SALARY:
+
+LINE/COL ERROR
+-------- -----------------------------------------------------------------
+0/0      PL/SQL: Compilation unit analysis terminated
+1/30     PLS-00488: 'EMPLOYEES.EMPLOYEE_ID' must be a type
+SQL> ed
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE PROCEDURE raise_salary (p_id employees.employee_id%type,P_SAL EMPLOYEES.SALARY%TYPE, P_persent number) IS
+  2  BEGIN
+  3  update employees
+  4  set salary= P_SAL*12 +(1*P_persent/100*P_SAL*12)
+  5  where employee_id=p_id;
+  6* END raise_salary;
+SQL> /
+
+Procedure created.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE PROCEDURE raise_salary (p_id employees.employee_id%type, P_persent number) IS
+  2  BEGIN
+  3  update employees
+  4  set salary= salary*12 +(1*P_persent/100*salary*12)
+  5  where employee_id=p_id;
+  6* END raise_salary;
+SQL> /
+
+Procedure created.
+
+SQL> execute raise_salary(100,10);
+
+PL/SQL procedure successfully completed.
+
+SQL> select salary from employees where employee_id=100;
+
+    SALARY
+----------
+    204600
+
+SQL> execute raise_salary(100,10);
+BEGIN raise_salary(100,10); END;
+
+*
+ERROR at line 1:
+ORA-01438: value larger than specified precision allowed for this column
+ORA-06512: at "HR.RAISE_SALARY", line 3
+ORA-06512: at line 1
+
+
+SQL> execute raise_salary(100,20);
+BEGIN raise_salary(100,20); END;
+
+*
+ERROR at line 1:
+ORA-01438: value larger than specified precision allowed for this column
+ORA-06512: at "HR.RAISE_SALARY", line 3
+ORA-06512: at line 1
+
+
+SQL> rollback
+  2  /
+
+Rollback complete.
+
+SQL>
+SQL> select salary from employees where employee_id=100;
+
+    SALARY
+----------
+     15500
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE PROCEDURE raise_salary (p_id employees.employee_id%type, P_persent number) IS
+  2  BEGIN
+  3  update employees
+  4  set salary= salary*12 +(1*P_persent/100*salary*12)
+  5  where employee_id=p_id;
+  6* END raise_salary;
+SQL> /
+
+Procedure created.
+
+SQL> execute raise_salary(100,10);
+
+PL/SQL procedure successfully completed.
+
+SQL> select salary from employees where employee_id=100;
+
+    SALARY
+----------
+    204600
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select salary from employees where employee_id=100
+SQL> /
+
+    SALARY
+----------
+    204600
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE PROCEDURE raise_salary (p_id employees.employee_id%type, P_persent number) IS
+  2  BEGIN
+  3  update employees
+  4  set salary= salary*12 +(1+P_persent/100*salary*12)
+  5  where employee_id=p_id;
+  6* END raise_salary;
+SQL> /
+
+Procedure created.
+
+SQL> execute raise_salary(100,10);
+BEGIN raise_salary(100,10); END;
+
+*
+ERROR at line 1:
+ORA-01438: value larger than specified precision allowed for this column
+ORA-06512: at "HR.RAISE_SALARY", line 3
+ORA-06512: at line 1
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE PROCEDURE raise_salary (p_id employees.employee_id%type, P_persent number) IS
+  2  BEGIN
+  3  update employees
+  4  set salary= salary *(1+P_persent/100)
+  5  where employee_id=p_id;
+  6* END raise_salary;
+SQL> /
+
+Procedure created.
+
+SQL> rollback
+  2  /
+
+Rollback complete.
+
+SQL> select salary from employees where employee_id=100
+  2  /
+
+    SALARY
+----------
+    204600
+
+SQL> rollback
+  2
+SQL> /
+
+Rollback complete.
+
+SQL> select salary from employees where employee_id=100
+  2  /
+
+    SALARY
+----------
+    204600
+
+SQL> rollback
+  2  /
+
+Rollback complete.
+
+SQL> select salary from employees where employee_id=100
+  2  /
+
+    SALARY
+----------
+    204600
+
+SQL> eded
+SP2-0042: unknown command "eded" - rest of line ignored.
+SQL> ed
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE PROCEDURE raise_salary (p_id employees.employee_id%type, P_persent number) IS
+  2  BEGIN
+  3  update employees
+  4  set salary= salary *(1+P_persent/100)
+  5  where employee_id=p_id;
+  6* END raise_salary;
+SQL> /
+
+Procedure created.
+
+SQL> execute raise_salary(120,30);
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE PROCEDURE add_dept ( p_name departments.department_id%tpe, p_loc departments.location_id%type) IS
+  2  BEGIN
+  3  insert into departments (department_id,department_name, location_id)
+  4  values (departments_seq.nextval,p_name,p_loc);
+  5* END add_dept;
+SQL> /
+
+Warning: Procedure created with compilation errors.
+
+SQL> show error
+Errors for PROCEDURE ADD_DEPT:
+
+LINE/COL ERROR
+-------- -----------------------------------------------------------------
+0/0      PL/SQL: Compilation unit analysis terminated
+1/55     PLS-00208: identifier 'TPE' is not a legal cursor attribute
+SQL> e
+SP2-0042: unknown command "e" - rest of line ignored.
+SQL> ed
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE PROCEDURE add_dept ( p_name departments.department_id%type, p_loc departments.location_id%type) IS
+  2  BEGIN
+  3  insert into departments (department_id,department_name, location_id)
+  4  values (departments_seq.nextval,p_name,p_loc);
+  5* END add_dept;
+SQL> /
+
+Procedure created.
+
+SQL> execute add_dept ('shohan', 1800);
+BEGIN add_dept ('shohan', 1800); END;
+
+*
+ERROR at line 1:
+ORA-06502: PL/SQL: numeric or value error: character to number conversion error
+ORA-06512: at line 1
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE PROCEDURE add_dept ( p_name departments.department_name%type, p_loc departments.location_id%type) IS
+  2  BEGIN
+  3  insert into departments (department_id,department_name, location_id)
+  4  values (departments_seq.nextval,p_name,p_loc);
+  5* END add_dept;
+SQL> /
+
+Procedure created.
+
+SQL> execute add_dept ('shohan', 1800);
+
+PL/SQL procedure successfully completed.
+
+ select * from departments;
+
+
+
+create or replace function get_sal(p_id employees.employee_id%type, p_sal out employees.salary%type) return employees.salary%type is
+ v_sal employees.salary%type;
+begin
+select salary into v_sal
+from employees
+where employee_id= p_id;
+return  v_sal ;
+end get_sal;
+/
+
+
+
+  create or replace function get_sal(p_id employees.employee_id%type) return number is
+   v_sal employees.salary%type;
+  begin
+  select salary into v_sal
+  from employees
+  where employee_id= p_id;
+  return  v_sal ;
+  end get_sal;
+
+
+ variable b_sal number
+ execute :b_sal:=get_sal(120);
+
+
+
+
+
+ create or replace function tax (p_sal employees.salary%type) return number is
+ begin
+ return (p_sal*.08);
+ end tax;
+/
+
+
+ select salary,tax(salary)
+ from employees;
+
+
+
+
+
+
+
+
+  create or replace function get_job (p_id jobs.job_id%type) return number is
+  v_job jobs.job_title%type;
+  begin
+  select job_title into v_job
+  from jobs
+ where job_id =p_id;
+ return v_job;
+ end get_job;
+
+
+variable b_job varchar2(15)
+execute :b_job :=get_job('IT_PROG');
+BEGIN :b_job :=get_job('IT_PROG'); END;
+
+
+create or replace function get_job (p_id jobs.job_id%type) return jobs.job_title%type is
+v_job jobs.job_title%type;
+ begin
+  select job_title into v_job
+ from jobs
+where job_id =p_id;
+ return v_job;
+ end get_job;
+/
+
+
+
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE PROCEDURE ADD_JOB(P_ID JOBS.JOB_ID%TYPE, P_TITLE JOBS.JOB_TITLE%TYPE) IS
+  2  BEGIN
+  3  INSERT INTO JOBS ( JOB_ID, JOB_TITLE)
+  4  VALUES (P_ID,P_TITLE);
+  5* END ADD_JOB;
+SQL> /
+
+Procedure created.
+
+SQL> CXECUTE ADD_JOB('IT_PROGG', 'SHOAN');
+SP2-0734: unknown command beginning "CXECUTE AD..." - rest of line ignored.
+SQL> EXECUTE ADD_JOB('IT_PROGG', 'SHOAN');
+
+PL/SQL procedure successfully completed.
+
+SQL> SELECT * FRM JOBS WHERE JOB_ID='IT_PROGG';
+SELECT * FRM JOBS WHERE JOB_ID='IT_PROGG'
+         *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1* SELECT * FROM JOBS WHERE JOB_ID='IT_PROGG'
+SQL> /
+
+JOB_ID     JOB_TITLE                           MIN_SALARY MAX_SALARY
+---------- ----------------------------------- ---------- ----------
+IT_PROGG   SHOAN
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE PROCEDURE UPD_JOB(P_ID JOBS.JOB_ID%TYPE, P_TITLE JOBS.JOB_TITLE%TYPE) IS
+  2  BEGIN
+  3  UPDATE JOBS
+  4  SET JOB_TITLE= 'NOOR VAI'
+  5  WHERE JOB_ID='IT_PROGG';
+  6* END ADD_JOB;
+SQL> /
+
+Warning: Procedure created with compilation errors.
+
+SQL> SHOW ERROR
+Errors for PROCEDURE UPD_JOB:
+
+LINE/COL ERROR
+-------- -----------------------------------------------------------------
+6/5      PLS-00113: END identifier 'ADD_JOB' must match 'UPD_JOB' at line
+         1, column 11
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE PROCEDURE UPD_JOB(P_ID JOBS.JOB_ID%TYPE, P_TITLE JOBS.JOB_TITLE%TYPE) IS
+  2  BEGIN
+  3  UPDATE JOBS
+  4  SET JOB_TITLE= 'NOOR VAI'
+  5  WHERE JOB_ID='IT_PROGG';
+  6* END UPD_JOB;
+SQL> /
+
+Procedure created.
+
+SQL> EXECUTE UPD_JOB
+BEGIN UPD_JOB; END;
+
+      *
+ERROR at line 1:
+ORA-06550: line 1, column 7:
+PLS-00306: wrong number or types of arguments in call to 'UPD_JOB'
+ORA-06550: line 1, column 7:
+PL/SQL: Statement ignored
+
+
+SQL> EXECUTE UPD_JOB;
+BEGIN UPD_JOB; END;
+
+      *
+ERROR at line 1:
+ORA-06550: line 1, column 7:
+PLS-00306: wrong number or types of arguments in call to 'UPD_JOB'
+ORA-06550: line 1, column 7:
+PL/SQL: Statement ignored
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE PROCEDURE UPD_JOB(P_ID JOBS.JOB_ID%TYPE, P_TITLE JOBS.JOB_TITLE%TYPE) IS
+  2  BEGIN
+  3  UPDATE JOBS
+  4  SET JOB_TITLE= P_TITLE
+  5  WHERE JOB_ID=P_ID;
+  6* END UPD_JOB;
+SQL> /
+
+Procedure created.
+
+SQL> EXECUTE UPD_JOB('IT_PROGG', 'NOOR VAIER BIA KHAMU');
+
+PL/SQL procedure successfully completed.
+
+SQL> SELECT * FROM JOBS WHERE JOB_ID='IT_PROGG';
+
+JOB_ID     JOB_TITLE                           MIN_SALARY MAX_SALARY
+---------- ----------------------------------- ---------- ----------
+IT_PROGG   NOOR VAIER BIA KHAMU
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE PROCEDURE UPD_JOB(P_ID JOBS.JOB_ID%TYPE) IS
+  2  BEGIN
+  3  DELETE FROM JOBS
+  4  WHERE JOB_ID=P_ID;
+  5* END UPD_JOB;
+SQL> /
+
+Procedure created.
+
+SQL> EXECUTE UPD_JOB('IT_PROGG');
+
+PL/SQL procedure successfully completed.
+
+SQL> SELECT * FROM JOBS WHERE JOB_ID='IT_PROGG';
+
+no rows selected
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE PROCEDURE GET_EMPLOYEE(P_ID IN EMPLOYEES.EMPLOYEE_ID%TYPE, P_SAL OUT EMPLOYEES.SALARY%TYPE, P_name out employees.last_name%type) IS
+  2  BEGIN
+  3  select SALARY, last_name into P_SAL, P_name
+  4  from employees
+  5  where employee_id=P_ID;
+  6* END GET_EMPLOYEE;
+SQL> /
+
+Procedure created.
+
+SQL> variable b_sal number
+SQL> variable b_name varchar2(15)
+SQL> execute GET_EMPLOYEE(100, :b_sal,:b_name);
+
+PL/SQL procedure successfully completed.
+
+SQL> print
+
+     B_SAL
+----------
+     15500
+
+
+B_NAME
+--------------------------------------------------------------------------------
+King
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE PROCEDURE raise_salary (p_id employees.employee_id,P_SAL EMPLOYEES.SALARY%TYPE, P_persent number) IS
+  2  BEGIN
+  3  update employees
+  4  set salary= P_SAL*12 +(1*P_persent/100*P_SAL*12)
+  5  where employee_id=p_id;
+  6* END raise_salary;
+SQL> /
+
+Warning: Procedure created with compilation errors.
+
+SQL> show error
+Errors for PROCEDURE RAISE_SALARY:
+
+LINE/COL ERROR
+-------- -----------------------------------------------------------------
+0/0      PL/SQL: Compilation unit analysis terminated
+1/30     PLS-00488: 'EMPLOYEES.EMPLOYEE_ID' must be a type
+SQL> ed
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE PROCEDURE raise_salary (p_id employees.employee_id%type,P_SAL EMPLOYEES.SALARY%TYPE, P_persent number) IS
+  2  BEGIN
+  3  update employees
+  4  set salary= P_SAL*12 +(1*P_persent/100*P_SAL*12)
+  5  where employee_id=p_id;
+  6* END raise_salary;
+SQL> /
+
+Procedure created.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE PROCEDURE raise_salary (p_id employees.employee_id%type, P_persent number) IS
+  2  BEGIN
+  3  update employees
+  4  set salary= salary*12 +(1*P_persent/100*salary*12)
+  5  where employee_id=p_id;
+  6* END raise_salary;
+SQL> /
+
+Procedure created.
+
+SQL> execute raise_salary(100,10);
+
+PL/SQL procedure successfully completed.
+
+SQL> select salary from employees where employee_id=100;
+
+    SALARY
+----------
+    204600
+
+SQL> execute raise_salary(100,10);
+BEGIN raise_salary(100,10); END;
+
+*
+ERROR at line 1:
+ORA-01438: value larger than specified precision allowed for this column
+ORA-06512: at "HR.RAISE_SALARY", line 3
+ORA-06512: at line 1
+
+
+SQL> execute raise_salary(100,20);
+BEGIN raise_salary(100,20); END;
+
+*
+ERROR at line 1:
+ORA-01438: value larger than specified precision allowed for this column
+ORA-06512: at "HR.RAISE_SALARY", line 3
+ORA-06512: at line 1
+
+
+SQL> rollback
+  2  /
+
+Rollback complete.
+
+SQL>
+SQL> select salary from employees where employee_id=100;
+
+    SALARY
+----------
+     15500
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE PROCEDURE raise_salary (p_id employees.employee_id%type, P_persent number) IS
+  2  BEGIN
+  3  update employees
+  4  set salary= salary*12 +(1*P_persent/100*salary*12)
+  5  where employee_id=p_id;
+  6* END raise_salary;
+SQL> /
+
+Procedure created.
+
+SQL> execute raise_salary(100,10);
+
+PL/SQL procedure successfully completed.
+
+SQL> select salary from employees where employee_id=100;
+
+    SALARY
+----------
+    204600
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select salary from employees where employee_id=100
+SQL> /
+
+    SALARY
+----------
+    204600
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE PROCEDURE raise_salary (p_id employees.employee_id%type, P_persent number) IS
+  2  BEGIN
+  3  update employees
+  4  set salary= salary*12 +(1+P_persent/100*salary*12)
+  5  where employee_id=p_id;
+  6* END raise_salary;
+SQL> /
+
+Procedure created.
+
+SQL> execute raise_salary(100,10);
+BEGIN raise_salary(100,10); END;
+
+*
+ERROR at line 1:
+ORA-01438: value larger than specified precision allowed for this column
+ORA-06512: at "HR.RAISE_SALARY", line 3
+ORA-06512: at line 1
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE PROCEDURE raise_salary (p_id employees.employee_id%type, P_persent number) IS
+  2  BEGIN
+  3  update employees
+  4  set salary= salary *(1+P_persent/100)
+  5  where employee_id=p_id;
+  6* END raise_salary;
+SQL> /
+
+Procedure created.
+
+SQL> rollback
+  2  /
+
+Rollback complete.
+
+SQL> select salary from employees where employee_id=100
+  2  /
+
+    SALARY
+----------
+    204600
+
+SQL> rollback
+  2
+SQL> /
+
+Rollback complete.
+
+SQL> select salary from employees where employee_id=100
+  2  /
+
+    SALARY
+----------
+    204600
+
+SQL> rollback
+  2  /
+
+Rollback complete.
+
+SQL> select salary from employees where employee_id=100
+  2  /
+
+    SALARY
+----------
+    204600
+
+SQL> eded
+SP2-0042: unknown command "eded" - rest of line ignored.
+SQL> ed
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE PROCEDURE raise_salary (p_id employees.employee_id%type, P_persent number) IS
+  2  BEGIN
+  3  update employees
+  4  set salary= salary *(1+P_persent/100)
+  5  where employee_id=p_id;
+  6* END raise_salary;
+SQL> /
+
+Procedure created.
+
+SQL> execute raise_salary(120,30);
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE PROCEDURE add_dept ( p_name departments.department_id%tpe, p_loc departments.location_id%type) IS
+  2  BEGIN
+  3  insert into departments (department_id,department_name, location_id)
+  4  values (departments_seq.nextval,p_name,p_loc);
+  5* END add_dept;
+SQL> /
+
+Warning: Procedure created with compilation errors.
+
+SQL> show error
+Errors for PROCEDURE ADD_DEPT:
+
+LINE/COL ERROR
+-------- -----------------------------------------------------------------
+0/0      PL/SQL: Compilation unit analysis terminated
+1/55     PLS-00208: identifier 'TPE' is not a legal cursor attribute
+SQL> e
+SP2-0042: unknown command "e" - rest of line ignored.
+SQL> ed
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE PROCEDURE add_dept ( p_name departments.department_id%type, p_loc departments.location_id%type) IS
+  2  BEGIN
+  3  insert into departments (department_id,department_name, location_id)
+  4  values (departments_seq.nextval,p_name,p_loc);
+  5* END add_dept;
+SQL> /
+
+Procedure created.
+
+SQL> execute add_dept ('shohan', 1800);
+BEGIN add_dept ('shohan', 1800); END;
+
+*
+ERROR at line 1:
+ORA-06502: PL/SQL: numeric or value error: character to number conversion error
+ORA-06512: at line 1
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE PROCEDURE add_dept ( p_name departments.department_name%type, p_loc departments.location_id%type) IS
+  2  BEGIN
+  3  insert into departments (department_id,department_name, location_id)
+  4  values (departments_seq.nextval,p_name,p_loc);
+  5* END add_dept;
+SQL> /
+
+Procedure created.
+
+SQL> execute add_dept ('shohan', 1800);
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from departments;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID
+------------- ------------------------------ ---------- -----------
+          290 NOC                                   100        1200
+          300 shohan                                           1200
+          630 Education
+           10 Administration                        200        1700
+           20 Marketing                             201        1800
+           30 Purchasing                            114        1700
+           40 Human Resources                       203        2400
+           50 Shipping                              121        1500
+           60 IT                                    103        1400
+           70 Public Relations                      204        2700
+           80 Sales                                 145        2500
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID
+------------- ------------------------------ ---------- -----------
+           90 Executive                             100        1700
+          100 Finance                               108        1700
+          110 Accounting                            205        1700
+          120 Treasury                                         1700
+          130 Corporate Tax                                    1700
+          140 Control And Credit                               1700
+          150 Shareholder Services                             1700
+          160 Benefits                                         1700
+          170 Manufacturing                                    1700
+          180 Construction                                     1700
+          190 Contracting                                      1700
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID
+------------- ------------------------------ ---------- -----------
+          200 Operations                                       1700
+          210 IT Support                                       1700
+          220 NOC                                              1700
+          230 IT Helpdesk                                      1700
+          240 Government Sales                                 1700
+          250 Retail Sales                                     1700
+          260 Recruiting                                       1700
+          270 Payroll                                          1700
+          310 shohan                                           1800
+          600 Test Dept
+          610 test dept1                            120        1200
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID
+------------- ------------------------------ ---------- -----------
+          620 test dept2
+
+34 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create or replace function get_sal(p_id employees.employee_id%type, p_sal out employees.salary%type) return employees.salary%type is
+  2   v_sal employees.salary%type
+  3  begin
+  4  select salary into v_sal
+  5  from employees
+  6  where employee_id= p_id;
+  7  return  v_sal ;
+  8* end get_sal;
+SQL> /
+
+Warning: Function created with compilation errors.
+
+SQL> show error
+Errors for FUNCTION GET_SAL:
+
+LINE/COL ERROR
+-------- -----------------------------------------------------------------
+3/1      PLS-00103: Encountered the symbol "BEGIN" when expecting one of
+         the following:
+         := ( ; not null range default character
+         The symbol ";" was substituted for "BEGIN" to continue.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create or replace function get_sal(p_id employees.employee_id%type, p_sal out employees.salary%type) return employees.salary%type is
+  2   v_sal employees.salary%type;
+  3  begin
+  4  select salary into v_sal
+  5  from employees
+  6  where employee_id= p_id;
+  7  return  v_sal ;
+  8* end get_sal;
+SQL> /
+
+Function created.
+
+SQL> variable b_sal number
+SQL> execute :b_sal:=get_sal(120);
+BEGIN :b_sal:=get_sal(120); END;
+
+               *
+ERROR at line 1:
+ORA-06550: line 1, column 16:
+PLS-00306: wrong number or types of arguments in call to 'GET_SAL'
+ORA-06550: line 1, column 7:
+PL/SQL: Statement ignored
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create or replace function get_sal(p_id employees.employee_id%type) return number is
+  2   v_sal employees.salary%type;
+  3  begin
+  4  select salary into v_sal
+  5  from employees
+  6  where employee_id= p_id;
+  7  return  v_sal ;
+  8* end get_sal;
+SQL> /
+
+Function created.
+
+SQL> variable b_sal number
+SQL> execute :b_sal:=get_sal(120);
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create or replace function tax (p_sal employees.salary%type) return number is
+  2  begin
+  3  return (p_sal*.08);
+  4* end tax;
+SQL> /
+
+Function created.
+
+SQL> select salary,tax(salary)
+  2  from employees;
+
+    SALARY TAX(SALARY)
+---------- -----------
+    204600       16368
+     17000        1360
+     17000        1360
+      9000         720
+      6000         480
+      4800         384
+      4800         384
+      4200         336
+     12008      960.64
+      9000         720
+      8200         656
+
+    SALARY TAX(SALARY)
+---------- -----------
+      7700         616
+      7800         624
+      6900         552
+     11000         880
+      3100         248
+      2900         232
+      2800         224
+      2600         208
+      2500         200
+     10400         832
+      8200         656
+
+    SALARY TAX(SALARY)
+---------- -----------
+      7900         632
+      6500         520
+      5800         464
+      3200         256
+      2700         216
+      2400         192
+      2200         176
+      3300         264
+      2800         224
+      2500         200
+      2100         168
+
+    SALARY TAX(SALARY)
+---------- -----------
+      3300         264
+      2900         232
+      2400         192
+      2200         176
+      3600         288
+      3200         256
+      2700         216
+      2500         200
+      3500         280
+      3100         248
+      2600         208
+
+    SALARY TAX(SALARY)
+---------- -----------
+      2500         200
+     14000        1120
+     13500        1080
+     12000         960
+     11000         880
+     10500         840
+     10000         800
+      9500         760
+      9000         720
+      8000         640
+      7500         600
+
+    SALARY TAX(SALARY)
+---------- -----------
+      7000         560
+     10000         800
+      9500         760
+      9000         720
+      8000         640
+      7500         600
+      7000         560
+     10500         840
+      9500         760
+      7200         576
+      6800         544
+
+    SALARY TAX(SALARY)
+---------- -----------
+      6400         512
+      6200         496
+     11500         920
+     10000         800
+      9600         768
+      7400         592
+      7300         584
+      6100         488
+     11000         880
+      8800         704
+      8600         688
+
+    SALARY TAX(SALARY)
+---------- -----------
+      8400         672
+      7000         560
+      6200         496
+      3200         256
+      3100         248
+      2500         200
+      2800         224
+      4200         336
+      4100         328
+      3400         272
+      3000         240
+
+    SALARY TAX(SALARY)
+---------- -----------
+      3800         304
+      3600         288
+      2900         232
+      2500         200
+      4000         320
+      3900         312
+      3200         256
+      2800         224
+      3100         248
+      3000         240
+      2600         208
+
+    SALARY TAX(SALARY)
+---------- -----------
+      2600         208
+      4400         352
+     13000        1040
+      6000         480
+      6500         520
+     10000         800
+     12008      960.64
+      8300         664
+      4500         360
+
+108 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create or replace function get_job (p_id jobs.job_id%type) return number is
+  2  v_job jobs.job_title%type;
+  3  begin
+  4  select job_title into v_job
+  5  from jobs
+  6  where job_id =p_id;
+  7  return v_job;
+  8* end tax;
+SQL> /
+
+Warning: Function created with compilation errors.
+
+SQL> show error
+Errors for FUNCTION GET_JOB:
+
+LINE/COL ERROR
+-------- -----------------------------------------------------------------
+8/5      PLS-00113: END identifier 'TAX' must match 'GET_JOB' at line 1,
+         column 10
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create or replace function get_job (p_id jobs.job_id%type) return number is
+  2  v_job jobs.job_title%type;
+  3  begin
+  4  select job_title into v_job
+  5  from jobs
+  6  where job_id =p_id;
+  7  return v_job;
+  8* end get_job;
+SQL> /
+
+Function created.
+
+SQL> variable b_job varchar2(15)
+SQL> execute :b_job :=get_job('IT_PROG');
+BEGIN :b_job :=get_job('IT_PROG'); END;
+
+*
+ERROR at line 1:
+ORA-06502: PL/SQL: numeric or value error: character to number conversion error
+ORA-06512: at "HR.GET_JOB", line 7
+ORA-06512: at line 1
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  create or replace function get_job (p_id jobs.job_id%type) return jobs.job_title%type is
+  2  v_job jobs.job_title%type;
+  3  begin
+  4  select job_title into v_job
+  5  from jobs
+  6  where job_id =p_id;
+  7  return v_job;
+  8* end get_job;
+SQL> /
+
+Function created.
+
+SQL> variable b_job varchar2(15)
+SQL> execute :b_job :=get_job('IT_PROG');
+
+PL/SQL procedure successfully completed.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  create or replace function GET_ANNAL_SAL (P_SAL EMPLOYEES.EMPLOYEES_ID%TYPE, P_COMM EMPLOYEES.COMMISSION_PCT) return NUMBER is
+  2  begin
+  3  RETURN (P_SAL*12+ NVL(P_COMM,0) * P_SAL*12);
+  4* end GET_ANNAL_SAL;
+SQL> /
+
+Warning: Function created with compilation errors.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  create or replace function GET_ANNAL_SAL (P_SAL EMPLOYEES.EMPLOYEES_ID%TYPE, P_COMM EMPLOYEES.COMMISSION_PCT) return NUMBER is
+  2  begin
+  3  RETURN (P_SAL*12+ NVL(P_COMM,0) * P_SAL*12);
+  4* end GET_ANNAL_SAL;
+SQL> /
+
+Warning: Function created with compilation errors.
+
+SQL> SHOW ERROR
+Errors for FUNCTION GET_ANNAL_SAL:
+
+LINE/COL ERROR
+-------- -----------------------------------------------------------------
+0/0      PL/SQL: Compilation unit analysis terminated
+1/41     PLS-00302: component 'EMPLOYEES_ID' must be declared
+SQL> ED
+Wrote file afiedt.buf
+
+  1  create or replace function GET_ANNAL_SAL (P_SAL EMPLOYEES.EMPLOYEE_ID%TYPE, P_COMM EMPLOYEES.COMMISSION_PCT) return NUMBER is
+  2  begin
+  3  RETURN (P_SAL*12+ NVL(P_COMM,0) * P_SAL*12);
+  4* end GET_ANNAL_SAL;
+SQL> /
+
+Warning: Function created with compilation errors.
+
+SQL> SHOW ERROR
+Errors for FUNCTION GET_ANNAL_SAL:
+
+LINE/COL ERROR
+-------- -----------------------------------------------------------------
+0/0      PL/SQL: Compilation unit analysis terminated
+1/66     PLS-00488: 'EMPLOYEES.COMMISSION_PCT' must be a type
+SQL> ED
+Wrote file afiedt.buf
+
+  1  create or replace function GET_ANNAL_SAL (P_SAL EMPLOYEES.EMPLOYEE_ID%TYPE, P_COMM EMPLOYEES.COMMISSION_PCT%TYPE) return NUMBER is
+  2  begin
+  3  RETURN (P_SAL*12+ NVL(P_COMM,0) * P_SAL*12);
+  4* end GET_ANNAL_SAL;
+SQL> /
+
+Function created.
+
+SQL> SELECT SALARY, GET_ANNAL_SAL(SALARY, COMMISSION_PCT)
+  2  FROM EMPLOYEES
+  3  /
+
+    SALARY GET_ANNAL_SAL(SALARY,COMMISSION_PCT)
+---------- ------------------------------------
+    204600                              2455200
+     17000                               204000
+     17000                               204000
+      9000                               108000
+      6000                                72000
+      4800                                57600
+      4800                                57600
+      4200                                50400
+     12008                               144096
+      9000                               108000
+      8200                                98400
+
+    SALARY GET_ANNAL_SAL(SALARY,COMMISSION_PCT)
+---------- ------------------------------------
+      7700                                92400
+      7800                                93600
+      6900                                82800
+     11000                               132000
+      3100                                37200
+      2900                                34800
+      2800                                33600
+      2600                                31200
+      2500                                30000
+     10400                               124800
+      8200                                98400
+
+    SALARY GET_ANNAL_SAL(SALARY,COMMISSION_PCT)
+---------- ------------------------------------
+      7900                                94800
+      6500                                78000
+      5800                                69600
+      3200                                38400
+      2700                                32400
+      2400                                28800
+      2200                                26400
+      3300                                39600
+      2800                                33600
+      2500                                30000
+      2100                                25200
+
+    SALARY GET_ANNAL_SAL(SALARY,COMMISSION_PCT)
+---------- ------------------------------------
+      3300                                39600
+      2900                                34800
+      2400                                28800
+      2200                                26400
+      3600                                43200
+      3200                                38400
+      2700                                32400
+      2500                                30000
+      3500                                42000
+      3100                                37200
+      2600                                31200
+
+    SALARY GET_ANNAL_SAL(SALARY,COMMISSION_PCT)
+---------- ------------------------------------
+      2500                                30000
+     14000                               235200
+     13500                               210600
+     12000                               187200
+     11000                               171600
+     10500                               151200
+     10000                               156000
+      9500                               142500
+      9000                               135000
+      8000                               115200
+      7500                               108000
+
+    SALARY GET_ANNAL_SAL(SALARY,COMMISSION_PCT)
+---------- ------------------------------------
+      7000                                96600
+     10000                               162000
+      9500                               153900
+      9000                               145800
+      8000                               124800
+      7500                               117000
+      7000                               105000
+     10500                               157500
+      9500                               131100
+      7200                                95040
+      6800                                89760
+
+    SALARY GET_ANNAL_SAL(SALARY,COMMISSION_PCT)
+---------- ------------------------------------
+      6400                                84480
+      6200                                81840
+     11500                               172500
+     10000                               144000
+      9600                               138240
+      7400                               102120
+      7300                               100740
+      6100                                80520
+     11000                               171600
+      8800                               132000
+      8600                               123840
+
+    SALARY GET_ANNAL_SAL(SALARY,COMMISSION_PCT)
+---------- ------------------------------------
+      8400                               120960
+      7000                                96600
+      6200                                81840
+      3200                                38400
+      3100                                37200
+      2500                                30000
+      2800                                33600
+      4200                                50400
+      4100                                49200
+      3400                                40800
+      3000                                36000
+
+    SALARY GET_ANNAL_SAL(SALARY,COMMISSION_PCT)
+---------- ------------------------------------
+      3800                                45600
+      3600                                43200
+      2900                                34800
+      2500                                30000
+      4000                                48000
+      3900                                46800
+      3200                                38400
+      2800                                33600
+      3100                                37200
+      3000                                36000
+      2600                                31200
+
+    SALARY GET_ANNAL_SAL(SALARY,COMMISSION_PCT)
+---------- ------------------------------------
+      2600                                31200
+      4400                                52800
+     13000                               156000
+      6000                                72000
+      6500                                78000
+     10000                               120000
+     12008                               144096
+      8300                                99600
+      4500                                54000
+
+108 rows selected.
+
+SQL>
 
 -- #############################################################################################################
 -- #############################################################################################################
