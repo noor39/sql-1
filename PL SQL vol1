@@ -2872,3 +2872,196 @@ END;
 -- #############################################################################################################
 --                     ******************** Chapter 5 working with Packages************
 -- #############################################################################################################
+
+
+
+
+
+
+CREATE OR REPLACE FUNCTION get_annual_comp(
+p_sal IN employees.salary%TYPE,
+p_comm IN employees.commission_pct%TYPE)
+RETURN NUMBER IS
+BEGIN 
+RETURN (NVL(p_sal,0)*12+(NVL(p_comm,0)*NVL(p_sal,0)*12));
+END get_annual_comp;
+/
+
+SELECT employee_id,last_name,get_annual_comp(salary,commission_pct)"Annual Compensation"
+FROM employees
+WHERE department_id=30
+/
+
+
+
+CREATE OR REPLACE PROCEDURE add_job(
+    p_jobid jobs.job_id%TYPE,
+    p_jobtitle jobs.job_title%TYPE) IS
+    BEGIN
+    INSERT INTO jobs(job_id,job_title)
+    VALUES (p_jobid,p_jobtitle);
+END add_job;
+/
+
+
+
+EXECUTE add_job ('IT_DBA','Database Administrator')
+SELECT * FROM jobs WHERE  job_id='IT_DBA';
+
+EXECUTE add_job ('ST_MmN','Stock Manager')
+SELECT * FROM jobs WHERE  job_id='ST_MmN';
+
+
+-- 
+Create or REPLACE PROCEDURE upd_job(
+  p_jobid IN jobs.job_id%TYPE,
+  p_jobtitle IN jobs.job_title%TYPE) IS
+BEGIN
+UPDATE jobs
+SET job_title = p_jobtitle
+WHERE job_id=p_jobid;
+IF SQL%NOTFOUND THEN 
+RAISE_APPLICATION_ERROR(-20202,'No job updated');
+END IF ;
+END upd_job;
+/
+
+EXECUTE upd_job('IT_DBA', 'Data Administrator')
+SELECT * FROM jobs WHERE job_id='IT_DBA';
+
+
+EXECUTE upd_job('IT_WEB', 'WEB MASTER')
+SELECT * FROM jobs WHERE job_id='IT_WEB';
+
+-- 
+Create or REPLACE PROCEDURE del_job(
+  p_jobid IN jobs.job_id%TYPE) IS
+BEGIN
+DELETE FROM jobs
+
+WHERE job_id=p_jobid;
+IF SQL%NOTFOUND THEN 
+RAISE_APPLICATION_ERROR(-20203,'No job deleted');
+END IF ;
+END del_job;
+/
+
+EXECUTE del_job('IT_DBA', 'Data Administrator')
+SELECT * FROM jobs WHERE job_id='IT_DBA';
+-- 
+
+CREATE OR REPLACE PROCEDURE GET_EMPLOYEE
+(p_empid IN employees.employee_id%TYPE,
+p_sal OUT employees.salary%TYPE,
+p_job OUT employees.job_id%TYPE) IS
+BEGIN 
+SELECT salary, job_id
+INTO p_sal,p_job
+FROM employees
+WHERE employee_id=p_empid;
+END GET_EMPLOYEE;
+/
+variable v_salary NUMBER
+VARIABLE v_job VARCHAR2(15)
+EXECUTE GET_EMPLOYEE(120,:v_salary,:v_job)   
+EXECUTE GET_EMPLOYEE(122,:v_salary,:v_job)
+
+
+
+variable v_salary NUMBER
+VARIABLE v_job VARCHAR2(15)
+EXECUTE GET_EMPLOYEE(300,:v_salary,:v_job)
+
+
+
+-- chapter3
+CREATE OR REPLACE FUNCTION get_job(p_jobid IN jobs.job_id%TYPE)
+RETURN jobs.job_title%TYPE IS 
+v_title jobs.job_title%TYPE;
+BEGIN 
+SELECT job_title
+INTO v_title
+FROM jobs
+WHERE job_id=p_jobid;
+RETURN v_title;
+END get_job;
+/
+VARIABLE b_title VARCHAR2(32)
+EXECUTE :b_title:=get_job('SA_REP');
+
+-- 
+CREATE OR REPLACE FUNCTION get_annual_comp(
+  p_sal IN employees.salary%TYPE,
+  p_comm IN employees.commission_pct%TYPE)
+  RETURN NUMBER IS 
+  BEGIN
+  RETURN (NVL(p_sal,0)*12+(NVL(p_comm,0)*nvl(p_sal,0)*12));
+END get_annual_comp;
+/
+
+SELECT employee_id,last_name,get_annual_comp(salary,commission_pct)"Annual Compensation"
+FROM employees 
+WHERE department_id=30
+/
+
+CREATE OR REPLACE FUNCTION valid_deptid(
+  p_deptid IN departments.department_id%TYPE)
+  RETURN BOOLEAN IS 
+  v_dummy PLS_INTEGER;
+  BEGIN
+  SELECT 1 
+  INTO v_dummy
+  FROM departments
+WHERE department_id=p_deptid;
+  RETURN TRUE;
+EXCEPTION
+WHEN NO_DATA_FOUND THEN 
+RETURN FALSE;
+END valid_deptid;
+/
+
+-- 
+
+CREATE OR REPLACE PROCEDURE add_employee(
+    p_first_name  IN employees.first_name%TYPE,
+    p_last_name   IN employees.last_name%TYPE,
+    p_email       IN employees.email%TYPE,
+    p_job         IN employees.job_id%TYPE DEFAULT 'SA_REP',
+    p_mgr         IN employees.manager_id%TYPE DEFAULT 145,
+    p_sal         IN employees.salary%TYPE DEFAULT 1000,
+    p_comm        IN employees.commission_pct%TYPE DEFAULT 0,
+    p_deptid      IN employees.department_id%TYPE DEFAULT 30  
+) 
+IS
+BEGIN
+    IF valid_deptid(p_deptid) THEN
+        INSERT INTO employees (
+            employee_id,
+            first_name,
+            last_name,
+            email,
+            job_id,
+            manager_id,
+            hire_date,
+            salary,
+            commission_pct,
+            department_id
+        ) VALUES (
+            employees_seq.NEXTVAL,  
+            p_first_name,
+            p_last_name,
+            p_email,
+            p_job,
+            p_mgr,
+            TRUNC(SYSDATE),
+            p_sal,
+            p_comm,
+            p_deptid
+        );
+    ELSE
+        RAISE_APPLICATION_ERROR(-20204, 'Invalid department ID. Try again');
+    END IF;
+END add_employee;
+/
+
+EXECUTE add_employee('Jane','haris','Jaharpur',p_deptid=>15)
