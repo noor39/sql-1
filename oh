@@ -236,3 +236,17 @@ SELECT employee_id,last_name,get_annual_comp(salary,commission_pct)"Annual Compe
 FROM employees
 WHERE department_id=30
 /
+
+
+CREATE OR REPLACE PROCEDURE process_employees
+IS CURSOR cur_emp_cursor IS 
+SELECT employee_id
+FROM employees;
+BEGIN
+FOR emp_rec IN cur_emp_cursor
+LOOP 
+raise_salary(emp_rec.employee_id,10);
+END LOOP;
+
+END process_employees;
+/
