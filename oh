@@ -1,0 +1,238 @@
+-- 1. create  compile and invoke the ADD_JOB procedure  and review the results
+
+CREATE OR REPLACE PROCEDURE ADD_JOB(
+    p_id JOBS.JOB_ID%TYPE,
+    p_title JOBS.JOB_TITLE%TYPE
+) IS
+BEGIN
+    INSERT INTO JOBS (job_id, job_title)
+    VALUES (p_id, p_title);
+    COMMIT;
+END;
+/
+
+-- Invocation
+EXECUTE  ADD_JOB('IT_TEST', 'Test Engineer');
+
+
+-- Review Results
+SELECT * FROM JOBS WHERE JOB_ID = 'IT_TEST';
+  
+
+-- 2. create a procedure called UPD_JOB to modify a job in the JOBS table.
+
+CREATE OR REPLACE PROCEDURE UPD_JOB(
+    p_id JOBS.JOB_ID%TYPE,
+    p_title JOBS.JOB_TITLE%TYPE
+) IS
+BEGIN
+    UPDATE JOBS
+    SET job_title = p_title
+    WHERE job_id = p_id;
+
+    IF SQL%NOTFOUND THEN
+        RAISE_APPLICATION_ERROR(-20010, 'Job not found for update');
+    END IF;
+END;
+/
+
+-- Invocation
+EXECUTE UPD_JOB('IT_TEST', 'Senior Test Engineer');
+
+
+-- 3. create a procedure called DEL_JOB to delete a job from the JOBS table.
+CREATE OR REPLACE PROCEDURE DEL_JOB(
+    p_id JOBS.JOB_ID%TYPE
+) IS
+BEGIN
+    DELETE FROM JOBS
+    WHERE job_id = p_id;
+
+    IF SQL%NOTFOUND THEN
+        RAISE_APPLICATION_ERROR(-20011, 'Job not found for deletion');
+    END IF;
+END;
+/
+
+-- Invocation
+EXECUTE DEL_JOB('IT_TEST');
+
+-- 4. create a procedure called GET_EMPLOYEE to query the EMPLOYEES table.
+CREATE OR REPLACE PROCEDURE GET_EMPLOYEE (
+    p_empid IN EMPLOYEES.EMPLOYEE_ID%TYPE,
+    p_sal OUT EMPLOYEES.SALARY%TYPE,
+    p_job OUT EMPLOYEES.JOB_ID%TYPE
+) IS
+BEGIN
+    SELECT SALARY, JOB_ID INTO p_sal, p_job
+    FROM EMPLOYEES
+    WHERE EMPLOYEE_ID = p_empid;
+END;
+/
+
+-- Invocation
+VARIABLE v_sal NUMBER
+VARIABLE v_job VARCHAR2(20)
+EXECUTE GET_EMPLOYEE(100, :v_sal, :v_job)
+
+-- 5. Create a procedure called RAISE_SALARY to increase the employee salary?
+CREATE OR REPLACE PROCEDURE RAISE_SALARY (
+    p_id IN EMPLOYEES.EMPLOYEE_ID%TYPE,
+    p_percent IN NUMBER
+) IS
+BEGIN
+    UPDATE EMPLOYEES
+    SET salary = salary * (1 + p_percent / 100)
+    WHERE employee_id = p_id;
+END;
+/
+
+-- Invocation
+EXECUTE RAISE_SALARY(100, 10);
+
+
+-- 6. Create a procedure called QUERY_EMP to query the employee last_name and salary from the EMPLOYEES table.
+CREATE OR REPLACE PROCEDURE QUERY_EMP (
+    p_id IN EMPLOYEES.EMPLOYEE_ID%TYPE,
+    p_name OUT EMPLOYEES.LAST_NAME%TYPE,
+    p_salary OUT EMPLOYEES.SALARY%TYPE
+) IS
+BEGIN
+    SELECT last_name, salary INTO p_name, p_salary
+    FROM EMPLOYEES
+    WHERE EMPLOYEE_ID = p_id;
+END;
+/
+
+-- Invocation
+DECLARE
+    v_name EMPLOYEES.LAST_NAME%TYPE;
+    v_sal  EMPLOYEES.SALARY%TYPE;
+BEGIN
+    QUERY_EMP(100, v_name, v_sal);
+    DBMS_OUTPUT.PUT_LINE(v_name || ' earns ' || TO_CHAR(v_sal, '$999,999.00'));
+END;
+
+-- 7. Create a procedure called ADD_DEPT for adding new department into DEPARTMENTS table.
+CREATE OR REPLACE PROCEDURE ADD_DEPT (
+    p_name DEPARTMENTS.DEPARTMENT_NAME%TYPE,
+    p_loc  DEPARTMENTS.LOCATION_ID%TYPE
+) IS
+BEGIN
+    INSERT INTO DEPARTMENTS (department_id, department_name, location_id)
+    VALUES (departments_seq.NEXTVAL, p_name, p_loc);
+END;
+/
+
+-- Invocation
+EXECUTE ADD_DEPT('RESEARCH', 1700);
+-- 8. Create and invoke the GET_SAL function with a single input parameter and to returns the salary of inputted employee.
+CREATE OR REPLACE FUNCTION GET_SAL (
+    p_empid EMPLOYEES.EMPLOYEE_ID%TYPE
+) RETURN NUMBER IS
+    v_sal EMPLOYEES.SALARY%TYPE;
+BEGIN
+    SELECT SALARY INTO v_sal
+    FROM EMPLOYEES
+    WHERE EMPLOYEE_ID = p_empid;
+    RETURN v_sal;
+END;
+/
+-- Invocation
+SELECT GET_SAL(100) AS salary FROM DUAL;
+
+-- 9. Create and invoke the TAX function with a single input parameter and to returns the income tax based on simple flat tax rate for inputted salary.
+CREATE OR REPLACE FUNCTION TAX (
+    p_salary IN NUMBER
+) RETURN NUMBER IS
+    v_tax_rate CONSTANT NUMBER := 0.15;
+BEGIN
+    RETURN ROUND(p_salary * v_tax_rate, 2);
+END;
+/
+
+-- Invocation
+SELECT TAX(6000) AS tax_amount FROM DUAL;
+
+-- 10. Create and invoke the GET_JOB function to return job_title.
+CREATE OR REPLACE FUNCTION GET_JOB (
+    p_job_id JOBS.JOB_ID%TYPE
+) RETURN VARCHAR2 IS
+    v_title JOBS.JOB_TITLE%TYPE;
+BEGIN
+    SELECT JOB_TITLE INTO v_title
+    FROM JOBS
+    WHERE JOB_ID = p_job_id;
+    RETURN v_title;
+END;
+/
+
+-- Invocation
+SELECT GET_JOB('IT_PROG') AS job_title FROM DUAL;
+
+-- 11. Create function called GET_ANNUAL_COMP to return the annual salary computed from employee's monthly salary and commission passed as parameters.
+CREATE OR REPLACE FUNCTION GET_ANNUAL_COMP (
+    p_salary IN NUMBER,
+    p_commission IN NUMBER DEFAULT 0
+) RETURN NUMBER IS
+BEGIN
+    RETURN ROUND((p_salary + NVL(p_commission, 0)) * 12, 2);
+END;
+/
+
+-- Invocation
+SELECT GET_ANNUAL_COMP(5000, 500) AS annual_comp FROM DUAL;
+
+-- 12.Create a procedure ADD_EMPLOYEE to insert a new employee into the EMPLOYEES table. The procedure should call a VALID_DEPTID function to check wheather the department_id for the new employee exists in the DEPARTMENTS table.
+CREATE OR REPLACE FUNCTION VALID_DEPTID (
+    p_dept_id DEPARTMENTS.DEPARTMENT_ID%TYPE
+) RETURN BOOLEAN IS
+    v_count NUMBER;
+BEGIN
+    SELECT COUNT(*) INTO v_count
+    FROM DEPARTMENTS
+    WHERE DEPARTMENT_ID = p_dept_id;
+    RETURN v_count > 0;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE ADD_EMPLOYEE (
+    p_empid     EMPLOYEES.EMPLOYEE_ID%TYPE,
+    p_fname     EMPLOYEES.FIRST_NAME%TYPE,
+    p_lname     EMPLOYEES.LAST_NAME%TYPE,
+    p_email     EMPLOYEES.EMAIL%TYPE,
+    p_hire_date EMPLOYEES.HIRE_DATE%TYPE,
+    p_job_id    EMPLOYEES.JOB_ID%TYPE,
+    p_salary    EMPLOYEES.SALARY%TYPE,
+    p_dept_id   EMPLOYEES.DEPARTMENT_ID%TYPE
+) IS
+BEGIN
+    IF VALID_DEPTID(p_dept_id) THEN
+        INSERT INTO EMPLOYEES (employee_id, first_name, last_name, email, hire_date, job_id, salary, department_id)
+        VALUES (p_empid, p_fname, p_lname, p_email, p_hire_date, p_job_id, p_salary, p_dept_id);
+    ELSE
+        RAISE_APPLICATION_ERROR(-20020, 'Invalid Department ID');
+    END IF;
+END;
+/
+
+-- Invocation (ensure department_id exists)
+EXECUTE ADD_EMPLOYEE(300, 'Luna', 'Lovegood', 'luna.lovegood@hogwarts.com', SYSDATE, 'IT_PROG', 4500, 60);
+
+
+-- 13. Create a  function called GET_ANNUAL_COMP to return the annual salary computed from an employee's monthly salary and commission passed as parameters. 2.2 Use the function in a SELECT statement against the EMPLOYEES table for employees in department 30.
+
+
+CREATE OR REPLACE FUNCTION get_annual_comp(
+p_sal IN employees.salary%TYPE,
+p_comm IN employees.commission_pct%TYPE)
+RETURN NUMBER IS
+BEGIN 
+RETURN (NVL(p_sal,0)*12+(NVL(p_comm,0)*NVL(p_sal,0)*12));
+END get_annual_comp;
+/
+
+SELECT employee_id,last_name,get_annual_comp(salary,commission_pct)"Annual Compensation"
+FROM employees
+WHERE department_id=30
+/
