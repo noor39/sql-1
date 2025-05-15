@@ -254,29 +254,20 @@ EXECUTE ADD_EMPLOYEE(300, 'Luna', 'Lovegood', 'luna.lovegood@hogwarts.com', SYSD
 
 -- 13. Create a  function called GET_ANNUAL_COMP to return the annual salary computed from an employee's monthly salary and commission passed as parameters. 2.2 Use the function in a SELECT statement against the EMPLOYEES table for employees in department 30.
 
-SELECT LAST_NAME, GET_ANNUAL_COMP(SALARY, COMMISSION_PCT * SALARY) AS annual_comp
-FROM EMPLOYEES
-WHERE DEPARTMENT_ID = 30;
 
+CREATE OR REPLACE FUNCTION get_annual_comp(
+p_sal IN employees.salary%TYPE,
+p_comm IN employees.commission_pct%TYPE)
+RETURN NUMBER IS
+BEGIN 
+RETURN (NVL(p_sal,0)*12+(NVL(p_comm,0)*NVL(p_sal,0)*12));
+END get_annual_comp;
+/
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+SELECT employee_id,last_name,get_annual_comp(salary,commission_pct)"Annual Compensation"
+FROM employees
+WHERE department_id=30
+/
 
 
 
