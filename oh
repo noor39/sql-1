@@ -90,6 +90,20 @@ END;
 -- Invocation
 EXECUTE RAISE_SALARY(100, 10);
 
+CREATE OR REPLACE PROCEDURE RAISlE_SALARY(
+  p_id IN employees.employee_id%TYPE,
+  p_percent IN NUMBER 
+  ) IS
+  BEGIN 
+  UPDATE employees
+  set salary=salary*(1+p_percent/100)
+  WHERE employee_id=p_id;
+  END;
+  /
+  EXECUTE RAISlE_SALARY(100,10);
+  select salary from employees where employee_id=100;
+   drop trigger hr.salary_check
+ drop trigger secure_emp
 
 -- 6. Create a procedure called QUERY_EMP to query the employee last_name and salary from the EMPLOYEES table.
 CREATE OR REPLACE PROCEDURE QUERY_EMP (
@@ -141,6 +155,9 @@ END;
 -- Invocation
 SELECT GET_SAL(100) AS salary FROM DUAL;
 
+variable b_sal number
+execute :b_sal:=get_sal(100);
+
 -- 9. Create and invoke the TAX function with a single input parameter and to returns the income tax based on simple flat tax rate for inputted salary.
 CREATE OR REPLACE FUNCTION TAX (
     p_salary IN NUMBER
@@ -152,7 +169,7 @@ END;
 /
 
 -- Invocation
-SELECT TAX(6000) AS tax_amount FROM DUAL;
+select salary, tax(salary) from employees;
 
 -- 10. Create and invoke the GET_JOB function to return job_title.
 CREATE OR REPLACE FUNCTION GET_JOB (
@@ -184,41 +201,40 @@ END;
 SELECT GET_ANNUAL_COMP(5000, 500) AS annual_comp FROM DUAL;
 
 -- 12.Create a procedure ADD_EMPLOYEE to insert a new employee into the EMPLOYEES table. The procedure should call a VALID_DEPTID function to check wheather the department_id for the new employee exists in the DEPARTMENTS table.
-CREATE OR REPLACE FUNCTION VALID_DEPTID (
-    p_dept_id DEPARTMENTS.DEPARTMENT_ID%TYPE
-) RETURN BOOLEAN IS
-    v_count NUMBER;
-BEGIN
-    SELECT COUNT(*) INTO v_count
-    FROM DEPARTMENTS
-    WHERE DEPARTMENT_ID = p_dept_id;
-    RETURN v_count > 0;
-END;
-/
+CREATE OR REPLACE FUNCTION VALID_DEPTID(
+  p_deptid IN departments.department_id%TYPE
+) RETURN BOOLEAN IS 
+v_dummy PLS_INTEGER;
 
-CREATE OR REPLACE PROCEDURE ADD_EMPLOYEE (
-    p_empid     EMPLOYEES.EMPLOYEE_ID%TYPE,
-    p_fname     EMPLOYEES.FIRST_NAME%TYPE,
-    p_lname     EMPLOYEES.LAST_NAME%TYPE,
-    p_email     EMPLOYEES.EMAIL%TYPE,
-    p_hire_date EMPLOYEES.HIRE_DATE%TYPE,
-    p_job_id    EMPLOYEES.JOB_ID%TYPE,
-    p_salary    EMPLOYEES.SALARY%TYPE,
-    p_dept_id   EMPLOYEES.DEPARTMENT_ID%TYPE
-) IS
-BEGIN
-    IF VALID_DEPTID(p_dept_id) THEN
-        INSERT INTO EMPLOYEES (employee_id, first_name, last_name, email, hire_date, job_id, salary, department_id)
-        VALUES (p_empid, p_fname, p_lname, p_email, p_hire_date, p_job_id, p_salary, p_dept_id);
+BEGIN 
+  SELECT 1
+  INTO v_dummy
+  FROM departments
+  WHERE department_id=p_deptid;
+  RETURN TRUE;
+EXCEPTION
+  WHEN NO_DATA_FOUND THEN
+    RETURN FALSE;
+END VALID_DEPTID;
+/
+CREATE OR REPLACE PROCEDURE   ADD_EMPLOYEE(
+  p_first_name employees.first_name%Type,
+  p_last_name employees.last_name%TYPE,
+  p_email employees.email%TYPE,
+  p_job employees.job_id%TYPE DEFAULT 'SA_REP',
+  p_mgr employees.manager_id%TYPE DEFAULT 145,
+  p_sal employees.salary%TYPE DEFAULT 1000,
+  p_comm employees.commission_pct%TYPE DEFAULT 0,
+  p_deptid employees.department_id%TYPE DEFAULT 30) IS
+  BEGIN
+   IF VALID_DEPTID(p_deptid) THEN
+    INSERT INTO employees(employee_id,first_name,last_name,email,job_id,manager_id,hire_date,salary,commission_pct,department_id)
+    values(employees_seq.NEXTVAL,p_first_name,p_last_name,p_email,p_job,p_mgr,TRUNC(SYSDATE),p_sal,p_comm,p_deptid);
     ELSE
-        RAISE_APPLICATION_ERROR(-20020, 'Invalid Department ID');
+    RAISE_APPLICATION_ERROR (-20204,' HEY BROTHER, Invalid department ID. TRY again!');
     END IF;
-END;
+    END ADD_EMPLOYEE;
 /
-
--- Invocation (ensure department_id exists)
-EXECUTE ADD_EMPLOYEE(300, 'Luna', 'Lovegood', 'luna.lovegood@hogwarts.com', SYSDATE, 'IT_PROG', 4500, 60);
-
 
 -- 13. Create a  function called GET_ANNUAL_COMP to return the annual salary computed from an employee's monthly salary and commission passed as parameters. 2.2 Use the function in a SELECT statement against the EMPLOYEES table for employees in department 30.
 
@@ -235,18 +251,3 @@ END get_annual_comp;
 SELECT employee_id,last_name,get_annual_comp(salary,commission_pct)"Annual Compensation"
 FROM employees
 WHERE department_id=30
-/
-
-
-CREATE OR REPLACE PROCEDURE process_employees
-IS CURSOR cur_emp_cursor IS 
-SELECT employee_id
-FROM employees;
-BEGIN
-FOR emp_rec IN cur_emp_cursor
-LOOP 
-raise_salary(emp_rec.employee_id,10);
-END LOOP;
-
-END process_employees;
-/
