@@ -239,6 +239,9 @@ CREATE OR REPLACE PROCEDURE   ADD_EMPLOYEE(
     END ADD_EMPLOYEE;
 /
 
+
+execute add_employee( 'shohan','ahmed','asdkjf') ;
+select * from employees where first_name='shohan'
 -- 13. Create a  function called GET_ANNUAL_COMP to return the annual salary computed from an employee's monthly salary and commission passed as parameters. 2.2 Use the function in a SELECT statement against the EMPLOYEES table for employees in department 30.
 
 
