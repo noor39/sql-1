@@ -89,6 +89,9 @@ END;
 
 -- Invocation
 EXECUTE RAISE_SALARY(100, 10);
+ select salary from employees where employee_id=100;
+
+
 
 CREATE OR REPLACE PROCEDURE RAISlE_SALARY(
   p_id IN employees.employee_id%TYPE,
